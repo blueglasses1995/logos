@@ -4,13 +4,15 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button"
 import { getAllChapters } from "@/lib/content"
 import { useProgress } from "@/hooks/use-progress"
 import { EMPTY_CHAPTER_PROGRESS } from "@/types/progress"
 
 export default function HomePage() {
   const chapters = getAllChapters()
-  const { progress } = useProgress()
+  const { progress, getDueItems } = useProgress()
+  const dueCount = getDueItems().length
 
   function getChapterCompletion(slug: string): number {
     const cp = progress.chapters[slug] ?? EMPTY_CHAPTER_PROGRESS
@@ -36,6 +38,27 @@ export default function HomePage() {
           <span>{progress.streak.currentDays}日連続学習中</span>
         </div>
       )}
+
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle className="text-lg">復習</CardTitle>
+          <Badge variant={dueCount > 0 ? "default" : "secondary"}>
+            {dueCount}件
+          </Badge>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground mb-4">
+            {dueCount > 0
+              ? `${dueCount}件の復習アイテムが期限を迎えています。`
+              : "現在、復習が必要なアイテムはありません。"}
+          </p>
+          <Link href="/review">
+            <Button disabled={dueCount === 0} className="w-full">
+              復習を開始する
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
 
       <div className="space-y-4">
         <h2 className="text-xl font-semibold">チャプター</h2>
