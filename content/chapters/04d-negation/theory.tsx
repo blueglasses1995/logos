@@ -1,3 +1,11 @@
+import {
+  Callout,
+  FormulaBlock,
+  ComparisonTable,
+  KeyPoint,
+  SectionDivider,
+} from "@/components/content"
+
 export function TheoryContent() {
   return (
     <article className="prose prose-zinc max-w-none">
@@ -8,79 +16,94 @@ export function TheoryContent() {
         量化子の否定には、2つの基本法則があります。
         これらは<strong>ド・モルガンの法則を量化子に一般化</strong>したものです。
       </p>
-      <ul>
-        <li>
-          <strong>法則1</strong>: <code>{"¬∀x P(x) ≡ ∃x ¬P(x)"}</code>
-          {" "}— 「すべてのxについてP(x)が成り立つ」の否定は、「P(x)が成り立たないxが存在する」
-        </li>
-        <li>
-          <strong>法則2</strong>: <code>{"¬∃x P(x) ≡ ∀x ¬P(x)"}</code>
-          {" "}— 「P(x)が成り立つxが存在する」の否定は、「すべてのxについてP(x)が成り立たない」
-        </li>
-      </ul>
+
+      <Callout variant="definition" label="定義">
+        <p>
+          <strong>法則1</strong>: ¬∀x P(x) ≡ ∃x ¬P(x)
+          — 「すべてのxについてP(x)が成り立つ」の否定は、「P(x)が成り立たないxが存在する」
+        </p>
+        <p>
+          <strong>法則2</strong>: ¬∃x P(x) ≡ ∀x ¬P(x)
+          — 「P(x)が成り立つxが存在する」の否定は、「すべてのxについてP(x)が成り立たない」
+        </p>
+      </Callout>
+
       <p>
         つまり、量化子を否定すると<strong>∀と∃が入れ替わり</strong>、
         同時に<strong>述語Pも否定される</strong>のです。
         これが量化子の否定の本質です。
       </p>
 
+      <KeyPoint>
+        量化子の否定では、∀ ↔ ∃ の入れ替えと、述語Pの否定が同時に起こる。
+      </KeyPoint>
+
+      <SectionDivider />
+
       <h2>なぜこうなるか: ド・モルガンの法則からの自然な拡張</h2>
       <p>
         第2章で学んだド・モルガンの法則を思い出してください。
       </p>
-      <ul>
-        <li><code>{"¬(A ∧ B) ≡ ¬A ∨ ¬B"}</code></li>
-        <li><code>{"¬(A ∨ B) ≡ ¬A ∧ ¬B"}</code></li>
-      </ul>
+
+      <FormulaBlock caption="命題論理のド・モルガンの法則">
+        {"¬(A ∧ B) ≡ ¬A ∨ ¬B"}
+        <br />
+        {"¬(A ∨ B) ≡ ¬A ∧ ¬B"}
+      </FormulaBlock>
+
       <p>
         ここで重要な視点があります。
         全称量化子∀は<strong>「巨大な論理積（∧）」</strong>です。
         領域の要素が a, b, c の3つだとすると、
       </p>
-      <p>
-        <code>{"∀x P(x) ≡ P(a) ∧ P(b) ∧ P(c)"}</code>
-      </p>
+
+      <FormulaBlock caption="∀は巨大な∧">
+        {"∀x P(x) ≡ P(a) ∧ P(b) ∧ P(c)"}
+      </FormulaBlock>
+
       <p>
         「すべてのxについてP(x)」とは、「P(a)かつP(b)かつP(c)かつ...」という
         すべての要素に対する論理積に他なりません。
       </p>
+
       <p>
         同様に、存在量化子∃は<strong>「巨大な論理和（∨）」</strong>です。
       </p>
-      <p>
-        <code>{"∃x P(x) ≡ P(a) ∨ P(b) ∨ P(c)"}</code>
-      </p>
+
+      <FormulaBlock caption="∃は巨大な∨">
+        {"∃x P(x) ≡ P(a) ∨ P(b) ∨ P(c)"}
+      </FormulaBlock>
+
       <p>
         「あるxについてP(x)」とは、「P(a)またはP(b)またはP(c)または...」という
         すべての要素に対する論理和です。
       </p>
+
       <p>
         この視点があれば、ド・モルガンの法則をそのまま適用できます。
       </p>
-      <p>
-        <code>{"¬∀x P(x)"}</code> を展開すると、
-      </p>
-      <p>
-        <code>{"¬(P(a) ∧ P(b) ∧ P(c))"}</code>
-      </p>
-      <p>
-        ド・モルガンの法則により、
-      </p>
-      <p>
-        <code>{"¬P(a) ∨ ¬P(b) ∨ ¬P(c)"}</code>
-      </p>
-      <p>
-        これは巨大な論理和なので、∃を使って書き直すと、
-      </p>
-      <p>
-        <code>{"∃x ¬P(x)"}</code>
-      </p>
+
+      <FormulaBlock caption="¬∀x P(x) の展開">
+        {"¬∀x P(x)"}
+        <br />
+        {"= ¬(P(a) ∧ P(b) ∧ P(c))"}
+        <br />
+        {"= ¬P(a) ∨ ¬P(b) ∨ ¬P(c)  ← ド・モルガン"}
+        <br />
+        {"= ∃x ¬P(x)"}
+      </FormulaBlock>
+
       <p>
         有限の場合だけでなく、無限の領域でもこの関係は成り立ちます。
         ド・モルガンの法則が∧と∨の間の否定の「交換」を示したように、
         量化子の否定法則は∀と∃の間の否定の「交換」を示しています。
-        <strong>本質は同じであり、スケールが異なるだけです。</strong>
       </p>
+
+      <KeyPoint>
+        ∀は巨大な∧、∃は巨大な∨。ド・モルガンの法則を量化子に拡張したものが量化子の否定法則である。本質は同じであり、スケールが異なるだけ。
+      </KeyPoint>
+
+      <SectionDivider />
 
       <h2>具体例</h2>
 
@@ -88,15 +111,11 @@ export function TheoryContent() {
       <p>
         「すべてのテストが通っているわけではない」を形式化してみましょう。
       </p>
-      <p>
-        <code>{"¬∀x Pass(x)"}</code> — すべてのテストxが通っている、の否定
-      </p>
-      <p>
-        量化子の否定法則を適用すると、
-      </p>
-      <p>
-        <code>{"∃x ¬Pass(x)"}</code> — 通っていないテストが存在する
-      </p>
+
+      <FormulaBlock caption="テストの部分的失敗">
+        {"¬∀x Pass(x)  ≡  ∃x ¬Pass(x)"}
+      </FormulaBlock>
+
       <p>
         CIパイプラインで「not all tests passed」というメッセージを見たとき、
         それは「少なくとも1つのテストが失敗した」ことを意味します。
@@ -106,88 +125,87 @@ export function TheoryContent() {
       <h3>ポパーの反証主義</h3>
       <p>
         第3章で触れた反証主義を、量化子の否定で正確に定式化できます。
-      </p>
-      <p>
         「すべての白鳥は白い」を否定すると、
       </p>
-      <p>
-        <code>{"¬∀x(Swan(x) → White(x))"}</code>
-      </p>
-      <p>
-        これは次と同値です。
-      </p>
-      <p>
-        <code>{"∃x ¬(Swan(x) → White(x))"}</code>
-      </p>
-      <p>
-        条件文の否定は <code>{"¬(A → B) ≡ A ∧ ¬B"}</code> なので、
-      </p>
-      <p>
-        <code>{"∃x(Swan(x) ∧ ¬White(x))"}</code>
-      </p>
+
+      <FormulaBlock caption="反証主義の論理構造">
+        {"¬∀x(Swan(x) → White(x))"}
+        <br />
+        {"≡ ∃x ¬(Swan(x) → White(x))"}
+        <br />
+        {"≡ ∃x(Swan(x) ∧ ¬White(x))  ← ¬(A→B) ≡ A∧¬B"}
+      </FormulaBlock>
+
       <p>
         つまり「白鳥であって、白くないものが存在する」です。
         科学理論を反証するには、たった1つの反例を見つければよい。
-        これがポパーの反証主義の論理的な核心であり、
-        量化子の否定法則そのものです。
+        これがポパーの反証主義の論理的な核心であり、量化子の否定法則そのものです。
       </p>
 
       <h3>バグの不在証明</h3>
       <p>
         「このコードにバグは存在しない」を形式化すると、
       </p>
-      <p>
-        <code>{"¬∃x Bug(x)"}</code> — バグであるxが存在する、の否定
-      </p>
-      <p>
-        量化子の否定法則を適用すると、
-      </p>
-      <p>
-        <code>{"∀x ¬Bug(x)"}</code> — すべてのxについて、xはバグではない
-      </p>
+
+      <FormulaBlock caption="バグの不在">
+        {"¬∃x Bug(x)  ≡  ∀x ¬Bug(x)"}
+      </FormulaBlock>
+
       <p>
         「バグが存在しない」と「すべてのコードパスにバグがない」は同じ主張です。
         ダイクストラの有名な言葉「テストはバグの存在を示せるが、不在は示せない」は、
-        <code>{"∀x ¬Bug(x)"}</code> の証明がテストでは不可能であることを意味しています。
+        ∀x ¬Bug(x) の証明がテストでは不可能であることを意味しています。
       </p>
+
+      <KeyPoint>
+        反証主義、テスト、バグ証明 — いずれも量化子の否定法則の直接的な応用である。
+      </KeyPoint>
+
+      <SectionDivider />
 
       <h2>最も危険な誤解: ¬∀xP(x) ≠ ∀x¬P(x)</h2>
       <p>
         量化子の否定で<strong>最も致命的な間違い</strong>は、
-        <code>{"¬∀x P(x)"}</code> を <code>{"∀x ¬P(x)"}</code> だと思うことです。
+        ¬∀x P(x) を ∀x ¬P(x) だと思うことです。
       </p>
-      <ul>
-        <li><code>{"¬∀x P(x)"}</code> = 「すべてが真というわけではない」= <code>{"∃x ¬P(x)"}</code>（少なくとも1つが偽）</li>
-        <li><code>{"∀x ¬P(x)"}</code> = 「すべてが偽である」</li>
-      </ul>
+
+      <ComparisonTable
+        headers={["¬∀x P(x)（正しい否定）", "∀x ¬P(x)（別の主張）"]}
+        rows={[
+          ["「すべてが真というわけではない」", "「すべてが偽である」"],
+          ["∃x ¬P(x)（少なくとも1つが偽）", "すべてのxでP(x)が偽"],
+          ["100人中1人でも偽なら真", "100人全員が偽でないと真にならない"],
+        ]}
+      />
+
       <p>
-        これらはまったく異なる主張です。
+        具体例を見ましょう。
+        「すべての社員がリモートワークしているわけではない」は、
       </p>
-      <p>
-        具体例を見ましょう。「すべての社員がリモートワークしているわけではない」は、
-      </p>
-      <p>
-        <code>{"¬∀x Remote(x)"}</code> ≡ <code>{"∃x ¬Remote(x)"}</code>
-      </p>
+
+      <FormulaBlock caption="部分否定の例">
+        {"¬∀x Remote(x)  ≡  ∃x ¬Remote(x)"}
+      </FormulaBlock>
+
       <p>
         つまり「リモートワークしていない社員が少なくとも1人いる」という意味です。
         これは<strong>「すべての社員が出社している」とは全く別の主張</strong>です。
-        100人の社員のうち99人がリモートで1人だけ出社していても、
-        「すべての社員がリモートワークしているわけではない」は真になります。
+        100人の社員のうち99人がリモートで1人だけ出社していても、この命題は真になります。
       </p>
-      <p>
-        否定の記号¬は<strong>∀の直前にある</strong>のであって、
-        P(x)だけにかかっているのではありません。
+
+      <Callout variant="tip">
+        否定の記号¬は<strong>∀の直前にある</strong>のであって、P(x)だけにかかっているのではありません。
         ¬∀は「すべてではない」であり、「すべてが否定」ではないのです。
-      </p>
+      </Callout>
+
+      <SectionDivider />
 
       <h2>どこで使われるか</h2>
 
       <h3>ポパーの反証主義（第3章からの接続）</h3>
       <p>
         科学的理論は「すべてのxについてP(x)」の形をとります。
-        その反証は <code>{"¬∀x P(x)"}</code> ≡ <code>{"∃x ¬P(x)"}</code>、
-        すなわち「反例が1つ存在すること」です。
+        その反証は ¬∀x P(x) ≡ ∃x ¬P(x)、すなわち「反例が1つ存在すること」です。
         実験科学の方法論は、量化子の否定法則を基盤としています。
       </p>
 
@@ -195,15 +213,17 @@ export function TheoryContent() {
       <p>
         SQLの <code>NOT EXISTS</code> は、まさにこの法則の直接的な実装です。
       </p>
+
+      <FormulaBlock caption="NOT EXISTSの論理構造">
+        {"¬∃x(InDept(x, d) ∧ ¬Active(x))"}
+        <br />
+        {"≡ ∀x(InDept(x, d) → Active(x))"}
+      </FormulaBlock>
+
       <p>
-        <code>{"SELECT * FROM departments d WHERE NOT EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.id AND e.is_active = false)"}</code>
-      </p>
-      <p>
-        これは「非アクティブな社員が存在しない部署」、つまり
-        <code>{"¬∃x(InDept(x, d) ∧ ¬Active(x))"}</code> です。
-        量化子の否定法則により、
-        <code>{"∀x(InDept(x, d) → Active(x))"}</code>
-        と同値であり、「その部署のすべての社員がアクティブである」という意味になります。
+        「非アクティブな社員が存在しない部署」は、
+        「その部署のすべての社員がアクティブである」と同値です。
+        <code>NOT EXISTS</code> サブクエリを書くとき、この等価性を理解しているかどうかで正確さが変わります。
       </p>
 
       <h3>バグ報告と障害対応</h3>
@@ -211,9 +231,16 @@ export function TheoryContent() {
         「not all tests pass（すべてのテストが通るわけではない）」と
         「all tests fail（すべてのテストが失敗する）」では、
         障害の深刻度も対応方法もまったく異なります。
-        前者は <code>{"∃x ¬Pass(x)"}</code>（部分的な失敗）、
-        後者は <code>{"∀x ¬Pass(x)"}</code>（全面的な失敗）です。
       </p>
+
+      <ComparisonTable
+        headers={["not all tests pass", "all tests fail"]}
+        rows={[
+          ["∃x ¬Pass(x)", "∀x ¬Pass(x)"],
+          ["部分的な失敗", "全面的な失敗"],
+          ["個別テストの調査", "システム全体の調査"],
+        ]}
+      />
 
       <h3>法律解釈</h3>
       <p>
@@ -223,12 +250,21 @@ export function TheoryContent() {
         量化子の否定法則を正しく適用できれば、この曖昧さを論理的に解消できます。
       </p>
 
+      <KeyPoint>
+        SQL、科学、法律、障害対応 — 量化子の否定法則は理論と実践の距離がゼロである。
+      </KeyPoint>
+
+      <SectionDivider />
+
       <h2>ないと困ること</h2>
 
       <h3>「not all」を「none」と誤解する</h3>
       <p>
         量化子の否定法則を知らないと、「すべてが真ではない」を「すべてが偽」と
-        取り違える危険があります。これは日常会話でも頻繁に起こります。
+        取り違える危険があります。
+        これは日常会話でも頻繁に起こります。
+      </p>
+      <p>
         「全員が賛成しているわけではない」は「反対者がいる」という意味であり、
         「全員が反対している」という意味ではありません。
       </p>
@@ -238,6 +274,8 @@ export function TheoryContent() {
         法的文書の解釈において、「すべての要件を満たしていない」の意味を
         取り違えると、契約違反の有無が正反対に判断されかねません。
         実際に裁判で「not all」の解釈が争点になった例は少なくありません。
+      </p>
+      <p>
         論理的な素養があれば、こうした曖昧さを構造的に分析できます。
       </p>
 
@@ -245,41 +283,58 @@ export function TheoryContent() {
       <p>
         「not all tests pass」は少なくとも1つの失敗を意味します。
         しかし「all tests fail」はシステム全体の障害を示唆します。
+      </p>
+      <p>
         この区別を間違えると、部分的な問題に対してシステム全体を再起動したり、
         逆に全面障害を見逃したりする可能性があります。
         障害のトリアージには量化子の否定の正確な理解が不可欠です。
       </p>
 
+      <SectionDivider />
+
       <h2>よくある誤解</h2>
 
-      <h3>誤解1: 「すべてではない」=「ひとつもない」</h3>
-      <p>
-        これは最も危険で最も頻出する誤解です。
-        <code>{"¬∀x P(x)"}</code> は <code>{"∃x ¬P(x)"}</code> であり、
-        <code>{"∀x ¬P(x)"}</code> ではありません。
-        「すべてではない」は「少なくとも1つが偽」を意味するだけであり、
-        「ひとつも真ではない」とは言っていません。
-        残りの大多数が真である可能性も十分にあります。
-      </p>
+      <Callout variant="warning" label="よくある誤解">
+        <p>
+          <strong>誤解1: 「すべてではない」=「ひとつもない」</strong>
+        </p>
+        <p>
+          ¬∀x P(x) は ∃x ¬P(x) であり、∀x ¬P(x) ではありません。
+          「すべてではない」は「少なくとも1つが偽」を意味するだけであり、
+          「ひとつも真ではない」とは言っていません。
+          残りの大多数が真である可能性も十分にあります。
+        </p>
+      </Callout>
 
-      <h3>誤解2: ∀と∃は入れ替わるが、Pの否定を忘れる</h3>
-      <p>
-        量化子の否定では<strong>2つの変換が同時に起こります</strong>。
-        (1) ∀と∃が入れ替わる。(2) 述語Pが否定される。
-        片方だけ適用して <code>{"¬∀x P(x)"}</code> を <code>{"∃x P(x)"}</code> と
-        してしまうのはよくある間違いです。
-        正しくは <code>{"∃x ¬P(x)"}</code> です。¬Pを忘れないでください。
-      </p>
+      <Callout variant="warning" label="よくある誤解">
+        <p>
+          <strong>誤解2: ∀と∃は入れ替わるが、Pの否定を忘れる</strong>
+        </p>
+        <p>
+          量化子の否定では<strong>2つの変換が同時に起こります</strong>。
+          (1) ∀と∃が入れ替わる。(2) 述語Pが否定される。
+        </p>
+        <p>
+          片方だけ適用して ¬∀x P(x) を ∃x P(x) としてしまうのはよくある間違いです。
+          正しくは ∃x ¬P(x) です。¬Pを忘れないでください。
+        </p>
+      </Callout>
 
-      <h3>誤解3: これは理論だけの話で、実用性がない</h3>
-      <p>
-        SQLの <code>NOT EXISTS</code> はまさにこの法則そのものです。
-        データベースのクエリを書くとき、<code>NOT EXISTS</code> サブクエリと
-        <code>NOT IN</code> の使い分けには量化子の否定の理解が必要です。
-        ポパーの反証主義、バグ報告の解釈、法律文書の分析、
-        いずれも量化子の否定法則の直接的な応用です。
-        理論と実践の距離はゼロです。
-      </p>
+      <Callout variant="warning" label="よくある誤解">
+        <p>
+          <strong>誤解3: これは理論だけの話で、実用性がない</strong>
+        </p>
+        <p>
+          SQLの <code>NOT EXISTS</code> はまさにこの法則そのものです。
+          データベースのクエリを書くとき、<code>NOT EXISTS</code> サブクエリと
+          <code>NOT IN</code> の使い分けには量化子の否定の理解が必要です。
+        </p>
+        <p>
+          ポパーの反証主義、バグ報告の解釈、法律文書の分析、
+          いずれも量化子の否定法則の直接的な応用です。
+          理論と実践の距離はゼロです。
+        </p>
+      </Callout>
     </article>
   )
 }
