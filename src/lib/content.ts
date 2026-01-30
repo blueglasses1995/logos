@@ -14,6 +14,24 @@ const CHAPTERS: readonly ChapterMeta[] = [
     order: 2,
     description: "真理値表の構築、トートロジー、ド・モルガンの法則、対偶",
   },
+  {
+    slug: "03-validity",
+    title: "論証の妥当性と健全性",
+    order: 3,
+    description: "演繹的妥当性、健全性、主要な推論規則、反例による否定",
+  },
+  {
+    slug: "04-predicate-logic",
+    title: "述語論理の基礎",
+    order: 4,
+    description: "述語と量化子（∀, ∃）、量化子の否定、多重量化",
+  },
+  {
+    slug: "05-fallacies",
+    title: "非形式的誤謬",
+    order: 5,
+    description: "人身攻撃、藁人形論法、偽の二択など主要な誤謬の分類と識別",
+  },
 ]
 
 export function getAllChapters(): readonly ChapterMeta[] {
