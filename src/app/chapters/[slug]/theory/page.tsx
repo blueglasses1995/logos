@@ -5,8 +5,8 @@ import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { QuizRunner } from "@/components/quiz/QuizRunner"
 import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
+import { getChapterContent } from "@/lib/content-registry"
 import { useProgress } from "@/hooks/use-progress"
-import { TheoryContent } from "../../../../../content/chapters/01-propositions/theory"
 import Link from "next/link"
 
 export default function TheoryPage({
@@ -17,6 +17,10 @@ export default function TheoryPage({
   const { slug } = use(params)
   const chapter = getChapterMeta(slug)
   if (!chapter) notFound()
+
+  const content = getChapterContent(slug)
+  if (!content) notFound()
+  const { TheoryContent } = content
 
   const quizzes = getChapterQuizzes(slug, "theory")
   const { recordAttempt } = useProgress()

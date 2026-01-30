@@ -4,8 +4,8 @@ import { use, useEffect } from "react"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { getChapterMeta } from "@/lib/content"
+import { getChapterContent } from "@/lib/content-registry"
 import { useProgress } from "@/hooks/use-progress"
-import { PhilosophyContent } from "../../../../../content/chapters/01-propositions/philosophy"
 import Link from "next/link"
 
 export default function PhilosophyPage({
@@ -16,6 +16,10 @@ export default function PhilosophyPage({
   const { slug } = use(params)
   const chapter = getChapterMeta(slug)
   if (!chapter) notFound()
+
+  const content = getChapterContent(slug)
+  if (!content) notFound()
+  const { PhilosophyContent } = content
 
   const { markPhilosophy } = useProgress()
 
