@@ -1,12 +1,4 @@
-export interface ReviewItem {
-  readonly quizId: string
-  readonly chapterSlug: string
-  readonly section: "theory" | "practice"
-  readonly nextReview: string // ISO date (YYYY-MM-DD)
-  readonly interval: number // days
-  readonly easeFactor: number // starts at 2.5, min 1.3
-  readonly repetitions: number
-}
+import type { ReviewItemData } from "@/types/progress"
 
 export type ResponseQuality = 0 | 1 | 2 | 3 | 4 | 5
 // 0-2: incorrect (reset), 3: correct with difficulty, 4: correct, 5: easy
@@ -18,7 +10,7 @@ export function createReviewItem(
   quizId: string,
   chapterSlug: string,
   section: "theory" | "practice"
-): ReviewItem {
+): ReviewItemData {
   return {
     quizId,
     chapterSlug,
@@ -31,9 +23,9 @@ export function createReviewItem(
 }
 
 export function calculateNextReview(
-  item: ReviewItem,
+  item: ReviewItemData,
   quality: ResponseQuality
-): ReviewItem {
+): ReviewItemData {
   // SM-2 ease factor update
   const newEaseFactor = Math.max(
     MIN_EASE_FACTOR,

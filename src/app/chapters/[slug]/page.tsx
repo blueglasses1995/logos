@@ -49,7 +49,6 @@ export default function ChapterPage({
     }
     const section = chapterProgress[key]
     if (section.attempts.length === 0) return "未着手"
-    if (section.completed) return "完了"
     return "進行中"
   }
 

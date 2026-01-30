@@ -1,4 +1,4 @@
-export interface TextSegment {
+interface TextSegment {
   readonly type: "text" | "term"
   readonly value: string
 }

@@ -5,7 +5,6 @@ export interface QuizAttempt {
 }
 
 export interface SectionProgress {
-  readonly completed: boolean
   readonly attempts: readonly QuizAttempt[]
 }
 
@@ -35,7 +34,6 @@ export interface UserProgress {
 }
 
 export const EMPTY_SECTION_PROGRESS: SectionProgress = {
-  completed: false,
   attempts: [],
 }
 

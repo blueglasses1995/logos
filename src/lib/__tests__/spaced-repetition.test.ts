@@ -2,9 +2,9 @@ import { describe, it, expect } from "vitest"
 import {
   calculateNextReview,
   createReviewItem,
-  type ReviewItem,
   type ResponseQuality,
 } from "../spaced-repetition"
+import type { ReviewItemData } from "@/types/progress"
 
 describe("createReviewItem", () => {
   it("creates a new review item with default values", () => {
@@ -19,7 +19,7 @@ describe("createReviewItem", () => {
 })
 
 describe("calculateNextReview", () => {
-  const baseItem: ReviewItem = {
+  const baseItem: ReviewItemData = {
     quizId: "ch1-t1",
     chapterSlug: "01-propositions",
     section: "theory",
@@ -42,14 +42,14 @@ describe("calculateNextReview", () => {
   })
 
   it("sets interval to 6 on second successful review", () => {
-    const item: ReviewItem = { ...baseItem, repetitions: 1, interval: 1 }
+    const item: ReviewItemData = { ...baseItem, repetitions: 1, interval: 1 }
     const result = calculateNextReview(item, 4)
     expect(result.repetitions).toBe(2)
     expect(result.interval).toBe(6)
   })
 
   it("multiplies interval by ease factor on subsequent reviews", () => {
-    const item: ReviewItem = { ...baseItem, repetitions: 2, interval: 6, easeFactor: 2.5 }
+    const item: ReviewItemData = { ...baseItem, repetitions: 2, interval: 6, easeFactor: 2.5 }
     const result = calculateNextReview(item, 4)
     expect(result.repetitions).toBe(3)
     expect(result.interval).toBe(15) // Math.round(6 * 2.5)
@@ -66,13 +66,13 @@ describe("calculateNextReview", () => {
   })
 
   it("does not let ease factor go below 1.3", () => {
-    const item: ReviewItem = { ...baseItem, easeFactor: 1.3 }
+    const item: ReviewItemData = { ...baseItem, easeFactor: 1.3 }
     const result = calculateNextReview(item, 0)
     expect(result.easeFactor).toBeGreaterThanOrEqual(1.3)
   })
 
   it("sets nextReview date based on interval", () => {
-    const item: ReviewItem = { ...baseItem, nextReview: "2026-01-30" }
+    const item: ReviewItemData = { ...baseItem, nextReview: "2026-01-30" }
     const result = calculateNextReview(item, 4)
     // interval = 1 for first success, so next review is tomorrow
     expect(result.nextReview).toBe("2026-01-31")

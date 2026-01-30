@@ -20,22 +20,6 @@ export interface TruthTableQuiz {
 
 export type Quiz = MultipleChoiceQuiz | TruthTableQuiz
 
-// --- Section Types ---
-
-export interface TheorySection {
-  readonly slug: string
-  readonly quizzes: readonly Quiz[]
-}
-
-export interface PracticeSection {
-  readonly slug: string
-  readonly quizzes: readonly Quiz[]
-}
-
-export interface PhilosophySection {
-  readonly slug: string
-}
-
 // --- Chapter Types ---
 
 export interface ChapterMeta {

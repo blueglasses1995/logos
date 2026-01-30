@@ -6,11 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useProgress } from "@/hooks/use-progress"
 import { getChapterContent } from "@/lib/content-registry"
 import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
-import { calculateNextReview, createReviewItem, type ResponseQuality } from "@/lib/spaced-repetition"
+import { calculateNextReview, type ResponseQuality } from "@/lib/spaced-repetition"
 import { MultipleChoiceQuiz } from "@/components/quiz/MultipleChoiceQuiz"
 import { TruthTableQuiz } from "@/components/quiz/TruthTableQuiz"
 import type { Quiz, MultipleChoiceQuiz as MCQuiz, TruthTableQuiz as TTQuiz } from "@/types/content"
-import type { ReviewItemData } from "@/types/progress"
 import Link from "next/link"
 
 type ReviewPhase = "answering" | "rating"
@@ -78,25 +77,8 @@ export default function ReviewPage() {
   }
 
   const handleRating = (quality: ResponseQuality) => {
-    const reviewItem = {
-      quizId: currentItem.quizId,
-      chapterSlug: currentItem.chapterSlug,
-      section: currentItem.section,
-      nextReview: currentItem.nextReview,
-      interval: currentItem.interval,
-      easeFactor: currentItem.easeFactor,
-      repetitions: currentItem.repetitions,
-    }
-    const updated = calculateNextReview(reviewItem, quality)
-    addReviewItem({
-      quizId: updated.quizId,
-      chapterSlug: updated.chapterSlug,
-      section: updated.section,
-      nextReview: updated.nextReview,
-      interval: updated.interval,
-      easeFactor: updated.easeFactor,
-      repetitions: updated.repetitions,
-    })
+    const updated = calculateNextReview(currentItem, quality)
+    addReviewItem(updated)
     setPhase("answering")
     setCurrentIndex((prev) => prev + 1)
   }

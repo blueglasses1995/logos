@@ -23,11 +23,6 @@ export function useProgress() {
     saveProgress(updated)
   }, [])
 
-  const persist = useCallback((next: UserProgress) => {
-    setProgress(next)
-    saveProgress(next)
-  }, [])
-
   const recordAttempt = useCallback(
     (
       chapterSlug: string,
@@ -68,7 +63,6 @@ export function useProgress() {
     progress,
     recordAttempt,
     markPhilosophy,
-    persist,
     addReviewItem,
     getDueItems,
   }
