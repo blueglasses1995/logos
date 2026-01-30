@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ch5-t1",
+    "type": "multiple-choice",
+    "question": "「あの政治家は金持ちだから、彼の経済政策は庶民のためにならない」 — この推論に含まれる誤謬はどれですか？",
+    "options": [
+      "人身攻撃（Ad Hominem）",
+      "藁人形論法（Straw Man）",
+      "滑りやすい坂論法（Slippery Slope）",
+      "偽の二択（False Dilemma）"
+    ],
+    "correctIndex": 0,
+    "explanation": "政策の内容ではなく、主張者の属性（金持ち）を理由に主張を退けています。これは人身攻撃の典型例です。政策の良し悪しは内容で判断すべきです。"
+  },
+  {
+    "id": "ch5-t2",
+    "type": "multiple-choice",
+    "question": "「このダイエット法は効果がある。なぜなら、100万人が実践しているからだ」 — この推論に含まれる誤謬はどれですか？",
+    "options": [
+      "多数への訴え（Ad Populum）",
+      "権威への訴え（Appeal to Authority）",
+      "循環論法（Begging the Question）",
+      "感情への訴え（Appeal to Emotion）"
+    ],
+    "correctIndex": 0,
+    "explanation": "多くの人が実践していることは、効果の証拠にはなりません。科学的有効性は臨床試験で示す必要があります。"
+  },
+  {
+    "id": "ch5-t3",
+    "type": "multiple-choice",
+    "question": "A「残業を減らすべきだ」B「仕事を全くしなくていいと言うのか？」 — Bの反論に含まれる誤謬はどれですか？",
+    "options": [
+      "藁人形論法（Straw Man）",
+      "人身攻撃（Ad Hominem）",
+      "偽の二択（False Dilemma）",
+      "滑りやすい坂論法（Slippery Slope）"
+    ],
+    "correctIndex": 0,
+    "explanation": "Aは「残業を減らす」と言っただけなのに、Bは「仕事をしない」と極端に歪めて反論しています。相手の主張を弱い形に変えて攻撃する藁人形論法です。"
+  },
+  {
+    "id": "ch5-t4",
+    "type": "multiple-choice",
+    "question": "「この技術を採用するか、競合に負けるか、どちらかだ」 — この主張に含まれる誤謬はどれですか？",
+    "options": [
+      "偽の二択（False Dilemma）",
+      "多数への訴え（Ad Populum）",
+      "権威への訴え（Appeal to Authority）",
+      "循環論法（Begging the Question）"
+    ],
+    "correctIndex": 0,
+    "explanation": "実際には他の選択肢（別の技術を採用する、段階的に移行する、独自の手法を開発するなど）があるのに、2つの選択肢しかないように提示しています。"
+  },
+  {
+    "id": "ch5-t5",
+    "type": "multiple-choice",
+    "question": "「リモートワークを許可したら、次はフレックスタイム、次は週3日勤務と要求がエスカレートし、最終的に会社が崩壊する」 — この推論に含まれる誤謬はどれですか？",
+    "options": [
+      "滑りやすい坂論法（Slippery Slope）",
+      "藁人形論法（Straw Man）",
+      "偽の二択（False Dilemma）",
+      "人身攻撃（Ad Hominem）"
+    ],
+    "correctIndex": 0,
+    "explanation": "一つの変更が連鎖的に極端な結果を生むと主張していますが、各段階の因果関係が証明されていません。リモートワークの許可が必ず会社崩壊につながるわけではありません。"
+  }
+]
