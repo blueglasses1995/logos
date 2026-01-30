@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "id": "ch4f-t1",
+    "type": "multiple-choice",
+    "question": "SQLの設計基盤について正しい記述はどれですか？",
+    "options": [
+      "Edgar F. Coddが述語論理と集合論を基盤としてリレーショナルモデルを設計した",
+      "SQLは実務上の便宜から経験則で設計され、論理学とは無関係である",
+      "SQLの設計基盤はグラフ理論であり、述語論理は後から追加された",
+      "SQLは命題論理のみに基づいており、述語論理は使われていない"
+    ],
+    "correctIndex": 0,
+    "explanation": "Edgar F. Coddは1970年に述語論理と集合論を直接の基盤としてリレーショナルモデルを発表しました。テーブルは述語の拡張、クエリは論理式、制約は論理的不変条件です。SQLは述語論理を実行可能にした言語です。"
+  },
+  {
+    "id": "ch4f-t2",
+    "type": "multiple-choice",
+    "question": "SQLの「SELECT * FROM users WHERE age > 20 AND is_active = true」を述語論理で解釈すると、最も正確なのはどれですか？",
+    "options": [
+      "一項述語A(x)「xの年齢は20より大きい」と一項述語B(x)「xはアクティブである」の論理積 A(x) ∧ B(x) を満たすすべてのxを返す",
+      "二項述語R(age, is_active)「年齢とアクティブ状態の関係」を返す",
+      "存在量化 ∃x(age > 20) を確認している",
+      "全称量化 ∀x(age > 20 → is_active = true) を確認している"
+    ],
+    "correctIndex": 0,
+    "explanation": "WHERE句の各条件は一項述語です。「age > 20」は行xに対する述語A(x)、「is_active = true」は述語B(x)です。ANDは論理積∧に対応し、クエリ全体はA(x) ∧ B(x)を満たす行の集合を返します。"
+  },
+  {
+    "id": "ch4f-t3",
+    "type": "multiple-choice",
+    "question": "SQLにFORALLキーワードが存在しない理由として、論理学的に最も正確な説明はどれですか？",
+    "options": [
+      "∀x P(x) ≡ ¬∃x ¬P(x) という論理的同値により、EXISTSとNOTで全称量化を表現できるため",
+      "全称量化は実用上ほとんど使われないため省略された",
+      "FORALLは実装が技術的に不可能であるため",
+      "NOT EXISTSはFORALLの近似的な代替手段にすぎない"
+    ],
+    "correctIndex": 0,
+    "explanation": "量化子の否定規則 ∀x P(x) ≡ ¬∃x ¬P(x) により、∀と∃は互いに定義可能です。SQLはEXISTSを基本として選び、NOT EXISTS ... WHERE NOT ... で全称量化を表現します。これは回避策ではなく、全称量化の定義そのものです。"
+  },
+  {
+    "id": "ch4f-t4",
+    "type": "multiple-choice",
+    "question": "述語論理の「∀x(P(x) → Q(x))」（すべてのxについて、PならばQ）をSQLで表現するとき、正しいパターンはどれですか？",
+    "options": [
+      "NOT EXISTS (SELECT ... WHERE P AND NOT Q)",
+      "EXISTS (SELECT ... WHERE P AND Q)",
+      "NOT EXISTS (SELECT ... WHERE NOT P OR NOT Q)",
+      "EXISTS (SELECT ... WHERE P OR Q)"
+    ],
+    "correctIndex": 0,
+    "explanation": "∀x(P(x) → Q(x)) は ¬∃x ¬(P(x) → Q(x)) と同値です。P → Q の否定は P ∧ ¬Q なので、¬∃x(P(x) ∧ ¬Q(x)) となります。これをSQLで書くと NOT EXISTS (SELECT ... WHERE P AND NOT Q) です。「Pを満たすがQを満たさないxが存在しない」ことで「PならばQ」を表現します。"
+  },
+  {
+    "id": "ch4f-t5",
+    "type": "multiple-choice",
+    "question": "Codd以前のデータベース（階層型・ネットワーク型）と比較して、関係モデルの最大の革新はどれですか？",
+    "options": [
+      "述語論理と集合論を基盤とすることで、クエリの正しさを数学的に検証可能にしたこと",
+      "データをJSON形式で保存できるようにしたこと",
+      "プログラミング言語を不要にしたこと",
+      "データの物理的な保存方法を規定したこと"
+    ],
+    "correctIndex": 0,
+    "explanation": "Codd以前の階層型・ネットワーク型データベースには数学的基盤がなく、クエリの正しさやデータの整合性を形式的に検証する方法がありませんでした。Coddは述語論理と集合論を基盤としてリレーショナルモデルを構築し、データ管理に数学的保証を持ち込みました。"
+  }
+]

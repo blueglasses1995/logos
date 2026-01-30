@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "ch4f-p1",
+    "type": "multiple-choice",
+    "question": "ECサイトのデータベースで「すべての注文が発送済みである顧客」を検索したい。次のSQL文のうち、述語論理の観点で正しいのはどれですか？\n\n顧客テーブル: customers(id, name)\n注文テーブル: orders(id, customer_id, status)",
+    "options": [
+      "SELECT name FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id AND o.status != 'shipped')\nこれは ∀o(Order(o, c) → Shipped(o)) を ¬∃o(Order(o, c) ∧ ¬Shipped(o)) として表現している",
+      "SELECT name FROM customers c WHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id AND o.status = 'shipped')\nこれは ∀o(Shipped(o)) を表現している",
+      "SELECT name FROM customers c JOIN orders o ON c.id = o.customer_id WHERE o.status = 'shipped'\nこれは全称量化を表現している",
+      "SELECT name FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id AND o.status = 'shipped')\nこれは「すべてが発送済み」を表現している"
+    ],
+    "correctIndex": 0,
+    "explanation": "「すべての注文が発送済み」は全称量化 ∀o(Order(o, c) → Shipped(o)) です。SQLにFORALLはないため、量化子の否定規則 ∀x P(x) ≡ ¬∃x ¬P(x) を適用します。「発送済みでない注文が存在しない」= NOT EXISTS (... WHERE status != 'shipped') が正しい表現です。2番目の選択肢は「発送済みの注文が1つでもある」という存在量化 ∃ にすぎません。3番目はJOINで発送済みの注文と結合しているだけです。4番目は「発送済みの注文が存在しない」という逆の意味になります。"
+  },
+  {
+    "id": "ch4f-p2",
+    "type": "multiple-choice",
+    "question": "あるORMが以下のコードから生成するSQLを推測したい。\n\n// 「未提出の課題がある学生」を検索\nStudent.findMany({\n  where: {\n    assignments: {\n      some: {\n        submitted: false\n      }\n    }\n  }\n})\n\nこのORMコードが対応する述語論理の式として最も正確なのはどれですか？",
+    "options": [
+      "∃a(Assignment(a, s) ∧ ¬Submitted(a)) — 学生sについて、未提出の課題aが存在する。SQLでは EXISTS (SELECT 1 FROM assignments a WHERE a.student_id = s.id AND a.submitted = false) が生成される",
+      "∀a(Assignment(a, s) → ¬Submitted(a)) — 学生sのすべての課題が未提出である",
+      "¬∃a(Assignment(a, s) ∧ Submitted(a)) — 提出済みの課題が一つもない",
+      "∃a(Assignment(a, s) ∧ Submitted(a)) — 提出済みの課題が存在する"
+    ],
+    "correctIndex": 0,
+    "explanation": "ORMのsomeメソッドは存在量化子 ∃ に対応します。「some: { submitted: false }」は「submitted = falseである課題が少なくとも1つ存在する」という意味です。これは ∃a(Assignment(a, s) ∧ ¬Submitted(a)) であり、SQLではEXISTS句が生成されます。2番目は「すべての課題が未提出」で、全称量化 ∀ であり、someではなくeveryに対応します。3番目は「提出済みが0件」で、∀の別表現です。4番目は「提出済みが存在する」で、someの条件が逆です。"
+  },
+  {
+    "id": "ch4f-p3",
+    "type": "multiple-choice",
+    "question": "以下のSQLクエリが返す結果を述語論理で正確に記述しているのはどれですか？\n\nSELECT d.name\nFROM departments d\nWHERE NOT EXISTS (\n  SELECT 1 FROM employees e\n  WHERE e.dept_id = d.id\n  AND NOT EXISTS (\n    SELECT 1 FROM certifications c\n    WHERE c.employee_id = e.id\n    AND c.type = 'security'\n  )\n)",
+    "options": [
+      "∀e(Employee(e, d) → ∃c(Cert(c, e) ∧ Security(c))) — 部署dのすべての従業員eについて、セキュリティ認定cが存在する。つまり「全従業員がセキュリティ認定を持つ部署」",
+      "∃e(Employee(e, d) ∧ ∃c(Cert(c, e) ∧ Security(c))) — 部署dにセキュリティ認定を持つ従業員が少なくとも1人いる",
+      "∀e(Employee(e, d) → ∀c(Cert(c, e) → Security(c))) — 部署dの全従業員の全認定がセキュリティ認定である",
+      "¬∃e(Employee(e, d)) — 従業員が一人もいない部署"
+    ],
+    "correctIndex": 0,
+    "explanation": "二重のNOT EXISTSを外側から読み解きます。外側のNOT EXISTS: 「〜な従業員eが存在しない」。内側のNOT EXISTS: 「セキュリティ認定cが存在しない」。組み合わせると「セキュリティ認定が存在しない従業員が存在しない」= 「すべての従業員がセキュリティ認定を持つ」です。これは ∀e(Employee(e, d) → ∃c(Cert(c, e) ∧ Security(c))) であり、外側のNOT EXISTSが ∀e を、内側のNOT EXISTSの否定が ∃c を表現しています。量化子の否定規則の二重適用です。"
+  }
+]

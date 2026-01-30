@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "ch4e-p1",
+    "type": "multiple-choice",
+    "question": "次のJavaScriptコードが検証している論理式として正しいものはどれですか？\n\nconst result = users.every(u => roles.some(r => u.roles.includes(r.id)))\n\nここで users はユーザーの配列、roles は利用可能なロールの配列です。",
+    "options": [
+      "∀x(User(x) → ∃y(Role(y) ∧ HasRole(x, y))) — すべてのユーザーが少なくとも1つのロールを持つ",
+      "∃y(Role(y) ∧ ∀x(User(x) → HasRole(x, y))) — あるロールをすべてのユーザーが持つ",
+      "∃x(User(x) ∧ ∃y(Role(y) ∧ HasRole(x, y))) — あるユーザーが何らかのロールを持つ",
+      "∀x ∀y(User(x) ∧ Role(y) → HasRole(x, y)) — すべてのユーザーがすべてのロールを持つ"
+    ],
+    "correctIndex": 0,
+    "explanation": "every() は ∀ に、some() は ∃ に対応します。every(u => ... some(r => ...)) は外側が ∀（すべてのユーザー）、内側が ∃（いずれかのロール）です。つまり「すべてのユーザーについて、そのユーザーが持つロールが少なくとも1つ存在する」= ∀x ∃y の構造です。もし ∃y ∀x にしたければ roles.some(r => users.every(u => ...)) のように外側をsome、内側をeveryにする必要があります。"
+  },
+  {
+    "id": "ch4e-p2",
+    "type": "multiple-choice",
+    "question": "次のSQLクエリが表現している論理式はどれですか？\n\nSELECT e.name FROM employees e\nWHERE NOT EXISTS (\n  SELECT 1 FROM projects p\n  WHERE NOT EXISTS (\n    SELECT 1 FROM assignments a\n    WHERE a.employee_id = e.id AND a.project_id = p.id\n  )\n)\n\nこのクエリは何を取得しますか？",
+    "options": [
+      "∃e(Employee(e) ∧ ∀p(Project(p) → ∃a Assigned(e, p, a))) — すべてのプロジェクトに参加しているある社員を取得する",
+      "∀e(Employee(e) → ∃p(Project(p) ∧ Assigned(e, p))) — すべての社員が少なくとも1つのプロジェクトに参加しているか確認する",
+      "∃p(Project(p) ∧ ∀e(Employee(e) → Assigned(e, p))) — すべての社員が参加しているあるプロジェクトを取得する",
+      "∀p(Project(p) → ∀e(Employee(e) → Assigned(e, p))) — すべてのプロジェクトにすべての社員が参加しているか確認する"
+    ],
+    "correctIndex": 0,
+    "explanation": "NOT EXISTS の二重入れ子は多重量化を表現します。外側の SELECT は各社員eについて繰り返します。NOT EXISTS (SELECT ... FROM projects p WHERE NOT EXISTS (...)) は「すべてのプロジェクトpに対して（そのプロジェクトへのアサインが存在しないプロジェクトが存在しない = すべてに存在する）」を意味します。つまり ∀p ∃a の構造です。結果として「すべてのプロジェクトにアサインされている社員」を取得します。"
+  },
+  {
+    "id": "ch4e-p3",
+    "type": "multiple-choice",
+    "question": "ある法律事務所の規定に「すべての契約書には少なくとも1名の弁護士が審査すること」と定められています。この規定を正しく形式化したものと、その実務的な意味として正しいのはどれですか？",
+    "options": [
+      "∀x(Contract(x) → ∃y(Lawyer(y) ∧ Reviews(y, x))) — 各契約に対して（それぞれ異なってもよい）審査弁護士がいればよい。契約Aは田中弁護士、契約Bは鈴木弁護士が審査しても規定を満たす",
+      "∃y(Lawyer(y) ∧ ∀x(Contract(x) → Reviews(y, x))) — ある1人の弁護士がすべての契約を審査する必要がある。専任の審査弁護士を置かなければ規定違反となる",
+      "∀x ∀y(Contract(x) ∧ Lawyer(y) → Reviews(y, x)) — すべての弁護士がすべての契約を審査しなければならない",
+      "∃x(Contract(x) ∧ ∃y(Lawyer(y) ∧ Reviews(y, x))) — 少なくとも1つの契約が弁護士の審査を受けていればよい"
+    ],
+    "correctIndex": 0,
+    "explanation": "「すべての契約には少なくとも1名の弁護士が審査する」は ∀x ∃y の構造です。各契約xに対して、審査する弁護士yが存在すればよく、契約ごとに異なる弁護士で構いません。∃y ∀x にすると「1人の弁護士がすべての契約を審査する」という意味になり、元の規定よりもはるかに厳しい要件になります。法的な文脈では、量化子の順序の取り違えが義務の範囲を大きく変えてしまいます。"
+  }
+]
