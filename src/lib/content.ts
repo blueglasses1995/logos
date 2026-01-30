@@ -8,6 +8,12 @@ const CHAPTERS: readonly ChapterMeta[] = [
     order: 1,
     description: "AND, OR, NOT, IF-THEN — 論理の基本的な結合子を学ぶ",
   },
+  {
+    slug: "02-truth-tables",
+    title: "真理値表と恒真式",
+    order: 2,
+    description: "真理値表の構築、トートロジー、ド・モルガンの法則、対偶",
+  },
 ]
 
 export function getAllChapters(): readonly ChapterMeta[] {

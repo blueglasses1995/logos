@@ -1,0 +1,65 @@
+[
+  {
+    "id": "ch2-t1",
+    "type": "multiple-choice",
+    "question": "次の論理式のうち、恒真式（トートロジー）はどれですか？",
+    "options": [
+      "P ∨ ¬P",
+      "P ∧ ¬P",
+      "P → Q",
+      "P ∧ Q"
+    ],
+    "correctIndex": 0,
+    "explanation": "P ∨ ¬P（排中律）は、Pが真でも偽でも常に真になります。P ∧ ¬Pは矛盾式（常に偽）、他の2つは充足可能式です。"
+  },
+  {
+    "id": "ch2-t2",
+    "type": "multiple-choice",
+    "question": "ド・モルガンの法則により、¬(P ∨ Q) と論理的に同値なのはどれですか？",
+    "options": [
+      "¬P ∧ ¬Q",
+      "¬P ∨ ¬Q",
+      "P ∧ Q",
+      "¬P → ¬Q"
+    ],
+    "correctIndex": 0,
+    "explanation": "ド・モルガンの法則: ¬(P ∨ Q) ≡ ¬P ∧ ¬Q です。「PまたはQでない」は「PでないかつQでない」と同じです。"
+  },
+  {
+    "id": "ch2-t3",
+    "type": "multiple-choice",
+    "question": "対偶の法則により、(P → Q) と論理的に同値なのはどれですか？",
+    "options": [
+      "¬Q → ¬P",
+      "Q → P",
+      "¬P → ¬Q",
+      "P ∧ ¬Q"
+    ],
+    "correctIndex": 0,
+    "explanation": "対偶: (P → Q) ≡ (¬Q → ¬P) です。「PならばQ」と「QでなければPでない」は同値です。Q → P は「逆」、¬P → ¬Qは「裏」であり、元の命題とは同値ではありません。"
+  },
+  {
+    "id": "ch2-t4",
+    "type": "truth-table",
+    "expression": "P ∨ ¬P",
+    "variables": ["P"],
+    "expectedTable": [
+      [true, true],
+      [false, true]
+    ],
+    "blanks": [1, 3]
+  },
+  {
+    "id": "ch2-t5",
+    "type": "truth-table",
+    "expression": "¬(P ∧ Q)",
+    "variables": ["P", "Q"],
+    "expectedTable": [
+      [true, true, false],
+      [true, false, true],
+      [false, true, true],
+      [false, false, true]
+    ],
+    "blanks": [2, 5, 8, 11]
+  }
+]

@@ -14,12 +14,23 @@ import { PhilosophyContent as Ch01Philosophy } from "../../content/chapters/01-p
 import ch01TheoryQuizzes from "../../content/chapters/01-propositions/theory-quizzes.json"
 import ch01PracticeQuizzes from "../../content/chapters/01-propositions/practice-quizzes.json"
 
+import { TheoryContent as Ch02Theory } from "../../content/chapters/02-truth-tables/theory"
+import { PhilosophyContent as Ch02Philosophy } from "../../content/chapters/02-truth-tables/philosophy"
+import ch02TheoryQuizzes from "../../content/chapters/02-truth-tables/theory-quizzes.json"
+import ch02PracticeQuizzes from "../../content/chapters/02-truth-tables/practice-quizzes.json"
+
 const CONTENT_REGISTRY: Readonly<Record<string, ChapterContent>> = {
   "01-propositions": {
     TheoryContent: Ch01Theory,
     PhilosophyContent: Ch01Philosophy,
     theoryQuizzes: ch01TheoryQuizzes as unknown as Quiz[],
     practiceQuizzes: ch01PracticeQuizzes as unknown as Quiz[],
+  },
+  "02-truth-tables": {
+    TheoryContent: Ch02Theory,
+    PhilosophyContent: Ch02Philosophy,
+    theoryQuizzes: ch02TheoryQuizzes as unknown as Quiz[],
+    practiceQuizzes: ch02PracticeQuizzes as unknown as Quiz[],
   },
 }
 

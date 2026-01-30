@@ -19,7 +19,7 @@ describe("getChapterQuizzes", () => {
 describe("getAllChapters", () => {
   it("returns chapter metadata list", () => {
     const chapters = getAllChapters()
-    expect(chapters).toHaveLength(1)
+    expect(chapters.length).toBeGreaterThanOrEqual(1)
     expect(chapters[0].slug).toBe("01-propositions")
   })
 })
