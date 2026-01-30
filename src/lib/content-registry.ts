@@ -34,6 +34,11 @@ import { PhilosophyContent as Ch05Philosophy } from "../../content/chapters/05-f
 import ch05TheoryQuizzes from "../../content/chapters/05-fallacies/theory-quizzes.json"
 import ch05PracticeQuizzes from "../../content/chapters/05-fallacies/practice-quizzes.json"
 
+import { TheoryContent as Ch06Theory } from "../../content/chapters/06-synthesis/theory"
+import { PhilosophyContent as Ch06Philosophy } from "../../content/chapters/06-synthesis/philosophy"
+import ch06TheoryQuizzes from "../../content/chapters/06-synthesis/theory-quizzes.json"
+import ch06PracticeQuizzes from "../../content/chapters/06-synthesis/practice-quizzes.json"
+
 const CONTENT_REGISTRY: Readonly<Record<string, ChapterContent>> = {
   "01-propositions": {
     TheoryContent: Ch01Theory,
@@ -64,6 +69,12 @@ const CONTENT_REGISTRY: Readonly<Record<string, ChapterContent>> = {
     PhilosophyContent: Ch05Philosophy,
     theoryQuizzes: ch05TheoryQuizzes as unknown as Quiz[],
     practiceQuizzes: ch05PracticeQuizzes as unknown as Quiz[],
+  },
+  "06-synthesis": {
+    TheoryContent: Ch06Theory,
+    PhilosophyContent: Ch06Philosophy,
+    theoryQuizzes: ch06TheoryQuizzes as unknown as Quiz[],
+    practiceQuizzes: ch06PracticeQuizzes as unknown as Quiz[],
   },
 }
 

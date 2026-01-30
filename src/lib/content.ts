@@ -32,6 +32,12 @@ const CHAPTERS: readonly ChapterMeta[] = [
     order: 5,
     description: "人身攻撃、藁人形論法、偽の二択など主要な誤謬の分類と識別",
   },
+  {
+    slug: "06-synthesis",
+    title: "実践総合演習",
+    order: 6,
+    description: "全章の知識を統合した議論分析フレームワークと総合演習",
+  },
 ]
 
 export function getAllChapters(): readonly ChapterMeta[] {
