@@ -7,6 +7,7 @@ import { getChapterMeta } from "@/lib/content"
 import { getChapterContent } from "@/lib/content-registry"
 import { useProgress } from "@/hooks/use-progress"
 import Link from "next/link"
+import { AutoLinkedArticle } from "@/components/glossary/auto-linked-article"
 
 export default function PhilosophyPage({
   params,
@@ -37,7 +38,9 @@ export default function PhilosophyPage({
         哲学コラム
       </div>
 
-      <PhilosophyContent />
+      <AutoLinkedArticle>
+        <PhilosophyContent />
+      </AutoLinkedArticle>
 
       <div className="flex justify-between pt-4">
         <Link href={`/chapters/${slug}/practice`}>
