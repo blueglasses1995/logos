@@ -41,7 +41,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       "アリストテレスが定式化した推論形式。2つの前提から1つの結論を導く。例:「すべての人間は死すべきものである。ソクラテスは人間である。ゆえにソクラテスは死すべきものである。」約2000年間、論理学の中核として使われた。",
     relatedChapters: [
       { slug: "01-propositions", label: "第1章: 哲学コラム" },
-      { slug: "04-predicate-logic", label: "第4章: 述語論理" },
+      { slug: "04a-predicates", label: "第4a章: 述語と項" },
     ],
   },
 
@@ -124,13 +124,13 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
     ],
   },
 
-  // 第4章: 述語論理
+  // 第4章: 述語論理（6サブチャプター）
   {
     term: "述語論理",
     description:
       "命題論理を拡張し、個体・述語・量化子を導入した論理体系。「すべてのxについてP(x)」（∀x P(x)）や「あるxが存在してP(x)」（∃x P(x)）を形式的に表現できる。フレーゲが1879年の『概念記法』で創始した。",
     relatedChapters: [
-      { slug: "04-predicate-logic", label: "第4章: 述語論理の基礎" },
+      { slug: "04a-predicates", label: "第4a章: 述語と項" },
     ],
   },
   {
@@ -138,7 +138,8 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
     description:
       "変数の範囲を指定する記号。全称量化子∀（すべての）と存在量化子∃（ある...が存在する）の2つがある。フレーゲが『概念記法』で導入し、ワイエルシュトラスのε-δ論法のような数学的推論を形式化することを可能にした。",
     relatedChapters: [
-      { slug: "04-predicate-logic", label: "第4章: 述語論理の基礎" },
+      { slug: "04b-universal", label: "第4b章: 全称量化子" },
+      { slug: "04c-existential", label: "第4c章: 存在量化子" },
     ],
   },
   {
@@ -147,7 +148,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
     description:
       "1848-1925年。ドイツの数学者・論理学者。イエナ大学教授。算術を純粋な論理から導出する「論理主義」を目指し、1879年に述語論理を創始する革命的著作『概念記法』を出版。しかし1902年、ラッセルのパラドックスにより主著の体系が崩壊する悲劇を経験した。",
     relatedChapters: [
-      { slug: "04-predicate-logic", label: "第4章: 哲学コラム" },
+      { slug: "04a-predicates", label: "第4a章: 哲学コラム" },
     ],
   },
   {
@@ -156,7 +157,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
     description:
       "1872-1970年。イギリスの哲学者・数学者・論理学者。1902年にフレーゲの体系に致命的な矛盾（ラッセルのパラドックス）を発見。その対処として「型理論」を考案した。ホワイトヘッドとの共著『プリンキピア・マテマティカ』は論理学の金字塔。ノーベル文学賞受賞者でもある。",
     relatedChapters: [
-      { slug: "04-predicate-logic", label: "第4章: 哲学コラム" },
+      { slug: "04a-predicates", label: "第4a章: 哲学コラム" },
       { slug: "06-synthesis", label: "第6章: 哲学コラム" },
     ],
   },
@@ -165,7 +166,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
     description:
       "ラッセルがパラドックスへの対処として考案した理論。集合を「型（レベル）」に分類し、自分自身を要素として含むことを禁止する。現代のプログラミング言語の型システム（TypeScript、Haskell、Rust）は型理論の直系の子孫である。",
     relatedChapters: [
-      { slug: "04-predicate-logic", label: "第4章: 哲学コラム" },
+      { slug: "04f-sql-connection", label: "第4f章: 述語論理とSQL" },
     ],
   },
 
