@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "ch4a-p1",
+    "type": "multiple-choice",
+    "question": "TypeScriptで次の型ガード関数を書きました。\n\nfunction isAdmin(user: User): user is AdminUser {\n  return user.role === 'admin'\n}\n\nこの関数を述語論理の観点で最も正確に記述しているのはどれですか？",
+    "options": [
+      "一項述語 A(x):「xはAdminUserである」を実装しており、xにUser型の値を入れると真偽が返る",
+      "二項述語 A(x, y):「xのロールはyである」を実装している",
+      "命題「adminロールが存在する」を返す関数である",
+      "述語ではなく、単なるboolean値を返す関数である"
+    ],
+    "correctIndex": 0,
+    "explanation": "型ガード関数isAdminは、User型の値xを1つ受け取り、「xはAdminUserである」という命題の真偽を返します。これは一項述語A(x)の直接的な実装です。TypeScriptの「x is AdminUser」という戻り値型は、この関数が述語であることをコンパイラに宣言しています。Array.filterにこの関数を渡せば、「A(x)を満たすすべてのx」を取得でき、これはSQLのWHERE句と同じ構造です。"
+  },
+  {
+    "id": "ch4a-p2",
+    "type": "multiple-choice",
+    "question": "契約書に次の条項があります。\n\n「甲が本契約に違反した場合、甲は乙に対して損害賠償金を支払うものとする」\n\nこの条項の論理構造を述語で分析したとき、最も適切なのはどれですか？",
+    "options": [
+      "条件部は二項述語 V(甲, 本契約)「甲は本契約に違反した」、帰結部は三項述語 P(甲, 乙, 損害賠償金)「甲は乙に損害賠償金を支払う」であり、V(甲, 本契約) → P(甲, 乙, 損害賠償金) の形をしている",
+      "一項述語「甲は違反した」と一項述語「甲は支払う」の論理積である",
+      "命題P「甲が違反する」と命題Q「支払う」の条件文 P → Q である",
+      "三項述語 C(甲, 乙, 契約)「甲と乙が契約を結んでいる」のみで記述できる"
+    ],
+    "correctIndex": 0,
+    "explanation": "この条項は条件文（→）の形をしています。条件部「甲が本契約に違反した」は、甲と本契約の2つの項を含む二項述語V(甲, 本契約)です。帰結部「甲は乙に対して損害賠償金を支払う」は、支払者・受取者・金額の3つの項を含む三項述語P(甲, 乙, 損害賠償金)です。命題論理の「P → Q」では「誰が」「何に対して」「何を」という構造が失われますが、述語を使えば契約の義務関係を正確に記述できます。"
+  },
+  {
+    "id": "ch4a-p3",
+    "type": "multiple-choice",
+    "question": "次のSQLクエリを考えます。\n\nSELECT * FROM employees e JOIN departments d ON e.dept_id = d.id\n\nこのJOIN ON句「e.dept_id = d.id」を述語論理で解釈すると、最も適切なのはどれですか？",
+    "options": [
+      "二項述語 B(e, d):「従業員eの部署IDは部署dのIDと等しい」であり、employeesの行eとdepartmentsの行dの2つの項を取る",
+      "一項述語:「dept_idが存在する」であり、employeesの行のみを対象とする",
+      "命題:「dept_idとidは常に等しい」という真偽が定まった文である",
+      "三項述語:「eとdとidの3つの関係」を表している"
+    ],
+    "correctIndex": 0,
+    "explanation": "JOIN ON句は2つのテーブルの行の間の関係を記述する二項述語です。e（employeesの行）とd（departmentsの行）の2つの項を受け取り、「eのdept_idとdのidが等しい」という真偽を返します。SQLのJOINは、この二項述語を満たすすべての(e, d)の組み合わせを返す操作です。WHERE句が一項述語（1つのテーブルの行に対する条件）であるのに対し、JOIN ONは二項述語（2つのテーブルの行の関係）である点が重要な違いです。"
+  }
+]
