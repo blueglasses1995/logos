@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "ch4c-p1",
+    "type": "multiple-choice",
+    "question": "QAエンジニアがバグレポートを提出しました。\n\n「認証モジュールにおいて、パスワードが空文字の場合にログインが成功するバグが存在します。再現手順: ユーザー名に'admin'、パスワードに''を入力しログインボタンを押す。」\n\nこのバグレポートを述語論理の観点で最も正確に分析しているのはどれですか？",
+    "options": [
+      "∃x(Input(x) ∧ EmptyPassword(x) ∧ LoginSuccess(x)) の存在証明であり、再現手順はその具体的な証拠（witness）である",
+      "∀x(Input(x) → LoginSuccess(x)) の全称証明であり、すべての入力でバグが発生することを示している",
+      "¬∃x Bug(x) の否定証明であり、バグが存在しないことの反証である",
+      "∃x(Input(x) → LoginSuccess(x)) の存在証明であり、条件付きでバグが発生することを示している"
+    ],
+    "correctIndex": 0,
+    "explanation": "バグレポートは存在量化子∃による存在証明です。「空パスワードでログインが成功する入力が存在する」ことを、具体的な再現手順（ユーザー名='admin'、パスワード=''）という証拠（witness）を提示して証明しています。∃x P(x)を証明するには条件を満たす具体例を一つ示せば十分であり、バグレポートの再現手順はまさにこの構造です。選択肢4の∃x(Input(x)→LoginSuccess(x))は→を使っているため、入力でないものが存在するだけで空虚に真になってしまい、バグの存在を正しく表現できません。"
+  },
+  {
+    "id": "ch4c-p2",
+    "type": "multiple-choice",
+    "question": "次のSQLクエリを考えます。\n\nSELECT d.name FROM departments d\nWHERE EXISTS (\n  SELECT 1 FROM employees e\n  WHERE e.dept_id = d.id AND e.performance = 'excellent'\n)\n\nこのクエリの論理構造を述語論理で最も正確に表現しているのはどれですか？",
+    "options": [
+      "∃e(BelongsTo(e, d) ∧ Excellent(e)) を満たす部署dの名前を返す。EXISTSは存在量化子∃の実装であり、条件を満たす社員が一人でもいれば真になる",
+      "∀e(BelongsTo(e, d) → Excellent(e)) を満たす部署dの名前を返す。EXISTSは全称量化子∀の実装である",
+      "∃e(BelongsTo(e, d) → Excellent(e)) を満たす部署dの名前を返す。EXISTSは含意を用いた存在量化である",
+      "部署dについて、Excellent(e)である社員eの数を数え、それが0より大きいかを判定している"
+    ],
+    "correctIndex": 0,
+    "explanation": "SQLのEXISTS句は存在量化子∃の直接的な実装です。このクエリは各部署dについて「dに所属し(BelongsTo(e,d))、かつ業績が優秀(Excellent(e))である社員eが少なくとも一人存在するか」を判定します。∃では∧を使うのが正しいパターンです。EXISTSはサブクエリが一行でも返せば真を返し、見つかった時点で走査を停止します。これは∃の意味論「一つあれば十分」と完全に一致します。選択肢3の→を使った形式化は、その部署に所属しない社員が一人でもいれば空虚に真になるため誤りです。"
+  },
+  {
+    "id": "ch4c-p3",
+    "type": "multiple-choice",
+    "question": "物理学者が次のように主張しました。\n\n「すべての金属は電気を通す、という理論は正しくない。なぜなら、ある特定の条件下で電気を通さない金属が見つかったからだ。」\n\nこの反証の論理構造を最も正確に分析しているのはどれですか？",
+    "options": [
+      "理論は ∀x(Metal(x) → Conduct(x)) であり、反証は ∃x(Metal(x) ∧ ¬Conduct(x)) という反例の存在証明である。一つの反例が全称命題を覆した",
+      "理論は ∃x(Metal(x) ∧ Conduct(x)) であり、反証は ¬∃x(Metal(x) ∧ Conduct(x)) という全否定である",
+      "理論は ∀x(Metal(x) ∧ Conduct(x)) であり、反証は ∃x(Metal(x) → ¬Conduct(x)) である",
+      "理論は ∀x(Metal(x) → Conduct(x)) であり、反証は ∀x(Metal(x) → ¬Conduct(x)) という全称否定である"
+    ],
+    "correctIndex": 0,
+    "explanation": "科学理論「すべての金属は電気を通す」は ∀x(Metal(x)→Conduct(x)) と形式化されます（∀には→を使う標準パターン）。この全称命題を反証するには、その否定 ¬∀x(Metal(x)→Conduct(x)) = ∃x¬(Metal(x)→Conduct(x)) = ∃x(Metal(x) ∧ ¬Conduct(x)) を証明すれば十分です。つまり「金属であり、かつ電気を通さないもの」を一つ見つければよいのです（∃には∧を使う標準パターン）。これがポパーの反証主義の核心であり、一つの反例（∃）が全称命題（∀）を覆す力を持ちます。"
+  }
+]

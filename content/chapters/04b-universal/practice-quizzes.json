@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "ch4b-p1",
+    "type": "multiple-choice",
+    "question": "ある企業の就業規則に次の条項があります。\n\n「すべての正社員は、年1回の健康診断を受診しなければならない」\n\n監査の結果、正社員500名のうち498名が受診済みで、2名が未受診でした。この状況を論理学的に正しく評価しているのはどれですか？",
+    "options": [
+      "∀x (FullTime(x) → HealthCheck(x)) は偽である。2名の未受診者が反例となり、「すべての正社員」という全称命題は成り立たない",
+      "受診率99.6%なので ∀x (FullTime(x) → HealthCheck(x)) は実質的に真とみなせる",
+      "2名は統計的誤差の範囲内なので ∀x (FullTime(x) → HealthCheck(x)) は真である",
+      "∀x (FullTime(x) → HealthCheck(x)) の真偽は500名全員を確認しないと判定できない"
+    ],
+    "correctIndex": 0,
+    "explanation": "全称量化子 ∀ は「例外なくすべて」を意味します。500人中498人が受診していても、2人の未受診者が反例として存在するため、∀x (FullTime(x) → HealthCheck(x)) は偽です。「ほぼすべて」と「すべて」は論理学では根本的に異なります。法的にも、就業規則違反が2件発生しており、受診率の高さは違反の存在を打ち消しません。契約や規則の文脈では、この「すべて」と「ほぼすべて」の区別が法的責任に直結します。"
+  },
+  {
+    "id": "ch4b-p2",
+    "type": "multiple-choice",
+    "question": "次のJavaScriptコードがあります。\n\nconst items = [\n  { name: 'A', price: 100, inStock: true },\n  { name: 'B', price: 200, inStock: true },\n  { name: 'C', price: 150, inStock: false },\n  { name: 'D', price: 300, inStock: true }\n]\n\nconst result = items.every(item => item.inStock)\n\nresultの値と、その論理学的解釈として正しいのはどれですか？",
+    "options": [
+      "false — ∀x InStock(x) は偽。商品Cという反例が存在し、inStock: false であるため、「すべての商品が在庫あり」は成り立たない",
+      "true — 4つのうち3つがinStock: trueなので、過半数を満たしているため真",
+      "false — ∀x InStock(x) は偽だが、これは ∀x ¬InStock(x)（すべてが在庫切れ）を意味する",
+      "true — every()は1つでもtrueがあれば全体としてtrueを返す"
+    ],
+    "correctIndex": 0,
+    "explanation": "array.every() は ∀x P(x) の実装であり、すべての要素について述語が真を返すかを検証します。商品Cの inStock が false であるため、every() は false を返します。これは全称量化子の定義通り、たった1つの反例で全体が偽になる性質を反映しています。なお、every() が false を返すことは ∀x ¬InStock(x)（すべて在庫切れ）を意味するわけではなく、¬∀x InStock(x)（すべてが在庫ありではない）= ∃x ¬InStock(x)（在庫切れが少なくとも1つ存在する）を意味します。"
+  },
+  {
+    "id": "ch4b-p3",
+    "type": "multiple-choice",
+    "question": "ECサイトで「すべての注文が出荷済みの顧客」を取得するSQLを書きたいとします。\n\n次のうち、∀x (Order(x, c) → Shipped(x)) を正しくSQLで表現しているのはどれですか？",
+    "options": [
+      "SELECT * FROM customers c WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id AND o.shipped = false)",
+      "SELECT * FROM customers c WHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id AND o.shipped = true)",
+      "SELECT * FROM customers c JOIN orders o ON c.id = o.customer_id WHERE o.shipped = true",
+      "SELECT * FROM customers c WHERE (SELECT COUNT(*) FROM orders o WHERE o.customer_id = c.id AND o.shipped = true) > 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "SQLには ∀ に直接対応するキーワードがないため、NOT EXISTS を使って「反例が存在しない」ことで全称量化を表現します。∀x P(x) ≡ ¬∃x ¬P(x) という論理的同値を利用し、「未出荷の注文が1つも存在しない」= 「すべての注文が出荷済み」と変換しています。EXISTSやJOINで shipped = true を確認する方法では、「出荷済みの注文が1つでもある」（∃x Shipped(x)）を確認しているだけで、「すべてが出荷済み」（∀x Shipped(x)）を保証しません。"
+  }
+]
