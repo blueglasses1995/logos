@@ -15,12 +15,23 @@ export interface ChapterProgress {
   readonly philosophy: { readonly read: boolean }
 }
 
+export interface ReviewItemData {
+  readonly quizId: string
+  readonly chapterSlug: string
+  readonly section: "theory" | "practice"
+  readonly nextReview: string
+  readonly interval: number
+  readonly easeFactor: number
+  readonly repetitions: number
+}
+
 export interface UserProgress {
   readonly chapters: Readonly<Record<string, ChapterProgress>>
   readonly streak: {
     readonly currentDays: number
     readonly lastActiveDate: string
   }
+  readonly reviewQueue: readonly ReviewItemData[]
 }
 
 export const EMPTY_SECTION_PROGRESS: SectionProgress = {
@@ -40,4 +51,5 @@ export const EMPTY_PROGRESS: UserProgress = {
     currentDays: 0,
     lastActiveDate: "",
   },
+  reviewQueue: [],
 }

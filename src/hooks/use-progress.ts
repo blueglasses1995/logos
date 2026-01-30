@@ -7,8 +7,10 @@ import {
   recordQuizAttempt,
   markPhilosophyRead,
   updateStreak,
+  addToReviewQueue,
+  getDueReviewItems,
 } from "@/lib/progress"
-import { EMPTY_PROGRESS, type QuizAttempt, type UserProgress } from "@/types/progress"
+import { EMPTY_PROGRESS, type QuizAttempt, type ReviewItemData, type UserProgress } from "@/types/progress"
 
 export function useProgress() {
   const [progress, setProgress] = useState<UserProgress>(EMPTY_PROGRESS)
@@ -49,10 +51,25 @@ export function useProgress() {
     })
   }, [])
 
+  const addReviewItem = useCallback((item: ReviewItemData) => {
+    setProgress((prev) => {
+      const next = addToReviewQueue(prev, item)
+      saveProgress(next)
+      return next
+    })
+  }, [])
+
+  const getDueItems = useCallback(() => {
+    const today = new Date().toISOString().split("T")[0]
+    return getDueReviewItems(progress, today)
+  }, [progress])
+
   return {
     progress,
     recordAttempt,
     markPhilosophy,
     persist,
+    addReviewItem,
+    getDueItems,
   }
 }

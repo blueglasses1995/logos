@@ -3,6 +3,7 @@ import {
   EMPTY_PROGRESS,
   type ChapterProgress,
   type QuizAttempt,
+  type ReviewItemData,
   type SectionProgress,
   type UserProgress,
 } from "@/types/progress"
@@ -69,6 +70,26 @@ export function markPhilosophyRead(
       },
     },
   }
+}
+
+export function addToReviewQueue(
+  progress: UserProgress,
+  item: ReviewItemData
+): UserProgress {
+  const existing = progress.reviewQueue ?? []
+  const filtered = existing.filter((r) => r.quizId !== item.quizId)
+  return {
+    ...progress,
+    reviewQueue: [...filtered, item],
+  }
+}
+
+export function getDueReviewItems(
+  progress: UserProgress,
+  today: string
+): readonly ReviewItemData[] {
+  const queue = progress.reviewQueue ?? []
+  return queue.filter((item) => item.nextReview <= today)
 }
 
 export function updateStreak(
