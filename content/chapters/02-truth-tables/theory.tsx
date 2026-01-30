@@ -1,20 +1,31 @@
+import {
+  Callout,
+  FormulaBlock,
+  ComparisonTable,
+  KeyPoint,
+  SectionDivider,
+} from "@/components/content"
+
 export function TheoryContent() {
   return (
     <article className="prose prose-zinc max-w-none">
       <h1>第2章: 真理値表と恒真式</h1>
 
       <h2>真理値表とは</h2>
-      <p>
+
+      <Callout variant="definition" label="定義">
         <strong>真理値表（truth table）</strong>は、命題の全ての可能な真偽の組み合わせに対して、
         複合命題の真偽値を体系的に列挙する表です。
         第1章で学んだ論理結合子の意味を正確に把握する基本ツールです。
-      </p>
+      </Callout>
+
       <p>
         変数がn個あるとき、真理値表の行数は2<sup>n</sup>行になります。
         2変数なら4行、3変数なら8行です。
       </p>
 
-      <h2>真理値表の構築手順</h2>
+      <h3>真理値表の構築手順</h3>
+
       <ol>
         <li>含まれる命題変数を列挙する（P, Q, R, ...）</li>
         <li>全ての真偽の組み合わせを行として並べる</li>
@@ -22,6 +33,7 @@ export function TheoryContent() {
       </ol>
 
       <h3>例: ¬(P ∧ Q) の真理値表</h3>
+
       <table>
         <thead>
           <tr><th>P</th><th>Q</th><th>P ∧ Q</th><th>¬(P ∧ Q)</th></tr>
@@ -34,48 +46,110 @@ export function TheoryContent() {
         </tbody>
       </table>
 
+      <KeyPoint>
+        真理値表は全ての入力パターンを網羅的に検証する。
+        変数n個に対して2<sup>n</sup>行が必要になる。
+      </KeyPoint>
+
+      <SectionDivider />
+
       <h2>恒真式（トートロジー）</h2>
-      <p>
+
+      <Callout variant="definition" label="定義">
         <strong>恒真式（tautology）</strong>とは、命題変数にどのような真偽値を代入しても
         常に真になる論理式のことです。
+      </Callout>
+
+      <FormulaBlock caption="排中律（恒真式の例）">P ∨ ¬P</FormulaBlock>
+
+      <p>
+        排中律は「Pであるか、Pでないか」のどちらかは必ず成り立つことを示します。
+        真理値表で確認すると、すべての行で結果が真になります。
       </p>
-      <p>例: P ∨ ¬P（排中律）は常に真です。</p>
+
+      <SectionDivider />
 
       <h2>矛盾式と充足可能式</h2>
-      <p>
-        <strong>矛盾式（contradiction）</strong>は、常に偽になる論理式です（例: P ∧ ¬P）。
-      </p>
-      <p>
+
+      <Callout variant="definition" label="定義">
+        <strong>矛盾式（contradiction）</strong>は、常に偽になる論理式です。
         <strong>充足可能式（contingency）</strong>は、真になる場合も偽になる場合もある論理式です。
-        多くの日常的な命題はこれに該当します。
+      </Callout>
+
+      <FormulaBlock caption="矛盾式の例">P ∧ ¬P</FormulaBlock>
+
+      <p>
+        多くの日常的な命題は充足可能式に該当します。
+        恒真式と矛盾式は特殊なケースです。
       </p>
+
+      <ComparisonTable
+        headers={["恒真式（トートロジー）", "矛盾式"]}
+        rows={[
+          ["常に真", "常に偽"],
+          ["例: P ∨ ¬P", "例: P ∧ ¬P"],
+          ["真理値表の全行がT", "真理値表の全行がF"],
+        ]}
+      />
+
+      <KeyPoint>
+        論理式は「恒真式」「矛盾式」「充足可能式」の3種類に分類できる。
+        真理値表の全行を確認することで判別が可能。
+      </KeyPoint>
+
+      <SectionDivider />
 
       <h2>重要な恒真式</h2>
 
       <h3>ド・モルガンの法則</h3>
-      <ul>
-        <li>¬(P ∧ Q) ≡ ¬P ∨ ¬Q（「PかつQでない」＝「PでないまたはQでない」）</li>
-        <li>¬(P ∨ Q) ≡ ¬P ∧ ¬Q（「PまたはQでない」＝「PでないかつQでない」）</li>
-      </ul>
+
+      <FormulaBlock caption="ド・モルガンの法則">
+        ¬(P ∧ Q) ≡ ¬P ∨ ¬Q{"\n"}
+        ¬(P ∨ Q) ≡ ¬P ∧ ¬Q
+      </FormulaBlock>
+
       <p>
-        プログラミングでは条件分岐の簡略化に頻繁に使います。
-        例えば <code>!(a &amp;&amp; b)</code> は <code>!a || !b</code> と同値です。
+        「PかつQでない」は「PでないまたはQでない」と同値です。
+        「PまたはQでない」は「PでないかつQでない」と同値です。
       </p>
 
+      <Callout variant="tip">
+        プログラミングでは条件分岐の簡略化に頻繁に使います。
+        例えば <code>!(a &amp;&amp; b)</code> は <code>!a || !b</code> と同値です。
+      </Callout>
+
       <h3>二重否定除去</h3>
-      <p>¬¬P ≡ P — 否定の否定は元に戻ります。</p>
+
+      <FormulaBlock caption="二重否定除去">¬¬P ≡ P</FormulaBlock>
+
+      <p>否定の否定は元に戻ります。</p>
 
       <h3>対偶</h3>
+
+      <FormulaBlock caption="対偶の法則">
+        (P → Q) ≡ (¬Q → ¬P)
+      </FormulaBlock>
+
       <p>
-        (P → Q) ≡ (¬Q → ¬P) — 「PならばQ」と「QでないならばPでない」は論理的に同値です。
+        「PならばQ」と「QでないならばPでない」は論理的に同値です。
         これは証明や議論で非常に強力なツールです。
       </p>
 
       <h3>含意の定義</h3>
+
+      <FormulaBlock caption="含意の書き換え">
+        (P → Q) ≡ (¬P ∨ Q)
+      </FormulaBlock>
+
       <p>
-        (P → Q) ≡ (¬P ∨ Q) — 条件文は否定と論理和で表せます。
-        これは直感に反するかもしれませんが、真理値表で確認できます。
+        条件文は否定と論理和で表せます。
+        直感に反するかもしれませんが、真理値表で確認できます。
       </p>
+
+      <KeyPoint>
+        ド・モルガンの法則、二重否定除去、対偶、含意の定義は論理学の基本変換規則。
+        これらを使いこなすことで複雑な論理式を簡略化できる。
+      </KeyPoint>
     </article>
   )
 }
