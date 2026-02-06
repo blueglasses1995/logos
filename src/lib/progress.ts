@@ -2,6 +2,7 @@ import {
   EMPTY_CHAPTER_PROGRESS,
   EMPTY_PROGRESS,
   type ChapterProgress,
+  type DailyLog,
   type QuizAttempt,
   type ReviewItemData,
   type SectionProgress,
@@ -10,12 +11,30 @@ import {
 
 const STORAGE_KEY = "logos-progress"
 
+function migrateProgress(raw: Record<string, unknown>): UserProgress {
+  const base = raw as unknown as UserProgress
+
+  return {
+    chapters: base.chapters ?? {},
+    streak: {
+      currentDays: base.streak?.currentDays ?? 0,
+      lastActiveDate: base.streak?.lastActiveDate ?? "",
+      longestStreak: base.streak?.longestStreak ?? base.streak?.currentDays ?? 0,
+    },
+    reviewQueue: base.reviewQueue ?? [],
+    dailyLogs: base.dailyLogs ?? [],
+    achievements: base.achievements ?? [],
+    onboardingCompleted: base.onboardingCompleted ?? false,
+  }
+}
+
 export function loadProgress(): UserProgress {
   if (typeof window === "undefined") return EMPTY_PROGRESS
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return EMPTY_PROGRESS
-    return JSON.parse(raw) as UserProgress
+    const parsed = JSON.parse(raw)
+    return migrateProgress(parsed)
   } catch {
     return EMPTY_PROGRESS
   }
@@ -41,6 +60,9 @@ export function recordQuizAttempt(
     attempts: [...sectionProgress.attempts, attempt],
   }
 
+  const today = attempt.timestamp.split("T")[0]
+  const updatedLogs = updateDailyLog(progress.dailyLogs, today, attempt.correct)
+
   return {
     ...progress,
     chapters: {
@@ -50,6 +72,7 @@ export function recordQuizAttempt(
         [section]: updatedSection,
       },
     },
+    dailyLogs: updatedLogs,
   }
 }
 
@@ -96,9 +119,20 @@ export function updateStreak(
   progress: UserProgress,
   today: string
 ): UserProgress {
-  const { lastActiveDate, currentDays } = progress.streak
+  const { lastActiveDate, currentDays, longestStreak } = progress.streak
 
   if (lastActiveDate === today) return progress
+
+  if (lastActiveDate === "") {
+    return {
+      ...progress,
+      streak: {
+        currentDays: 1,
+        lastActiveDate: today,
+        longestStreak: Math.max(longestStreak ?? 0, 1),
+      },
+    }
+  }
 
   const lastDate = new Date(lastActiveDate)
   const todayDate = new Date(today)
@@ -106,12 +140,37 @@ export function updateStreak(
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
 
   const newDays = diffDays === 1 ? currentDays + 1 : 1
+  const newLongest = Math.max(longestStreak ?? 0, newDays)
 
   return {
     ...progress,
     streak: {
       currentDays: newDays,
       lastActiveDate: today,
+      longestStreak: newLongest,
     },
   }
+}
+
+function updateDailyLog(
+  logs: readonly DailyLog[],
+  date: string,
+  correct: boolean
+): readonly DailyLog[] {
+  const existing = logs.find((l) => l.date === date)
+  if (existing) {
+    return logs.map((l) =>
+      l.date === date
+        ? {
+            ...l,
+            quizCount: l.quizCount + 1,
+            correctCount: l.correctCount + (correct ? 1 : 0),
+          }
+        : l
+    )
+  }
+  return [
+    ...logs,
+    { date, quizCount: 1, correctCount: correct ? 1 : 0 },
+  ]
 }

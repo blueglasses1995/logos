@@ -2,10 +2,11 @@
 
 import { use } from "react"
 import { notFound } from "next/navigation"
-import Link from "next/link"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { getChapterMeta } from "@/lib/content"
+import { SiteHeader } from "@/components/layout/site-header"
+import { PageShell } from "@/components/layout/page-shell"
+import { Breadcrumb } from "@/components/layout/breadcrumb"
+import { SectionListItem } from "@/components/chapter/section-list-item"
+import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
 import { useProgress } from "@/hooks/use-progress"
 import { EMPTY_CHAPTER_PROGRESS } from "@/types/progress"
 
@@ -43,60 +44,53 @@ export default function ChapterPage({
   const chapterProgress =
     progress.chapters[slug] ?? EMPTY_CHAPTER_PROGRESS
 
-  function getSectionStatus(key: "theory" | "practice" | "philosophy") {
+  function getSectionStatus(key: "theory" | "practice" | "philosophy"): "done" | "started" | "none" {
     if (key === "philosophy") {
-      return chapterProgress.philosophy.read ? "完了" : "未読"
+      return chapterProgress.philosophy.read ? "done" : "none"
     }
     const section = chapterProgress[key]
-    if (section.attempts.length === 0) return "未着手"
-    return "進行中"
+    const totalQuizCount = getChapterQuizzes(slug, key).length
+    const uniqueQuizIds = new Set(section.attempts.map((a) => a.quizId)).size
+    if (uniqueQuizIds >= totalQuizCount && totalQuizCount > 0) return "done"
+    if (section.attempts.length > 0) return "started"
+    return "none"
   }
 
+  const statuses = SECTIONS.map((s) => getSectionStatus(s.key))
+  const firstIncompleteIdx = statuses.findIndex((s) => s !== "done")
+
   return (
-    <div className="container mx-auto max-w-3xl py-8 px-4 space-y-8">
-      <div className="text-sm text-muted-foreground">
-        <Link href="/" className="hover:underline">ホーム</Link>
-        {" / "}
-        {chapter.title}
-      </div>
+    <>
+      <SiteHeader />
+      <PageShell variant="quiz">
+        <Breadcrumb
+          items={[
+            { label: "ホーム", href: "/" },
+            { label: chapter.title },
+          ]}
+        />
 
-      <div>
-        <h1 className="text-3xl font-bold">{chapter.title}</h1>
-        <p className="text-muted-foreground mt-2">{chapter.description}</p>
-      </div>
+        <div className="mb-8">
+          <span className="font-serif text-5xl text-primary/40 leading-none">
+            {String(chapter.order).padStart(2, "0")}
+          </span>
+          <h1 className="text-3xl font-serif mt-2">{chapter.title}</h1>
+          <p className="text-muted-foreground mt-2">{chapter.description}</p>
+        </div>
 
-      <div className="grid gap-4">
-        {SECTIONS.map((section) => {
-          const status = getSectionStatus(section.key)
-          return (
-            <Link key={section.key} href={`/chapters/${slug}/${section.path}`}>
-              <Card className="hover:border-primary transition-colors cursor-pointer">
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-lg">
-                    {section.title}
-                  </CardTitle>
-                  <Badge
-                    variant={status === "完了" ? "default" : "secondary"}
-                  >
-                    {status}
-                  </Badge>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    {section.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          )
-        })}
-      </div>
-
-      <Link href="/" className="block">
-        <p className="text-sm text-muted-foreground hover:underline">
-          ← ダッシュボードに戻る
-        </p>
-      </Link>
-    </div>
+        <div className="space-y-3">
+          {SECTIONS.map((section, i) => (
+            <SectionListItem
+              key={section.key}
+              title={section.title}
+              description={section.description}
+              href={`/chapters/${slug}/${section.path}`}
+              status={statuses[i]}
+              isRecommended={i === firstIncompleteIdx}
+            />
+          ))}
+        </div>
+      </PageShell>
+    </>
   )
 }

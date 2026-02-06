@@ -24,16 +24,40 @@ export interface ReviewItemData {
   readonly repetitions: number
 }
 
+export interface DailyLog {
+  readonly date: string
+  readonly quizCount: number
+  readonly correctCount: number
+}
+
+export type AchievementId =
+  | "first-chapter"
+  | "first-review"
+  | "streak-7"
+  | "streak-30"
+  | "all-chapters"
+  | "100-answers"
+  | "perfect-quiz"
+
+export interface Achievement {
+  readonly id: AchievementId
+  readonly unlockedAt: string
+}
+
 export interface UserProgress {
   readonly chapters: Readonly<Record<string, ChapterProgress>>
   readonly streak: {
     readonly currentDays: number
     readonly lastActiveDate: string
+    readonly longestStreak: number
   }
   readonly reviewQueue: readonly ReviewItemData[]
+  readonly dailyLogs: readonly DailyLog[]
+  readonly achievements: readonly Achievement[]
+  readonly onboardingCompleted: boolean
 }
 
-export const EMPTY_SECTION_PROGRESS: SectionProgress = {
+const EMPTY_SECTION_PROGRESS: SectionProgress = {
   attempts: [],
 }
 
@@ -48,6 +72,10 @@ export const EMPTY_PROGRESS: UserProgress = {
   streak: {
     currentDays: 0,
     lastActiveDate: "",
+    longestStreak: 0,
   },
   reviewQueue: [],
+  dailyLogs: [],
+  achievements: [],
+  onboardingCompleted: false,
 }

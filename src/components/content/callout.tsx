@@ -2,19 +2,19 @@ import type { ReactNode } from "react"
 
 const VARIANT_STYLES = {
   definition: {
-    border: "border-l-zinc-400",
-    bg: "bg-zinc-50 dark:bg-zinc-900/50",
-    labelColor: "text-zinc-600 dark:text-zinc-400",
+    border: "border-l-primary",
+    bg: "bg-primary/5",
+    labelColor: "text-primary",
   },
   warning: {
-    border: "border-l-amber-400 dark:border-l-amber-500",
-    bg: "bg-amber-50/50 dark:bg-amber-950/20",
-    labelColor: "text-amber-700 dark:text-amber-400",
+    border: "border-l-destructive/60",
+    bg: "bg-destructive/5",
+    labelColor: "text-destructive",
   },
   tip: {
-    border: "border-l-blue-400 dark:border-l-blue-500",
-    bg: "bg-blue-50/50 dark:bg-blue-950/20",
-    labelColor: "text-blue-700 dark:text-blue-400",
+    border: "border-l-[oklch(0.550_0.100_230)]",
+    bg: "bg-[oklch(0.550_0.100_230)]/5",
+    labelColor: "text-[oklch(0.550_0.100_230)]",
   },
 } as const
 
@@ -37,7 +37,7 @@ export function Callout({ variant, label, children }: CalloutProps) {
           {label}
         </div>
       )}
-      <div className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+      <div className="text-sm leading-relaxed text-foreground/80">
         {children}
       </div>
     </div>

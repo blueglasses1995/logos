@@ -4,6 +4,7 @@ import { useState, useCallback, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { MultipleChoiceQuiz } from "./MultipleChoiceQuiz"
 import { TruthTableQuiz } from "./TruthTableQuiz"
+import { QuizProgressDots } from "./quiz-progress-dots"
 import type { Quiz } from "@/types/content"
 
 interface QuizResult {
@@ -35,6 +36,8 @@ export function QuizRunner({ quizzes, onComplete }: Props) {
     [currentQuiz.id]
   )
 
+  const quizContainerRef = useRef<HTMLDivElement>(null)
+
   const handleNext = () => {
     if (isLast) {
       onComplete(resultsRef.current)
@@ -42,13 +45,18 @@ export function QuizRunner({ quizzes, onComplete }: Props) {
     }
     setCurrentIndex((prev) => prev + 1)
     setAnswered(false)
+    setTimeout(() => {
+      quizContainerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    }, 0)
   }
 
   return (
-    <div className="space-y-4">
-      <div className="text-sm text-muted-foreground">
-        {currentIndex + 1} / {quizzes.length}
-      </div>
+    <div ref={quizContainerRef} className="space-y-6">
+      <QuizProgressDots
+        total={quizzes.length}
+        current={currentIndex}
+        answered={resultsRef.current.length}
+      />
 
       {currentQuiz.type === "multiple-choice" && (
         <MultipleChoiceQuiz key={currentQuiz.id} quiz={currentQuiz} onAnswer={handleAnswer} />

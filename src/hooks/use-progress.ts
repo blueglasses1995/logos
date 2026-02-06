@@ -10,7 +10,14 @@ import {
   addToReviewQueue,
   getDueReviewItems,
 } from "@/lib/progress"
-import { EMPTY_PROGRESS, type QuizAttempt, type ReviewItemData, type UserProgress } from "@/types/progress"
+import {
+  EMPTY_PROGRESS,
+  type QuizAttempt,
+  type ReviewItemData,
+  type UserProgress,
+  type Achievement,
+  type AchievementId,
+} from "@/types/progress"
 
 export function useProgress() {
   const [progress, setProgress] = useState<UserProgress>(EMPTY_PROGRESS)
@@ -59,11 +66,37 @@ export function useProgress() {
     return getDueReviewItems(progress, today)
   }, [progress])
 
+  const unlockAchievement = useCallback((id: AchievementId) => {
+    setProgress((prev) => {
+      if (prev.achievements.some((a) => a.id === id)) return prev
+      const achievement: Achievement = {
+        id,
+        unlockedAt: new Date().toISOString(),
+      }
+      const next: UserProgress = {
+        ...prev,
+        achievements: [...prev.achievements, achievement],
+      }
+      saveProgress(next)
+      return next
+    })
+  }, [])
+
+  const completeOnboarding = useCallback(() => {
+    setProgress((prev) => {
+      const next: UserProgress = { ...prev, onboardingCompleted: true }
+      saveProgress(next)
+      return next
+    })
+  }, [])
+
   return {
     progress,
     recordAttempt,
     markPhilosophy,
     addReviewItem,
     getDueItems,
+    unlockAchievement,
+    completeOnboarding,
   }
 }

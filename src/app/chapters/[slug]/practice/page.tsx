@@ -4,6 +4,9 @@ import { use } from "react"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { QuizRunner } from "@/components/quiz/QuizRunner"
+import { SiteHeader } from "@/components/layout/site-header"
+import { PageShell } from "@/components/layout/page-shell"
+import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
 import { useProgress } from "@/hooks/use-progress"
 import Link from "next/link"
@@ -34,33 +37,35 @@ export default function PracticePage({
   }
 
   return (
-    <div className="container mx-auto max-w-3xl py-8 px-4 space-y-8">
-      <div className="text-sm text-muted-foreground">
-        <Link href="/" className="hover:underline">ホーム</Link>
-        {" / "}
-        <Link href={`/chapters/${slug}`} className="hover:underline">{chapter.title}</Link>
-        {" / "}
-        実践編
-      </div>
+    <>
+      <SiteHeader />
+      <PageShell variant="quiz">
+        <Breadcrumb
+          items={[
+            { label: "ホーム", href: "/" },
+            { label: chapter.title, href: `/chapters/${slug}` },
+            { label: "実践編" },
+          ]}
+        />
 
-      <div className="prose prose-zinc max-w-none">
-        <h1>実践編: {chapter.title}</h1>
-        <p>
-          学問編で学んだ論理結合子を、ビジネスや日常生活の場面に適用してみましょう。
-          税務署との対話、営業トーク、コードレビューなど、実際のシナリオで論理的に考える練習です。
-        </p>
-      </div>
+        <div className="mb-8">
+          <h1 className="text-2xl font-serif">実践編</h1>
+          <p className="text-muted-foreground mt-2">
+            学問編で学んだ内容を、実際のシナリオに適用してみましょう。
+          </p>
+        </div>
 
-      <QuizRunner quizzes={quizzes} onComplete={handleComplete} />
+        <QuizRunner quizzes={quizzes} onComplete={handleComplete} />
 
-      <div className="flex justify-between pt-4">
-        <Link href={`/chapters/${slug}/theory`}>
-          <Button variant="outline">← 学問編に戻る</Button>
-        </Link>
-        <Link href={`/chapters/${slug}/philosophy`}>
-          <Button>哲学コラムへ →</Button>
-        </Link>
-      </div>
-    </div>
+        <div className="flex justify-between pt-8">
+          <Link href={`/chapters/${slug}/theory`}>
+            <Button variant="outline">← 学問編に戻る</Button>
+          </Link>
+          <Link href={`/chapters/${slug}/philosophy`}>
+            <Button>哲学コラムへ →</Button>
+          </Link>
+        </div>
+      </PageShell>
+    </>
   )
 }

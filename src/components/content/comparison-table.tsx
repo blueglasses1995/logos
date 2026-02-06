@@ -9,10 +9,10 @@ export function ComparisonTable({ headers, rows }: ComparisonTableProps) {
       <table className="w-full text-sm border-collapse">
         <thead>
           <tr>
-            <th className="text-left px-4 py-2 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300 font-medium border border-zinc-200 dark:border-zinc-700">
+            <th className="text-left px-4 py-2 bg-truth/10 text-truth font-medium border border-border">
               {headers[0]}
             </th>
-            <th className="text-left px-4 py-2 bg-red-50/50 dark:bg-red-950/20 text-red-800 dark:text-red-300 font-medium border border-zinc-200 dark:border-zinc-700">
+            <th className="text-left px-4 py-2 bg-falsehood/10 text-falsehood font-medium border border-border">
               {headers[1]}
             </th>
           </tr>
@@ -20,10 +20,10 @@ export function ComparisonTable({ headers, rows }: ComparisonTableProps) {
         <tbody>
           {rows.map((row, i) => (
             <tr key={i}>
-              <td className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
+              <td className="px-4 py-2 border border-border text-foreground/80">
                 {row[0]}
               </td>
-              <td className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
+              <td className="px-4 py-2 border border-border text-foreground/80">
                 {row[1]}
               </td>
             </tr>

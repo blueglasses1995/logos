@@ -4,6 +4,10 @@ import { use } from "react"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { QuizRunner } from "@/components/quiz/QuizRunner"
+import { SiteHeader } from "@/components/layout/site-header"
+import { PageShell } from "@/components/layout/page-shell"
+import { Breadcrumb } from "@/components/layout/breadcrumb"
+import { ReadingProgressBar } from "@/components/layout/reading-progress-bar"
 import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
 import { getChapterContent } from "@/lib/content-registry"
 import { useProgress } from "@/hooks/use-progress"
@@ -39,30 +43,34 @@ export default function TheoryPage({
   }
 
   return (
-    <div className="container mx-auto max-w-3xl py-8 px-4 space-y-8">
-      <div className="text-sm text-muted-foreground">
-        <Link href="/" className="hover:underline">ホーム</Link>
-        {" / "}
-        <Link href={`/chapters/${slug}`} className="hover:underline">{chapter.title}</Link>
-        {" / "}
-        学問編
-      </div>
+    <>
+      <ReadingProgressBar />
+      <SiteHeader />
+      <PageShell variant="reading">
+        <Breadcrumb
+          items={[
+            { label: "ホーム", href: "/" },
+            { label: chapter.title, href: `/chapters/${slug}` },
+            { label: "学問編" },
+          ]}
+        />
 
-      <TheoryContent />
+        <TheoryContent />
 
-      <div className="border-t pt-8">
-        <h2 className="text-xl font-bold mb-4">確認クイズ</h2>
-        <QuizRunner quizzes={quizzes} onComplete={handleComplete} />
-      </div>
+        <div className="border-t border-border mt-16 pt-8">
+          <h2 className="text-xl font-serif mb-6">確認クイズ</h2>
+          <QuizRunner quizzes={quizzes} onComplete={handleComplete} />
+        </div>
 
-      <div className="flex justify-between pt-4">
-        <Link href={`/chapters/${slug}`}>
-          <Button variant="outline">チャプターに戻る</Button>
-        </Link>
-        <Link href={`/chapters/${slug}/practice`}>
-          <Button>実践編へ →</Button>
-        </Link>
-      </div>
-    </div>
+        <div className="flex justify-between pt-8">
+          <Link href={`/chapters/${slug}`}>
+            <Button variant="outline">チャプターに戻る</Button>
+          </Link>
+          <Link href={`/chapters/${slug}/practice`}>
+            <Button>実践編へ →</Button>
+          </Link>
+        </div>
+      </PageShell>
+    </>
   )
 }

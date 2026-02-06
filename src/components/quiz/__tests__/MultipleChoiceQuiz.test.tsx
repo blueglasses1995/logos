@@ -17,7 +17,7 @@ describe("MultipleChoiceQuiz", () => {
   it("renders question and options", () => {
     render(<MultipleChoiceQuiz quiz={QUIZ} onAnswer={vi.fn()} />)
     expect(screen.getByText("1 + 1 = ?")).toBeInTheDocument()
-    expect(screen.getByText("2")).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "2" })).toBeInTheDocument()
   })
 
   it("calls onAnswer with true when correct option selected", async () => {
@@ -25,7 +25,7 @@ describe("MultipleChoiceQuiz", () => {
     const user = userEvent.setup()
     render(<MultipleChoiceQuiz quiz={QUIZ} onAnswer={onAnswer} />)
 
-    await user.click(screen.getByText("2"))
+    await user.click(screen.getByRole("button", { name: "2" }))
     await user.click(screen.getByRole("button", { name: /回答/i }))
 
     expect(onAnswer).toHaveBeenCalledWith(true)
@@ -35,7 +35,7 @@ describe("MultipleChoiceQuiz", () => {
     const user = userEvent.setup()
     render(<MultipleChoiceQuiz quiz={QUIZ} onAnswer={vi.fn()} />)
 
-    await user.click(screen.getByText("2"))
+    await user.click(screen.getByRole("button", { name: "2" }))
     await user.click(screen.getByRole("button", { name: /回答/i }))
 
     expect(screen.getByText("1 + 1 equals 2.")).toBeInTheDocument()
@@ -46,7 +46,7 @@ describe("MultipleChoiceQuiz", () => {
     const user = userEvent.setup()
     render(<MultipleChoiceQuiz quiz={QUIZ} onAnswer={onAnswer} />)
 
-    await user.click(screen.getByText("3"))
+    await user.click(screen.getByRole("button", { name: "3" }))
     await user.click(screen.getByRole("button", { name: /回答/i }))
 
     expect(onAnswer).toHaveBeenCalledWith(false)

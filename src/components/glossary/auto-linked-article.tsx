@@ -96,7 +96,7 @@ function renderLinkedText(
       <button
         key={`${seg.value}-${i}`}
         type="button"
-        className="glossary-term text-primary underline decoration-dotted underline-offset-4 hover:decoration-solid cursor-pointer bg-transparent border-none p-0 font-inherit text-inherit"
+        className="glossary-term text-primary underline decoration-dotted decoration-primary/40 underline-offset-4 hover:decoration-solid hover:decoration-primary transition-colors duration-150 cursor-pointer bg-transparent border-none p-0 font-inherit text-inherit"
         onClick={() => onClick(seg.value)}
       >
         {seg.value}

@@ -1,9 +1,13 @@
 "use client"
 
-import { use, useEffect } from "react"
+import { use } from "react"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { getChapterMeta } from "@/lib/content"
+import { SiteHeader } from "@/components/layout/site-header"
+import { PageShell } from "@/components/layout/page-shell"
+import { Breadcrumb } from "@/components/layout/breadcrumb"
+import { ReadingProgressBar } from "@/components/layout/reading-progress-bar"
+import { getChapterMeta, getAllChapters } from "@/lib/content"
 import { getChapterContent } from "@/lib/content-registry"
 import { useProgress } from "@/hooks/use-progress"
 import Link from "next/link"
@@ -22,34 +26,57 @@ export default function PhilosophyPage({
   if (!content) notFound()
   const { PhilosophyContent } = content
 
-  const { markPhilosophy } = useProgress()
+  const chapters = getAllChapters()
+  const currentIndex = chapters.findIndex((c) => c.slug === slug)
+  const nextChapter =
+    currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null
 
-  useEffect(() => {
-    markPhilosophy(slug)
-  }, [slug, markPhilosophy])
+  const { progress, markPhilosophy } = useProgress()
+  const isRead = progress.chapters[slug]?.philosophy.read ?? false
 
   return (
-    <div className="container mx-auto max-w-3xl py-8 px-4 space-y-8">
-      <div className="text-sm text-muted-foreground">
-        <Link href="/" className="hover:underline">ホーム</Link>
-        {" / "}
-        <Link href={`/chapters/${slug}`} className="hover:underline">{chapter.title}</Link>
-        {" / "}
-        哲学コラム
-      </div>
+    <>
+      <ReadingProgressBar />
+      <SiteHeader />
+      <PageShell variant="reading">
+        <Breadcrumb
+          items={[
+            { label: "ホーム", href: "/" },
+            { label: chapter.title, href: `/chapters/${slug}` },
+            { label: "哲学コラム" },
+          ]}
+        />
 
-      <AutoLinkedArticle>
-        <PhilosophyContent />
-      </AutoLinkedArticle>
+        <div className="philosophy-prose">
+          <AutoLinkedArticle>
+            <PhilosophyContent />
+          </AutoLinkedArticle>
+        </div>
 
-      <div className="flex justify-between pt-4">
-        <Link href={`/chapters/${slug}/practice`}>
-          <Button variant="outline">← 実践編に戻る</Button>
-        </Link>
-        <Link href="/">
-          <Button>ダッシュボードへ</Button>
-        </Link>
-      </div>
-    </div>
+        <div className="flex justify-center pt-8">
+          <Button
+            onClick={() => markPhilosophy(slug)}
+            disabled={isRead}
+          >
+            {isRead ? "読了済み" : "読了する"}
+          </Button>
+        </div>
+
+        <div className="flex justify-between pt-4">
+          <Link href={`/chapters/${slug}/practice`}>
+            <Button variant="outline">← 実践編に戻る</Button>
+          </Link>
+          {nextChapter ? (
+            <Link href={`/chapters/${nextChapter.slug}`}>
+              <Button>次のチャプターへ →</Button>
+            </Link>
+          ) : (
+            <Link href="/">
+              <Button>ダッシュボードへ →</Button>
+            </Link>
+          )}
+        </div>
+      </PageShell>
+    </>
   )
 }

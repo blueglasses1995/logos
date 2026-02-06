@@ -9,13 +9,6 @@ function Dialog({ ...props }: DialogPrimitive.DialogProps) {
   return <DialogPrimitive.Root {...props} />
 }
 
-function DialogTrigger({
-  className,
-  ...props
-}: DialogPrimitive.DialogTriggerProps) {
-  return <DialogPrimitive.Trigger className={className} {...props} />
-}
-
 function DialogPortal({ ...props }: DialogPrimitive.DialogPortalProps) {
   return <DialogPrimitive.Portal {...props} />
 }
@@ -103,9 +96,6 @@ function DialogDescription({
 
 export {
   Dialog,
-  DialogTrigger,
-  DialogPortal,
-  DialogOverlay,
   DialogContent,
   DialogHeader,
   DialogTitle,
