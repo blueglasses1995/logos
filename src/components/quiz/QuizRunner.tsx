@@ -4,6 +4,10 @@ import { useState, useCallback, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { MultipleChoiceQuiz } from "./MultipleChoiceQuiz"
 import { TruthTableQuiz } from "./TruthTableQuiz"
+import { ProofBuilderQuiz } from "./ProofBuilderQuiz"
+import { FallacySpotterQuiz } from "./FallacySpotterQuiz"
+import { CounterexampleQuiz } from "./CounterexampleQuiz"
+import { GapFillProofQuiz } from "./GapFillProofQuiz"
 import { QuizProgressDots } from "./quiz-progress-dots"
 import type { Quiz } from "@/types/content"
 
@@ -63,6 +67,18 @@ export function QuizRunner({ quizzes, onComplete }: Props) {
       )}
       {currentQuiz.type === "truth-table" && (
         <TruthTableQuiz key={currentQuiz.id} quiz={currentQuiz} onAnswer={handleAnswer} />
+      )}
+      {currentQuiz.type === "proof-builder" && (
+        <ProofBuilderQuiz key={currentQuiz.id} quiz={currentQuiz} onAnswer={handleAnswer} />
+      )}
+      {currentQuiz.type === "fallacy-spotter" && (
+        <FallacySpotterQuiz key={currentQuiz.id} quiz={currentQuiz} onAnswer={handleAnswer} />
+      )}
+      {currentQuiz.type === "counterexample" && (
+        <CounterexampleQuiz key={currentQuiz.id} quiz={currentQuiz} onAnswer={handleAnswer} />
+      )}
+      {currentQuiz.type === "gap-fill-proof" && (
+        <GapFillProofQuiz key={currentQuiz.id} quiz={currentQuiz} onAnswer={handleAnswer} />
       )}
 
       {answered && (
