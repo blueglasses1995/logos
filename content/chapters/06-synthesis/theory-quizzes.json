@@ -63,5 +63,27 @@
     ],
     "correctIndex": 0,
     "explanation": "選択肢Aは人身攻撃（非形式的誤謬）と後件肯定の誤謬（形式的に非妥当な推論）の両方を含んでいます。実際の議論では、このように複数の問題が混在していることが多いです。"
+  },
+  {
+    "id": "ch6-t6",
+    "type": "proof-builder",
+    "conclusion": "R",
+    "availablePremises": [
+      { "id": "p1", "label": "P → Q", "rule": "前提" },
+      { "id": "p2", "label": "Q → R", "rule": "前提" },
+      { "id": "p3", "label": "P", "rule": "前提" }
+    ],
+    "correctOrder": ["p3", "p1", "p2"],
+    "explanation": "仮言三段論法とモーダスポネンスの組み合わせ: P→QとQ→RからP→Rを導き、Pを適用してRを得ます。"
+  },
+  {
+    "id": "ch6-t7",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "P → Q", "type": "given" },
+      { "id": "s2", "content": "¬Q", "type": "given" },
+      { "id": "s3", "content": "___", "type": "gap", "correctValue": "¬P", "options": ["¬P", "P", "Q", "¬Q → ¬P"] }
+    ],
+    "explanation": "モーダストレンス: P→Qと¬Qから¬Pを導きます。対偶を利用した推論です。"
   }
 ]

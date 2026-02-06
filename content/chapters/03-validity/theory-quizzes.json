@@ -63,5 +63,37 @@
     ],
     "correctIndex": 0,
     "explanation": "健全性 = 妥当性 + 前提の真実性。妥当であるだけでは不十分（前提が偽かもしれない）、前提が真であるだけでも不十分（論理が飛躍しているかもしれない）。両方が必要です。"
+  },
+  {
+    "id": "ch3-t6",
+    "type": "proof-builder",
+    "conclusion": "Q",
+    "availablePremises": [
+      { "id": "p1", "label": "P → Q", "rule": "前提" },
+      { "id": "p2", "label": "P", "rule": "前提" }
+    ],
+    "correctOrder": ["p2", "p1"],
+    "explanation": "モーダスポネンス: 「P」と「P → Q」から「Q」を導きます。前提Pを先に置き、次にP→Qを適用します。"
+  },
+  {
+    "id": "ch3-t7",
+    "type": "proof-builder",
+    "conclusion": "¬P",
+    "availablePremises": [
+      { "id": "p1", "label": "¬Q", "rule": "前提" },
+      { "id": "p2", "label": "P → Q", "rule": "前提" }
+    ],
+    "correctOrder": ["p1", "p2"],
+    "explanation": "モーダストレンス: 「¬Q」と「P → Q」から「¬P」を導きます。結論の否定を先に置きます。"
+  },
+  {
+    "id": "ch3-t8",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "P → Q", "type": "given" },
+      { "id": "s2", "content": "Q → R", "type": "given" },
+      { "id": "s3", "content": "___", "type": "gap", "correctValue": "P → R", "options": ["P → R", "R → P", "P ∧ R", "Q → P"] }
+    ],
+    "explanation": "仮言三段論法: P→QとQ→RからP→Rを導きます。"
   }
 ]

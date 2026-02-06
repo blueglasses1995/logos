@@ -50,5 +50,13 @@
     ],
     "correctIndex": 0,
     "explanation": "経営者Xが使っているからといって、あなたの状況に適切とは限りません。経営規模、業種、法人形態が異なれば最適な税務戦略も異なります。節税方法は法的根拠と個別状況に基づいて判断すべきです。"
+  },
+  {
+    "id": "ch5-p5",
+    "type": "fallacy-spotter",
+    "passage": "うちのチームでは全員がこのライブラリを使っています。だからこれが最良の選択に違いありません。",
+    "fallacyType": "appeal-to-popularity",
+    "distractors": ["appeal-to-authority", "false-dilemma", "correlation-causation"],
+    "explanation": "チーム全員が使っていることは技術的な優位性の証拠にはなりません。慣性や惰性で使い続けているだけかもしれません。"
   }
 ]

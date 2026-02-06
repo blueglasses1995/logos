@@ -63,5 +63,21 @@
     ],
     "correctIndex": 0,
     "explanation": "一つの変更が連鎖的に極端な結果を生むと主張していますが、各段階の因果関係が証明されていません。リモートワークの許可が必ず会社崩壊につながるわけではありません。"
+  },
+  {
+    "id": "ch5-t6",
+    "type": "fallacy-spotter",
+    "passage": "この新しいフレームワークは有名なテックリーダーXが推薦しています。だから採用すべきです。",
+    "fallacyType": "appeal-to-authority",
+    "distractors": ["ad-hominem", "false-dilemma", "begging-the-question"],
+    "explanation": "有名人の推薦は技術的根拠にはなりません。フレームワークの採用はプロジェクト要件に基づくべきです。"
+  },
+  {
+    "id": "ch5-t7",
+    "type": "fallacy-spotter",
+    "passage": "テストカバレッジ100%を目指さないなら、品質など気にしていないのと同じだ。",
+    "fallacyType": "false-dilemma",
+    "distractors": ["slippery-slope", "straw-man", "ad-hominem"],
+    "explanation": "100%か0%かの二択に見せていますが、適切なカバレッジ目標は中間に存在します。"
   }
 ]
