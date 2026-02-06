@@ -42,7 +42,7 @@ function StepRow({
   if (step.type === "gap") {
     return (
       <div
-        className={`flex items-center gap-3 px-3 py-2 rounded-md border ${
+        className={`flex items-center gap-3 px-3 py-2 rounded-md border transition-all duration-200 ${
           submitted
             ? isCorrect
               ? "bg-emerald-50 border-emerald-300 dark:bg-emerald-900/20 dark:border-emerald-500"

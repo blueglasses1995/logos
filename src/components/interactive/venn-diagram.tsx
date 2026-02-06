@@ -66,14 +66,14 @@ export function VennDiagram({
           {/* Circle A background */}
           <circle
             cx={CX_A} cy={CY} r={R}
-            className={`${regionFill("a-only")} stroke-blue-500 transition-all duration-300`}
+            className={`${regionFill("a-only")} stroke-primary transition-all duration-300`}
             strokeWidth={2}
           />
 
           {/* Circle B background */}
           <circle
             cx={CX_B} cy={CY} r={R}
-            className={`${regionFill("b-only")} stroke-red-500 transition-all duration-300`}
+            className={`${regionFill("b-only")} stroke-emerald-600 dark:stroke-emerald-400 transition-all duration-300`}
             strokeWidth={2}
           />
 
@@ -85,12 +85,12 @@ export function VennDiagram({
           />
 
           {/* Circle outlines (on top) */}
-          <circle cx={CX_A} cy={CY} r={R} fill="none" className="stroke-blue-500 dark:stroke-blue-400" strokeWidth={2} />
-          <circle cx={CX_B} cy={CY} r={R} fill="none" className="stroke-red-500 dark:stroke-red-400" strokeWidth={2} />
+          <circle cx={CX_A} cy={CY} r={R} fill="none" className="stroke-primary" strokeWidth={2} />
+          <circle cx={CX_B} cy={CY} r={R} fill="none" className="stroke-emerald-600 dark:stroke-emerald-400" strokeWidth={2} />
 
           {/* Labels */}
-          <text x={CX_A - 30} y={CY - 5} className="text-sm fill-blue-700 dark:fill-blue-300 font-medium" textAnchor="middle">{labelA}</text>
-          <text x={CX_B + 30} y={CY - 5} className="text-sm fill-red-700 dark:fill-red-300 font-medium" textAnchor="middle">{labelB}</text>
+          <text x={CX_A - 30} y={CY - 5} className="text-sm fill-primary font-medium" textAnchor="middle">{labelA}</text>
+          <text x={CX_B + 30} y={CY - 5} className="text-sm fill-emerald-700 dark:fill-emerald-300 font-medium" textAnchor="middle">{labelB}</text>
 
           {/* Interactive overlay buttons */}
           {interactive && (

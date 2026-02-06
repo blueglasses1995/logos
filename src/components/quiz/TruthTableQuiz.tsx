@@ -85,8 +85,8 @@ export function TruthTableQuiz({ quiz, onAnswer }: Props) {
             className={cn(
               "min-w-[2rem] rounded px-2 py-1 font-mono font-bold transition-colors",
               !submitted && "bg-muted hover:bg-muted/80 cursor-pointer",
-              submitted && result === true && "bg-green-200 text-green-800",
-              submitted && result === false && "bg-red-200 text-red-800"
+              submitted && result === true && "bg-emerald-200 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300",
+              submitted && result === false && "bg-red-200 text-red-800 dark:bg-red-900/30 dark:text-red-300"
             )}
           >
             {cellValue}

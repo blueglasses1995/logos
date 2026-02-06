@@ -16,14 +16,14 @@ export function ExampleMapping({
       <div className="bg-secondary border border-border rounded-md overflow-hidden">
         <div className="grid grid-cols-2 divide-x divide-border">
           {/* Abstract */}
-          <div className="px-5 py-4">
+          <div className="px-5 py-4 transition-colors duration-300 hover:bg-primary/5">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
               抽象（論理式）
             </div>
             <code className="text-base font-mono text-foreground">{formula}</code>
           </div>
           {/* Concrete */}
-          <div className="px-5 py-4">
+          <div className="px-5 py-4 transition-colors duration-300 hover:bg-primary/5">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
               具体（日常例）
             </div>

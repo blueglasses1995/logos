@@ -91,8 +91,8 @@ export function ArgumentTree({
             width={NODE_WIDTH}
             height={NODE_HEIGHT}
             rx={6}
-            className="fill-primary/20 stroke-primary"
-            strokeWidth={2}
+            className="fill-primary/25 stroke-primary"
+            strokeWidth={2.5}
           />
           <text
             x={conclusionX}

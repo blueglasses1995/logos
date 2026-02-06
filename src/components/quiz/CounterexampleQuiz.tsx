@@ -43,7 +43,7 @@ export function CounterexampleQuiz({ quiz, onAnswer }: Props) {
               key={premise}
               className={`text-sm px-3 py-1.5 rounded-md ${
                 i === quiz.vulnerablePremiseIndex
-                  ? "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 font-medium"
+                  ? "bg-primary/10 text-primary dark:bg-primary/20 font-medium"
                   : "text-muted-foreground"
               }`}
             >
