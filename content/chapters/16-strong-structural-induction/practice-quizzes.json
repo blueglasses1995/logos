@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ch16-p1",
+    "type": "proof-builder",
+    "conclusion": "∀n ≧ 2: n はある素数 p で割り切れる",
+    "availablePremises": [
+      { "id": "p1", "label": "帰納仮定: 2 ≦ k < n なるすべての k はある素数で割り切れる", "rule": "強帰納法の仮定" },
+      { "id": "p2", "label": "n が素数の場合: n 自身が素数なので n は n で割り切れる", "rule": "素数の定義" },
+      { "id": "p3", "label": "n が合成数の場合: n = a·b (2 ≦ a < n)。帰納仮定より a はある素数 p で割り切れる。p は n も割り切る", "rule": "帰納仮定の適用" }
+    ],
+    "correctOrder": ["p1", "p2", "p3"],
+    "explanation": "強帰納法を用います。n が素数なら n 自身が素因数。n が合成数なら因数 a (2 ≦ a < n) を取り、帰納仮定より a を割る素数が存在し、それは n も割り切ります。"
+  },
+  {
+    "id": "ch16-p2",
+    "type": "proof-builder",
+    "conclusion": "任意のリスト L, M: reverse(L ++ M) = reverse(M) ++ reverse(L)",
+    "availablePremises": [
+      { "id": "p1", "label": "基底ケース (L=[]): reverse([] ++ M) = reverse(M) = reverse(M) ++ [] = reverse(M) ++ reverse([]) ✓", "rule": "基底ケース" },
+      { "id": "p2", "label": "帰納仮定: reverse(L' ++ M) = reverse(M) ++ reverse(L') と仮定", "rule": "帰納仮定" },
+      { "id": "p3", "label": "reverse((x::L') ++ M) = reverse(x::(L'++M)) = reverse(L'++M) ++ [x] = (reverse(M) ++ reverse(L')) ++ [x] = reverse(M) ++ reverse(x::L')", "rule": "帰納ステップ" }
+    ],
+    "correctOrder": ["p1", "p2", "p3"],
+    "explanation": "リスト L についての構造帰納法です。帰納ステップでは reverse の定義と帰納仮定を組み合わせ、連結の結合法則を用いて式を変形します。"
+  },
+  {
+    "id": "ch16-p3",
+    "type": "proof-builder",
+    "conclusion": "完全二分木で高さ h のとき、葉の数は 2^h",
+    "availablePremises": [
+      { "id": "p1", "label": "基底ケース (h=0, Leaf): 葉の数 = 1 = 2^0 ✓", "rule": "基底ケース" },
+      { "id": "p2", "label": "帰納仮定: 高さ h の左右部分木はそれぞれ 2^h 個の葉を持つ", "rule": "帰納仮定" },
+      { "id": "p3", "label": "高さ h+1 の完全二分木の葉数 = 2^h + 2^h = 2·2^h = 2^(h+1) ✓", "rule": "帰納ステップ" }
+    ],
+    "correctOrder": ["p1", "p2", "p3"],
+    "explanation": "完全二分木は左右の部分木が同じ高さ h を持ちます。帰納仮定よりそれぞれ 2^h 個の葉を持つので、合計 2·2^h = 2^(h+1) 個となります。"
+  },
+  {
+    "id": "ch16-p4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "定理: 任意のリスト L について reverse(reverse(L)) = L", "type": "given" },
+      { "id": "s2", "content": "基底ケース: reverse(reverse([])) = reverse([]) = [] ✓", "type": "given" },
+      { "id": "s3", "content": "帰納仮定: reverse(reverse(L')) = L' と仮定", "type": "given" },
+      { "id": "s4", "content": "reverse(reverse(x :: L')) = reverse(reverse(L') ++ [x]) = ___", "type": "gap", "correctValue": "reverse([x]) ++ reverse(reverse(L'))", "options": ["reverse([x]) ++ reverse(reverse(L'))", "x :: reverse(L')", "reverse(L') ++ [x]", "[x] ++ L'"] },
+      { "id": "s5", "content": "= [x] ++ L'（帰納仮定と reverse([x])=[x] より）= x :: L' ✓", "type": "derived", "rule": "reverse(A++B)=reverse(B)++reverse(A) を適用" }
+    ],
+    "explanation": "reverse(A ++ B) = reverse(B) ++ reverse(A) という性質を A=reverse(L'), B=[x] に適用すると reverse([x]) ++ reverse(reverse(L')) となります。reverse([x]) = [x] と帰納仮定 reverse(reverse(L')) = L' を使って [x] ++ L' = x :: L' を得ます。"
+  },
+  {
+    "id": "ch16-p5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "定理: 二分木 T について size(T) ≦ 2^(height(T)+1) - 1", "type": "given" },
+      { "id": "s2", "content": "基底ケース (Leaf): size = 1, 2^(0+1)-1 = 1, 1 ≦ 1 ✓", "type": "given" },
+      { "id": "s3", "content": "帰納仮定: size(L) ≦ 2^(h_L+1)-1 かつ size(R) ≦ 2^(h_R+1)-1", "type": "given" },
+      { "id": "s4", "content": "size(Node(L,v,R)) = 1 + size(L) + size(R) ≦ 1 + (2^(h_L+1)-1) + (2^(h_R+1)-1) = ___", "type": "gap", "correctValue": "2^(h_L+1) + 2^(h_R+1) - 1", "options": ["2^(h_L+1) + 2^(h_R+1) - 1", "2^(h+2) - 1", "2 * size(L) + 1", "size(L) + size(R)"] },
+      { "id": "s5", "content": "≦ 2·2^(max(h_L,h_R)+1) - 1 = 2^(height(Node)+1) - 1 ✓", "type": "derived", "rule": "height の定義と不等式の整理" }
+    ],
+    "explanation": "帰納仮定を代入して整理すると 2^(h_L+1) + 2^(h_R+1) - 1 となります。h_L, h_R ≦ max(h_L, h_R) = h なので、2^(h+1) + 2^(h+1) - 1 = 2^(h+2) - 1 以下です。height(Node) = h+1 なので結論が得られます。"
+  }
+]

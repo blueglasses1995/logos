@@ -16,6 +16,11 @@ const VARIANT_STYLES = {
     bg: "bg-[oklch(0.550_0.100_230)]/5",
     labelColor: "text-[oklch(0.550_0.100_230)]",
   },
+  example: {
+    border: "border-l-[oklch(0.600_0.118_184)]",
+    bg: "bg-[oklch(0.600_0.118_184)]/5",
+    labelColor: "text-[oklch(0.600_0.118_184)]",
+  },
 } as const
 
 interface CalloutProps {

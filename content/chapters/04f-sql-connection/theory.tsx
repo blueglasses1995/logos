@@ -4,13 +4,28 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
-import { ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
+import {
+  ExampleMapping,
+  InlineMiniQuiz,
+  CodeLogicBridge,
+  TddLogicBridge,
+  BusinessLogicLab,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第4f章: 述語論理とSQL — SQLは述語論理の実装である</h1>
+
+      <MotivationSection
+        icon="🗄️"
+        realWorldExample="述語論理の知識がSQLの理解を根本的に変える。WHERE句は述語そのもの。"
+        nextChapterConnection="非形式的誤謬で日常の議論を分析"
+      />
 
       <h2>定義: SQLは述語論理の実装である</h2>
 
@@ -646,6 +661,28 @@ export function TheoryContent() {
         あなたはすでに述語論理を使っています。
         それを意識的に行えるかどうかが、プログラマとしての推論力の差になります。
       </p>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: コード・ロジック・ブリッジ</h2>
+        <CodeLogicBridge />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: TDDロジック・ブリッジ</h2>
+        <TddLogicBridge />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: ビジネスロジック・ラボ</h2>
+        <BusinessLogicLab />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="04f-sql-connection" />
+    </div>
+    </>
   )
 }

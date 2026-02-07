@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { ActivityHeatmap } from "@/components/stats/activity-heatmap"
 import { StatsSummary } from "@/components/stats/stats-summary"
 import { AchievementList } from "@/components/stats/achievement-list"
+import { LearningPortfolio } from "@/components/dashboard/learning-portfolio"
 import { useProgress } from "@/hooks/use-progress"
 
 export default function StatsPage() {
@@ -33,6 +34,7 @@ export default function StatsPage() {
           <StatsSummary progress={progress} />
           <ActivityHeatmap logs={progress.dailyLogs} />
           <AchievementList achievements={progress.achievements} />
+          <LearningPortfolio progress={progress} />
         </div>
       </PageShell>
     </>

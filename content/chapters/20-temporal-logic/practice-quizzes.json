@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ch20-p1",
+    "type": "multiple-choice",
+    "question": "Webサーバーの仕様「すべてのHTTPリクエストに対して、タイムアウト内に応答を返すか、エラーメッセージを返す」をLTLで形式化すると？",
+    "options": [
+      "□(request → ◇(response ∨ error))",
+      "□(request → ○response)",
+      "◇(request → response)",
+      "□request → □response"
+    ],
+    "correctIndex": 0,
+    "explanation": "「すべてのリクエストに対して」は□(request → ...)、「応答かエラーを返す」は(response ∨ error)、「いつか」は◇です。○responseは「次のステップで」なので即座の応答を要求し、厳しすぎます。"
+  },
+  {
+    "id": "ch20-p2",
+    "type": "multiple-choice",
+    "question": "データベーストランザクションの性質「コミットされたトランザクションのデータは、以降の全ての時点で保持される」をLTLで表すと？",
+    "options": [
+      "□(committed → □persisted)",
+      "□(committed → ◇persisted)",
+      "◇committed → persisted",
+      "□committed"
+    ],
+    "correctIndex": 0,
+    "explanation": "「コミットされたら（committed →）以降の全ての時点で（□）保持される（persisted）」です。◇persistedだと「いつか保持される」で弱すぎます。これはデータベースの永続性（Durability）の形式化です。"
+  },
+  {
+    "id": "ch20-p3",
+    "type": "multiple-choice",
+    "question": "モデル検査の「状態爆発問題」とは何ですか？",
+    "options": [
+      "検証対象のシステムの状態数が指数的に増大し、メモリや計算時間が不足する問題",
+      "仕様のLTL式が複雑すぎて解析できない問題",
+      "反例が多すぎて出力できない問題",
+      "プログラムのバグが爆発的に増える問題"
+    ],
+    "correctIndex": 0,
+    "explanation": "状態爆発問題は、システムのコンポーネント数が増えると全体の状態数が指数的に増大する問題です。n個のブール変数を持つシステムは2ⁿの状態を持ちうるため、コンポーネント数が増えると実用的な時間内に検証できなくなります。"
+  },
+  {
+    "id": "ch20-p4",
+    "type": "proof-builder",
+    "conclusion": "□¬deadlock を検証する手順",
+    "availablePremises": [
+      { "id": "p1", "label": "システムの状態遷移図を作成する", "rule": "モデル構築" },
+      { "id": "p2", "label": "検証したい性質を□¬deadlockとしてLTL式に記述する", "rule": "仕様記述" },
+      { "id": "p3", "label": "モデル検査器にモデルとLTL式を入力し、全状態空間を探索する", "rule": "自動検証" },
+      { "id": "p4", "label": "結果を確認: 充足 or 反例（デッドロックに至る実行パス）", "rule": "結果分析" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4"],
+    "explanation": "モデル検査の手順: (1)システムをモデル化、(2)性質をLTL/CTLで記述、(3)モデル検査器が自動的に全状態を探索、(4)仕様を満たすか反例が出力される。"
+  },
+  {
+    "id": "ch20-p5",
+    "type": "proof-builder",
+    "conclusion": "エレベーターの安全性と活性の検証",
+    "availablePremises": [
+      { "id": "p1", "label": "安全性: □¬(door_open ∧ moving)（ドアが開いている間は動かない）", "rule": "安全性仕様" },
+      { "id": "p2", "label": "活性: □(button_pressed → ◇arrived)（ボタンを押したらいつか到着する）", "rule": "活性仕様" },
+      { "id": "p3", "label": "公平性: □◇¬moving（エレベーターはいつかは停止する）", "rule": "公平性仕様" },
+      { "id": "p4", "label": "全仕様の連言: p1 ∧ p2 ∧ p3 をモデル検査で同時に検証", "rule": "統合検証" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4"],
+    "explanation": "エレベーターシステムの検証では、安全性（ドアが開いたまま動かない）、活性（要求にいつか応答する）、公平性（永遠に動き続けない）を組み合わせて検証します。実際のモデル検査ではこれらの性質を個別に、または同時に検証できます。"
+  }
+]

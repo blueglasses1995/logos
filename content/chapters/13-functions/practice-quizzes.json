@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ch13-p1",
+    "type": "multiple-choice",
+    "question": "ハッシュ関数 h: {すべての文字列} → {0, 1, ..., 2³²-1} は一般にどの性質を持ちますか？",
+    "options": [
+      "全射だが単射ではない（ハッシュ衝突が起こりうる）",
+      "単射かつ全射（全単射）",
+      "単射だが全射ではない",
+      "単射でも全射でもない"
+    ],
+    "correctIndex": 0,
+    "explanation": "文字列の集合は無限であり、ハッシュ値の集合は有限（2³² 個）なので、鳩の巣原理により必ず衝突が発生します（単射でない）。良いハッシュ関数はすべての値を出力しうるので全射と見なせます。"
+  },
+  {
+    "id": "ch13-p2",
+    "type": "multiple-choice",
+    "question": "Array.prototype.map(f) は数学的にどのように解釈できますか？",
+    "options": [
+      "関数 f を配列の各要素に適用する関数の「持ち上げ」（リフト）",
+      "関数 f の逆関数を計算する操作",
+      "配列を集合に変換する操作",
+      "関数 f の合成を計算する操作"
+    ],
+    "correctIndex": 0,
+    "explanation": "map は関数 f: A → B を「リスト上の関数」F: List<A> → List<B> に持ち上げます。これは関手（functor）と呼ばれる概念で、圏論の基本的な構造です。"
+  },
+  {
+    "id": "ch13-p3",
+    "type": "multiple-choice",
+    "question": "暗号化関数 encrypt: 平文 → 暗号文 に逆関数（復号関数）が存在するためには、何が必要ですか？",
+    "options": [
+      "encrypt が全単射であること（異なる平文は異なる暗号文に写り、すべての暗号文に対応する平文がある）",
+      "encrypt が全射であればよい",
+      "encrypt が単射であればよい",
+      "特別な条件は不要"
+    ],
+    "correctIndex": 0,
+    "explanation": "復号関数は暗号化関数の逆関数です。逆関数が存在するには全単射が必要です。単射でなければ同じ暗号文から複数の平文が復元されてしまい、全射でなければ生成されない暗号文が存在してしまいます。"
+  },
+  {
+    "id": "ch13-p4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "f: A → B は全単射", "type": "given" },
+      { "id": "s2", "content": "f⁻¹: B → A を f⁻¹(b) = a ⟺ f(a) = b で定義", "type": "given" },
+      { "id": "s3", "content": "(f⁻¹ ∘ f)(a) = f⁻¹(f(a))", "type": "derived", "rule": "合成の定義" },
+      { "id": "s4", "content": "___", "type": "gap", "correctValue": "f⁻¹(f(a)) = a", "options": ["f⁻¹(f(a)) = a", "f⁻¹(f(a)) = f(a)", "f⁻¹(f(a)) = b", "f⁻¹(f(a)) = f⁻¹(a)"] },
+      { "id": "s5", "content": "よって f⁻¹ ∘ f = id_A", "type": "derived", "rule": "恒等関数の定義" }
+    ],
+    "explanation": "f(a) = b と置くと、逆関数の定義より f⁻¹(b) = a です。つまり f⁻¹(f(a)) = a が成り立ち、f⁻¹ ∘ f は恒等関数です。"
+  },
+  {
+    "id": "ch13-p5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "f: A → B, g: B → C がともに全射", "type": "given" },
+      { "id": "s2", "content": "任意の c ∈ C をとる", "type": "derived", "rule": "全射の証明の出発点" },
+      { "id": "s3", "content": "g が全射なので ∃b ∈ B: g(b) = c", "type": "derived", "rule": "g の全射性" },
+      { "id": "s4", "content": "___", "type": "gap", "correctValue": "f が全射なので ∃a ∈ A: f(a) = b", "options": ["f が全射なので ∃a ∈ A: f(a) = b", "f が単射なので a は一意", "g(f(a)) = g(b) = c", "a = f⁻¹(b)"] },
+      { "id": "s5", "content": "(g ∘ f)(a) = g(f(a)) = g(b) = c", "type": "derived", "rule": "合成と代入" },
+      { "id": "s6", "content": "よって g ∘ f は全射", "type": "derived", "rule": "全射の定義を満たす" }
+    ],
+    "explanation": "全射の合成が全射であることの証明: 任意の c ∈ C に対して、まず g の全射性で b を見つけ、次に f の全射性で a を見つけ、(g∘f)(a) = c を示します。"
+  }
+]

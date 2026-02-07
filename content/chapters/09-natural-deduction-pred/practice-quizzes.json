@@ -1,0 +1,76 @@
+[
+  {
+    "id": "ch9-p1",
+    "type": "proof-builder",
+    "conclusion": "∃x (Q(x) ∧ R(x))",
+    "availablePremises": [
+      { "id": "p1", "label": "∃x (P(x) ∧ Q(x))", "rule": "前提" },
+      { "id": "p2", "label": "∀x (P(x) → R(x))", "rule": "前提" },
+      { "id": "p3", "label": "[P(a) ∧ Q(a)] 仮定", "rule": "∃E のための仮定" },
+      { "id": "p4", "label": "P(a)", "rule": "∧E（p3より）" },
+      { "id": "p5", "label": "Q(a)", "rule": "∧E（p3より）" },
+      { "id": "p6", "label": "P(a) → R(a)", "rule": "∀E（p2より）" },
+      { "id": "p7", "label": "R(a)", "rule": "→E（p4, p6より）" },
+      { "id": "p8", "label": "Q(a) ∧ R(a)", "rule": "∧I（p5, p7より）" },
+      { "id": "p9", "label": "∃x (Q(x) ∧ R(x))", "rule": "∃I（p8より）" },
+      { "id": "p10", "label": "∃x (Q(x) ∧ R(x))", "rule": "∃E（p1, p3-p9より）" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"],
+    "explanation": "∃E と ∀E を組み合わせた証明です。∃x (P(x) ∧ Q(x)) から固有変数aで P(a) ∧ Q(a) を仮定し、∀x (P(x) → R(x)) に∀Eを適用して P(a) → R(a) を得ます。P(a) と合わせて R(a) を導き、Q(a) ∧ R(a) を作って∃Iで存在命題にします。結論にaは残っていないので∃Eが完了します。"
+  },
+  {
+    "id": "ch9-p2",
+    "type": "proof-builder",
+    "conclusion": "∀x (P(x) → R(x))",
+    "availablePremises": [
+      { "id": "p1", "label": "∀x (P(x) → Q(x))", "rule": "前提" },
+      { "id": "p2", "label": "∀x (Q(x) → R(x))", "rule": "前提" },
+      { "id": "p3", "label": "[P(a)] 仮定", "rule": "→I のための仮定" },
+      { "id": "p4", "label": "Q(a)", "rule": "∀E + →E" },
+      { "id": "p5", "label": "R(a)", "rule": "∀E + →E" },
+      { "id": "p6", "label": "P(a) → R(a)", "rule": "→I" },
+      { "id": "p7", "label": "∀x (P(x) → R(x))", "rule": "∀I" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5", "p6", "p7"],
+    "explanation": "仮言三段論法の述語論理版。aを固有変数として取り、P(a) を仮定します。∀E で P(a)→Q(a) と Q(a)→R(a) を得て、→E を2回使って R(a) を導きます。→I で P(a)→R(a) にまとめ、∀I で全称化します。aは前提に現れていないので固有変数条件を満たします。"
+  },
+  {
+    "id": "ch9-p3",
+    "type": "proof-builder",
+    "conclusion": "¬∀x P(x)",
+    "availablePremises": [
+      { "id": "p1", "label": "∃x ¬P(x)", "rule": "前提" },
+      { "id": "p2", "label": "[∀x P(x)] 仮定", "rule": "¬I のための仮定" },
+      { "id": "p3", "label": "[¬P(a)] 仮定", "rule": "∃E のための仮定" },
+      { "id": "p4", "label": "P(a)", "rule": "∀E（p2より）" },
+      { "id": "p5", "label": "⊥（矛盾）", "rule": "¬E（p3, p4より）" },
+      { "id": "p6", "label": "⊥（矛盾）", "rule": "∃E（p1, p3-p5より）" },
+      { "id": "p7", "label": "¬∀x P(x)", "rule": "¬I（p2-p6より）" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5", "p6", "p7"],
+    "explanation": "∃x ¬P(x) ⊢ ¬∀x P(x) の証明です。¬I のために∀x P(x) を仮定し、∃Eで ¬P(a) を仮定します。∀E で P(a) を得ると、P(a) と ¬P(a) で矛盾（⊥）が生じます。∃Eで矛盾を導出し、¬Iで ¬∀x P(x) を結論します。"
+  },
+  {
+    "id": "ch9-p4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "∀x (P(x) → Q(x))", "type": "given" },
+      { "id": "s2", "content": "P(a)", "type": "given" },
+      { "id": "s3", "content": "___", "type": "gap", "correctValue": "P(a) → Q(a)", "rule": "∀E（s1より）", "options": ["P(a) → Q(a)", "∀x Q(x)", "Q(a) → P(a)", "∃x P(x)"] },
+      { "id": "s4", "content": "___", "type": "gap", "correctValue": "Q(a)", "rule": "→E（s2, s3より）", "options": ["Q(a)", "P(a) ∧ Q(a)", "¬P(a)", "∀x Q(x)"] }
+    ],
+    "explanation": "∀x (P(x) → Q(x)) に∀Eを適用して P(a) → Q(a) を得ます（xにaを代入）。次に前提P(a)と合わせて→E（モーダスポネンス）でQ(a)を導きます。これは述語論理の最も基本的な推論パターンです。"
+  },
+  {
+    "id": "ch9-p5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "∃x (P(x) ∧ Q(x))", "type": "given" },
+      { "id": "s2", "content": "[P(a) ∧ Q(a)] 仮定（∃E）", "type": "given" },
+      { "id": "s3", "content": "___", "type": "gap", "correctValue": "P(a)", "rule": "∧E（s2より）", "options": ["P(a)", "Q(a)", "P(a) → Q(a)", "∃x P(x)"] },
+      { "id": "s4", "content": "___", "type": "gap", "correctValue": "∃x P(x)", "rule": "∃I（s3より）", "options": ["∃x P(x)", "∀x P(x)", "P(a) ∧ Q(a)", "∃x Q(x)"] },
+      { "id": "s5", "content": "∃x P(x)", "type": "given" }
+    ],
+    "explanation": "∃x (P(x) ∧ Q(x)) から ∃x P(x) を導く証明です。∃Eで P(a) ∧ Q(a) を仮定し、∧E で P(a) を取り出し、∃I で ∃x P(x) を導きます。結論にaが残っていないため∃Eが完了し、∃x P(x) を得ます。連言の一方から存在命題を導く基本パターンです。"
+  }
+]

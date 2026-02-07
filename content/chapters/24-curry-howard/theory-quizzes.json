@@ -1,0 +1,65 @@
+[
+  {
+    "id": "ch24-t1",
+    "type": "multiple-choice",
+    "question": "Curry-Howard対応において、論理学の「命題」に対応するプログラミングの概念は何ですか？",
+    "options": [
+      "型（Type）",
+      "変数（Variable）",
+      "関数（Function）",
+      "クラス（Class）"
+    ],
+    "correctIndex": 0,
+    "explanation": "Curry-Howard対応では、命題は型に対応します。命題が証明可能であることは、対応する型に値が存在する（inhabitable）ことと同義です。"
+  },
+  {
+    "id": "ch24-t2",
+    "type": "multiple-choice",
+    "question": "自然演繹の →I（含意導入）規則に対応するプログラミングの操作は何ですか？",
+    "options": [
+      "関数の定義（ラムダ抽象）",
+      "関数の呼び出し（関数適用）",
+      "変数の宣言",
+      "型の定義"
+    ],
+    "correctIndex": 0,
+    "explanation": "→I は「A を仮定して B を導ける場合、A → B が成り立つ」という規則です。これは「A 型の引数を受け取り B 型の値を返す関数を定義する」ことに対応します。"
+  },
+  {
+    "id": "ch24-t3",
+    "type": "multiple-choice",
+    "question": "TypeScript の never 型は、Curry-Howard対応において論理学のどの概念に対応しますか？",
+    "options": [
+      "⊥（偽 / 矛盾）",
+      "⊤（真）",
+      "¬P（否定）",
+      "P ∨ Q（選言）"
+    ],
+    "correctIndex": 0,
+    "explanation": "never 型は値が存在しない型です。これは証明が存在しない命題、すなわち ⊥（偽 / 矛盾）に対応します。never 型の値は構築できないのと同様、矛盾は証明できません。"
+  },
+  {
+    "id": "ch24-t4",
+    "type": "multiple-choice",
+    "question": "TypeScript の [A, B]（タプル型）は、Curry-Howard対応において論理学のどの結合子に対応しますか？",
+    "options": [
+      "A ∧ B（連言 / AND）",
+      "A ∨ B（選言 / OR）",
+      "A → B（含意）",
+      "¬A（否定）"
+    ],
+    "correctIndex": 0,
+    "explanation": "タプル [A, B] は A 型の値と B 型の値を両方持っている構造です。これは「A かつ B が成り立つ」（連言 A ∧ B）に対応します。タプルの構築は ∧I、要素の取得は ∧E に対応します。"
+  },
+  {
+    "id": "ch24-t5",
+    "type": "proof-builder",
+    "conclusion": "B",
+    "availablePremises": [
+      { "id": "p1", "label": "f: (a: A) => B（型: A → B）", "rule": "関数 f" },
+      { "id": "p2", "label": "x: A（型: A の値）", "rule": "値 x" }
+    ],
+    "correctOrder": ["p2", "p1"],
+    "explanation": "Curry-Howard対応による証明: f: A → B と x: A から f(x): B を得ます。これはモーダスポネンス（→E）に対応します。A 型の値 x を関数 f に適用することで B 型の値が得られます。"
+  }
+]

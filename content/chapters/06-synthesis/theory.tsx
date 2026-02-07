@@ -1,10 +1,32 @@
-import { Callout, FormulaBlock, ComparisonTable, KeyPoint, SectionDivider } from "@/components/content"
-import { ArgumentTree, LogicSandbox, InlineMiniQuiz } from "@/components/interactive"
+import {
+  Callout,
+  FormulaBlock,
+  ComparisonTable,
+  KeyPoint,
+  SectionDivider,
+  MotivationSection,
+} from "@/components/content"
+import {
+  ArgumentTree,
+  LogicSandbox,
+  InlineMiniQuiz,
+  ConceptMap,
+  CrossChapterExercise,
+  IntegrationProject,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第6章: 実践総合演習</h1>
+
+      <MotivationSection
+        icon="🏆"
+        realWorldExample="全章の知識を統合した議論分析フレームワークと総合演習。"
+        nextChapterConnection="これが完成形。実務で使いこなそう。"
+      />
 
       <h2>総合復習</h2>
 
@@ -146,6 +168,28 @@ export function TheoryContent() {
         correctIndex={0}
         explanation="まず論理構造（形式的妥当性）を確認し、次に前提の真偽（健全性）、最後に非形式的誤謬の有無を検討します。"
       />
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: コンセプトマップ</h2>
+        <ConceptMap />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 横断演習</h2>
+        <CrossChapterExercise />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 統合プロジェクト</h2>
+        <IntegrationProject />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="06-synthesis" />
+    </div>
+    </>
   )
 }

@@ -4,13 +4,28 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
-import { VennDiagram, ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
+import {
+  VennDiagram,
+  ExampleMapping,
+  InlineMiniQuiz,
+  BackwardProofTrainer,
+  ProofAssistant,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第4b章: 全称量化子（∀） — 「すべての」を厳密に表現する</h1>
+
+      <MotivationSection
+        icon="🌐"
+        realWorldExample="「全てのテストがパスする」を厳密に。テスト駆動開発の論理的基盤。"
+        nextChapterConnection="存在量化子で「存在する」を厳密に"
+      />
 
       <h2>定義: 全称量化子とは何か</h2>
 
@@ -345,6 +360,22 @@ export function TheoryContent() {
           この区別は日常会話でも、論理学でも、プログラミングでも極めて重要です。
         </p>
       </Callout>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 逆向き証明トレーナー</h2>
+        <BackwardProofTrainer />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 証明アシスタント</h2>
+        <ProofAssistant />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="04b-universal" />
+    </div>
+    </>
   )
 }

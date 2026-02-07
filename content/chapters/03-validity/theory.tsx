@@ -4,17 +4,29 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
 import {
   ArgumentTree,
   ExampleMapping,
   InlineMiniQuiz,
+  ArgumentWorkshop,
+  LogicDebugger,
+  ProofErrorDetector,
+  StudyNotes,
 } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第3章: 論証の妥当性と健全性</h1>
+
+      <MotivationSection
+        icon="⚖️"
+        realWorldExample="「この推論は正しいか？」はコードレビューの核心。妥当性の判定方法を学ぶ。"
+        nextChapterConnection="述語論理でより精密な表現へ"
+      />
 
       <h2>論証とは</h2>
 
@@ -192,6 +204,28 @@ export function TheoryContent() {
         correctIndex={0}
         explanation="妥当性は論理構造の正しさ、健全性は前提の真実性も要求します。前提が偽でも論理が正しければ妥当です。"
       />
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 論証ワークショップ</h2>
+        <ArgumentWorkshop />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: ロジックデバッガー</h2>
+        <LogicDebugger />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 証明エラー検出</h2>
+        <ProofErrorDetector />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="03-validity" />
+    </div>
+    </>
   )
 }

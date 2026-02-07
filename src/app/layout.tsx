@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import {
-  Instrument_Serif,
+  Lora,
   Source_Serif_4,
   JetBrains_Mono,
   Noto_Sans_JP,
 } from "next/font/google";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const lora = Lora({
+  variable: "--font-heading-serif",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${instrumentSerif.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} ${notoSansJP.variable} antialiased`}
+        className={`${lora.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} ${notoSansJP.variable} antialiased`}
       >
         {children}
       </body>

@@ -1,0 +1,71 @@
+[
+  {
+    "id": "ch7-p1",
+    "type": "proof-builder",
+    "conclusion": "¬P",
+    "availablePremises": [
+      { "id": "p1", "label": "P → Q", "rule": "前提" },
+      { "id": "p2", "label": "¬Q", "rule": "前提" },
+      { "id": "p3", "label": "P", "rule": "仮定" },
+      { "id": "p4", "label": "Q", "rule": "→E, p1, p3" },
+      { "id": "p5", "label": "⊥", "rule": "矛盾, p4, p2" },
+      { "id": "p6", "label": "¬P", "rule": "¬I, p3-p5" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5", "p6"],
+    "explanation": "モーダストレンスの自然演繹による証明です。P を仮定すると →E で Q が導かれますが、前提 ¬Q と矛盾します。¬I により仮定 P を解除して ¬P を得ます。"
+  },
+  {
+    "id": "ch7-p2",
+    "type": "proof-builder",
+    "conclusion": "P → R",
+    "availablePremises": [
+      { "id": "p1", "label": "P → (Q ∧ R)", "rule": "前提" },
+      { "id": "p2", "label": "P", "rule": "仮定" },
+      { "id": "p3", "label": "Q ∧ R", "rule": "→E, p1, p2" },
+      { "id": "p4", "label": "R", "rule": "∧E 右, p3" },
+      { "id": "p5", "label": "P → R", "rule": "→I, p2-p4" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5"],
+    "explanation": "P を仮定し、P → (Q ∧ R) に →E を適用して Q ∧ R を得て、∧E で R を取り出します。→I で仮定 P を解除して P → R を得ます。"
+  },
+  {
+    "id": "ch7-p3",
+    "type": "proof-builder",
+    "conclusion": "(P ∧ Q) ∧ R",
+    "availablePremises": [
+      { "id": "p1", "label": "P", "rule": "前提" },
+      { "id": "p2", "label": "Q ∧ R", "rule": "前提" },
+      { "id": "p3", "label": "Q", "rule": "∧E 左, p2" },
+      { "id": "p4", "label": "R", "rule": "∧E 右, p2" },
+      { "id": "p5", "label": "P ∧ Q", "rule": "∧I, p1, p3" },
+      { "id": "p6", "label": "(P ∧ Q) ∧ R", "rule": "∧I, p5, p4" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5", "p6"],
+    "explanation": "Q ∧ R から ∧E で Q と R を取り出し、P と Q を ∧I で P ∧ Q にまとめ、さらに R と ∧I で (P ∧ Q) ∧ R を構成します。連言の結合を組み替える操作です。"
+  },
+  {
+    "id": "ch7-p4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "P → Q", "type": "given" },
+      { "id": "s2", "content": "Q → R", "type": "given" },
+      { "id": "s3", "content": "P", "type": "given" },
+      { "id": "s4", "content": "???", "type": "gap", "correctValue": "Q", "rule": "→E, s1, s3", "options": ["Q", "R", "¬P", "P ∧ Q"] },
+      { "id": "s5", "content": "R", "type": "derived", "rule": "→E, s2, s4" }
+    ],
+    "explanation": "前提 P → Q と P に →E（モーダスポネンス）を適用すると Q が得られます。その Q と Q → R に再度 →E を適用して R を導きます。"
+  },
+  {
+    "id": "ch7-p5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "¬(P ∧ Q)", "type": "given" },
+      { "id": "s2", "content": "P", "type": "given" },
+      { "id": "s3", "content": "Q（仮定）", "type": "given" },
+      { "id": "s4", "content": "???", "type": "gap", "correctValue": "P ∧ Q", "rule": "∧I, s2, s3", "options": ["P ∧ Q", "¬Q", "P → Q", "⊥"] },
+      { "id": "s5", "content": "⊥", "type": "derived", "rule": "矛盾, s4, s1" },
+      { "id": "s6", "content": "¬Q", "type": "derived", "rule": "¬I, s3-s5" }
+    ],
+    "explanation": "Q を仮定すると、P と ∧I で P ∧ Q が得られますが、前提 ¬(P ∧ Q) と矛盾します。この矛盾から ¬I で Q の仮定を解除して ¬Q を導きます。"
+  }
+]

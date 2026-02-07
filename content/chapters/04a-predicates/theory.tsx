@@ -4,13 +4,26 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
-import { ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
+import {
+  ExampleMapping,
+  InlineMiniQuiz,
+  SteppedProofBuilder,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第4a章: 述語と項 — 命題の内部構造を分析する</h1>
+
+      <MotivationSection
+        icon="🔍"
+        realWorldExample="「全てのユーザー」「あるエラーが存在する」— 命題論理では言えないことを述語で表現。"
+        nextChapterConnection="全称量化子で「全て」を厳密に"
+      />
 
       <h2>定義: 述語とは何か</h2>
 
@@ -389,6 +402,16 @@ export function TheoryContent() {
       <KeyPoint>
         述語は動詞に限らない。アリティは1に限らない。命題論理と述語論理は断絶ではなく拡張の関係にある。
       </KeyPoint>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: ステップ式証明ビルダー</h2>
+        <SteppedProofBuilder />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="04a-predicates" />
+    </div>
+    </>
   )
 }

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ch7-t1",
+    "type": "multiple-choice",
+    "question": "次のうち、連言除去 (∧E) を正しく適用しているのはどれですか？",
+    "options": [
+      "P ∧ Q から P を導く",
+      "P から P ∧ Q を導く",
+      "P ∨ Q から P を導く",
+      "P → Q から P を導く"
+    ],
+    "correctIndex": 0,
+    "explanation": "∧E（連言除去）は P ∧ Q から P（左除去）または Q（右除去）を取り出す規則です。P だけから P ∧ Q を導くのは ∧I ではなく誤りです（Q も必要）。"
+  },
+  {
+    "id": "ch7-t2",
+    "type": "multiple-choice",
+    "question": "→I（条件付き証明）を適用したとき、何が起こりますか？",
+    "options": [
+      "サブ証明の仮定が解除され、条件文が得られる",
+      "新しい前提が追加される",
+      "結論が否定される",
+      "前提が削除される"
+    ],
+    "correctIndex": 0,
+    "explanation": "→I では、P を仮定したサブ証明で Q を導いた後、仮定 P を解除して P → Q という条件文を得ます。仮定は最終的な証明では有効ではなくなります。"
+  },
+  {
+    "id": "ch7-t3",
+    "type": "multiple-choice",
+    "question": "¬I（否定導入）と RAA（帰謬法）の違いは何ですか？",
+    "options": [
+      "¬I は P を仮定して矛盾を導き ¬P を得る。RAA は ¬P を仮定して矛盾を導き P を得る",
+      "¬I は ¬P を仮定して矛盾を導き P を得る。RAA は P を仮定して矛盾を導き ¬P を得る",
+      "¬I は前提を削除する。RAA は前提を追加する",
+      "¬I と RAA に違いはない"
+    ],
+    "correctIndex": 0,
+    "explanation": "¬I は P の仮定から矛盾を導いて ¬P を証明する規則で、RAA は ¬P の仮定から矛盾を導いて P を証明する規則です。仮定と結論の否定の関係が逆になっています。"
+  },
+  {
+    "id": "ch7-t4",
+    "type": "proof-builder",
+    "conclusion": "Q ∧ P",
+    "availablePremises": [
+      { "id": "p1", "label": "P ∧ Q", "rule": "前提" },
+      { "id": "p2", "label": "P", "rule": "∧E 左, p1" },
+      { "id": "p3", "label": "Q", "rule": "∧E 右, p1" },
+      { "id": "p4", "label": "Q ∧ P", "rule": "∧I, p3, p2" }
+    ],
+    "correctOrder": ["p1", "p3", "p2", "p4"],
+    "explanation": "P ∧ Q から ∧E で Q と P をそれぞれ取り出し、∧I で Q ∧ P として組み立て直します。連言の交換律の証明です。"
+  },
+  {
+    "id": "ch7-t5",
+    "type": "proof-builder",
+    "conclusion": "R",
+    "availablePremises": [
+      { "id": "p1", "label": "P → Q", "rule": "前提" },
+      { "id": "p2", "label": "Q → R", "rule": "前提" },
+      { "id": "p3", "label": "P", "rule": "前提" },
+      { "id": "p4", "label": "Q", "rule": "→E, p1, p3" },
+      { "id": "p5", "label": "R", "rule": "→E, p2, p4" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5"],
+    "explanation": "前提 P と P → Q に →E（モーダスポネンス）を適用して Q を得て、Q と Q → R に再び →E を適用して R を得ます。仮言三段論法の実行です。"
+  }
+]

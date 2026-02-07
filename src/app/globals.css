@@ -8,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-serif: var(--font-instrument-serif);
+  --font-serif: var(--font-heading-serif);
   --font-body: var(--font-source-serif);
   --font-mono: var(--font-jetbrains-mono);
   --font-sans: var(--font-noto-sans-jp);
@@ -161,10 +161,10 @@
     font-family: var(--font-jetbrains-mono), monospace;
   }
 
-  /* Headings: Instrument Serif */
+  /* Headings: Cormorant Garamond */
   h1, h2, h3 {
-    font-family: var(--font-instrument-serif), var(--font-noto-sans-jp), serif;
-    letter-spacing: -0.02em;
+    font-family: var(--font-heading-serif), var(--font-noto-sans-jp), serif;
+    letter-spacing: -0.01em;
   }
 
   /* Typography prose overrides for warm palette */

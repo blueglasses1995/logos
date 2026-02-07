@@ -1,0 +1,61 @@
+[
+  {
+    "id": "ch24-p1",
+    "type": "multiple-choice",
+    "question": "TypeScript で const swap = <A, B>(pair: [A, B]): [B, A] => [pair[1], pair[0]] と書きました。この関数が「証明」している論理的な命題は何ですか？",
+    "options": [
+      "A ∧ B → B ∧ A（連言の交換律）",
+      "A ∨ B → B ∨ A（選言の交換律）",
+      "A → B（含意）",
+      "¬A ∧ ¬B → ¬(A ∨ B)（ド・モルガン）"
+    ],
+    "correctIndex": 0,
+    "explanation": "swap 関数はタプル [A, B] を受け取り [B, A] を返します。タプル [A, B] は A ∧ B に対応するため、この関数は A ∧ B → B ∧ A（連言の交換律）の証明です。"
+  },
+  {
+    "id": "ch24-p2",
+    "type": "multiple-choice",
+    "question": "TypeScript で function absurd(x: never): string { return x } は型エラーにならずにコンパイルできます。なぜですか？",
+    "options": [
+      "never は全ての型のサブタイプだから。これは「矛盾からは何でも導ける」(Ex Falso) に対応する",
+      "TypeScript のコンパイラのバグだから",
+      "string 型は never と互換性があるから",
+      "return x が実行されないことをコンパイラが検出するから"
+    ],
+    "correctIndex": 0,
+    "explanation": "never は TypeScript の型階層において全ての型のサブタイプです。Curry-Howard対応では、⊥（矛盾）から任意の命題が導けるという Ex Falso Quodlibet に対応します。never 型の値は存在しないため、この関数は決して呼び出されません。"
+  },
+  {
+    "id": "ch24-p3",
+    "type": "multiple-choice",
+    "question": "関数合成 const compose = <A, B, C>(f: (a: A) => B, g: (b: B) => C): (a: A) => C => (a) => g(f(a)) は、どの推論規則の証明に対応しますか？",
+    "options": [
+      "仮言三段論法: A → B, B → C ⊢ A → C",
+      "モーダスポネンス: A → B, A ⊢ B",
+      "連言導入: A, B ⊢ A ∧ B",
+      "選言除去: A ∨ B, A → C, B → C ⊢ C"
+    ],
+    "correctIndex": 0,
+    "explanation": "f: A → B と g: B → C を合成して (a: A) => C を得ることは、仮言三段論法（A → B と B → C から A → C を導く）の証明そのものです。"
+  },
+  {
+    "id": "ch24-p4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "命題 A ∧ B → A を証明する", "type": "given" },
+      { "id": "s2", "content": "TypeScript の型: (pair: [A, B]) => A", "type": "given" },
+      { "id": "s3", "content": "実装: (pair) => ___", "type": "gap", "correctValue": "pair[0]", "options": ["pair[0]", "pair[1]", "pair", "[pair[0], pair[1]]"] }
+    ],
+    "explanation": "A ∧ B → A は連言除去（∧E左）に対応します。タプル [A, B] の第一要素 pair[0] を取り出すことで、A 型の値が得られます。"
+  },
+  {
+    "id": "ch24-p5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "命題 A → A ∨ B を証明する", "type": "given" },
+      { "id": "s2", "content": "TypeScript の型: (a: A) => A | B", "type": "given" },
+      { "id": "s3", "content": "実装: (a) => ___", "type": "gap", "correctValue": "a", "options": ["a", "a as B", "[a]", "undefined"] }
+    ],
+    "explanation": "A → A ∨ B は選言導入（∨I左）に対応します。A 型の値 a はそのまま A | B 型の値として使えます（A は A | B のサブタイプ）。"
+  }
+]

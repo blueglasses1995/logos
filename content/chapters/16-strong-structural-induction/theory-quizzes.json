@@ -1,0 +1,65 @@
+[
+  {
+    "id": "ch16-t1",
+    "type": "multiple-choice",
+    "question": "強帰納法と弱帰納法（通常の帰納法）の主な違いは何ですか？",
+    "options": [
+      "強帰納法では P(0),...,P(n-1) のすべてを帰納仮定として使えるが、弱帰納法では P(n) のみ",
+      "強帰納法は弱帰納法より多くの命題を証明できる",
+      "強帰納法には基底ケースが不要である",
+      "弱帰納法は自然数にしか使えないが、強帰納法はすべての集合に使える"
+    ],
+    "correctIndex": 0,
+    "explanation": "強帰納法では n より小さいすべての値について命題が成り立つことを帰納仮定として使えます。弱帰納法では直前の P(n) のみを仮定します。ただし両者は論理的に等価であり、証明できる命題の範囲は同じです。"
+  },
+  {
+    "id": "ch16-t2",
+    "type": "multiple-choice",
+    "question": "構造帰納法で「リストの性質 P」を証明するとき、基底ケースは何ですか？",
+    "options": [
+      "空リスト [] について P が成り立つことを示す",
+      "長さ1のリスト [x] について P が成り立つことを示す",
+      "任意の要素 x について P が成り立つことを示す",
+      "リスト全体について P が成り立つことを示す"
+    ],
+    "correctIndex": 0,
+    "explanation": "リストの再帰的定義では、基底ケースは空リスト [] です。構造帰納法の基底ケースは、データ構造の定義における基底ケースに対応します。"
+  },
+  {
+    "id": "ch16-t3",
+    "type": "multiple-choice",
+    "question": "二分木の構造帰納法の帰納ステップで、Node(L, v, R) について P を示すとき、何を帰納仮定として使えますか？",
+    "options": [
+      "P(L) と P(R) の両方",
+      "P(L) のみ",
+      "P(v) のみ",
+      "P(Node(L, v, R)) 自体"
+    ],
+    "correctIndex": 0,
+    "explanation": "Node(L, v, R) の部分構造は左部分木 L と右部分木 R です。構造帰納法では、すべての部分構造について命題が成り立つことを帰納仮定として使えるため、P(L) と P(R) の両方を仮定できます。"
+  },
+  {
+    "id": "ch16-t4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "定理: 2以上のすべての自然数 n は素因数分解を持つ", "type": "given" },
+      { "id": "s2", "content": "証明: n について強帰納法を用いる", "type": "given" },
+      { "id": "s3", "content": "帰納仮定: 2 ≦ k < n なるすべての k は素因数分解を持つ", "type": "given" },
+      { "id": "s4", "content": "場合1: n が素数 → n 自身が素因数分解", "type": "derived", "rule": "素数の定義" },
+      { "id": "s5", "content": "場合2: n が合成数 → n = a·b (2 ≦ a,b < n)。帰納仮定より a,b は素因数分解を持つので ___", "type": "gap", "correctValue": "n = a·b も素数の積として表せる", "options": ["n = a·b も素数の積として表せる", "n は素数である", "n-1 が素因数分解を持つ", "n は 2 の冪である"] }
+    ],
+    "explanation": "合成数 n = a·b において、a と b はどちらも 2以上 n未満なので帰納仮定が適用できます。a と b の素因数分解を連結すれば n の素因数分解が得られます。"
+  },
+  {
+    "id": "ch16-t5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "定理: 任意のリスト L について length(reverse(L)) = length(L)", "type": "given" },
+      { "id": "s2", "content": "基底ケース: length(reverse([])) = length([]) = 0 ✓", "type": "given" },
+      { "id": "s3", "content": "帰納仮定: length(reverse(L')) = length(L') と仮定", "type": "given" },
+      { "id": "s4", "content": "length(reverse(x :: L')) = length(reverse(L') ++ [x]) = ___", "type": "gap", "correctValue": "length(reverse(L')) + 1", "options": ["length(reverse(L')) + 1", "length(L') - 1", "length(x :: L')", "length(reverse(L'))"] },
+      { "id": "s5", "content": "= length(L') + 1（帰納仮定）= length(x :: L') ✓", "type": "derived", "rule": "帰納仮定の適用" }
+    ],
+    "explanation": "reverse(x :: L') = reverse(L') ++ [x] です。リスト連結の長さの性質より length(reverse(L') ++ [x]) = length(reverse(L')) + 1 となり、帰納仮定を適用すると length(L') + 1 = length(x :: L') が得られます。"
+  }
+]

@@ -1,10 +1,31 @@
-import { Callout, FormulaBlock, ComparisonTable, KeyPoint, SectionDivider } from "@/components/content"
-import { ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
+import {
+  Callout,
+  FormulaBlock,
+  ComparisonTable,
+  KeyPoint,
+  SectionDivider,
+  MotivationSection,
+} from "@/components/content"
+import {
+  ExampleMapping,
+  InlineMiniQuiz,
+  DebateSimulator,
+  LegalLogicAnalyzer,
+  LogicEssayBuilder,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第5章: 非形式的誤謬</h1>
+
+      <MotivationSection
+        icon="🛡️"
+        realWorldExample="ニュース、SNS、会議。誤謬は日常に溢れている。見抜く力は最強の武器。"
+        nextChapterConnection="総合演習で全てを統合"
+      />
 
       <h2>誤謬とは</h2>
 
@@ -183,6 +204,28 @@ export function TheoryContent() {
         曖昧さの誤謬では、論証の構造や言葉の使い方に不明瞭さがあります。
         「前提と結論が独立しているか」「根拠は論理的か感情的か」を常に確認しましょう。
       </KeyPoint>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: ディベートシミュレーター</h2>
+        <DebateSimulator />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 法的論理分析</h2>
+        <LegalLogicAnalyzer />
+      </div>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 論理エッセイビルダー</h2>
+        <LogicEssayBuilder />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="05-fallacies" />
+    </div>
+    </>
   )
 }

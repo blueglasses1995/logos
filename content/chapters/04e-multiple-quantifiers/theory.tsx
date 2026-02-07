@@ -4,13 +4,26 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
-import { VennDiagram, InlineMiniQuiz } from "@/components/interactive"
+import {
+  VennDiagram,
+  InlineMiniQuiz,
+  CurryHowardExplorer,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第4e章: 多重量化 — 量化子の入れ子と順序</h1>
+
+      <MotivationSection
+        icon="🧩"
+        realWorldExample="データベースの複雑なクエリ、数学の定理。量化子の順序で意味が変わる世界。"
+        nextChapterConnection="SQLとの対応で実務に接続"
+      />
 
       <h2>定義: 多重量化とは何か</h2>
 
@@ -462,6 +475,16 @@ export function TheoryContent() {
         量化子の順序交換は、同種の量化子のみ安全。
         ∀ と ∃ が混在する場合、順序は意味を決定的に変えるため、常に慎重に読み書きすること。
       </KeyPoint>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: カリー＝ハワード対応エクスプローラー</h2>
+        <CurryHowardExplorer />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="04e-multiple-quantifiers" />
+    </div>
+    </>
   )
 }

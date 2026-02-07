@@ -4,17 +4,27 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
 import {
   LogicSandbox,
   TruthValueAnimator,
   InlineMiniQuiz,
+  LogicPuzzleChallenge,
+  StudyNotes,
 } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第2章: 真理値表と恒真式</h1>
+
+      <MotivationSection
+        icon="📊"
+        realWorldExample="バグの原因は論理条件の見落とし。真理値表で全パターンを網羅的にチェック。"
+        nextChapterConnection="論証の妥当性で推論全体を評価"
+      />
 
       <h2>真理値表とは</h2>
 
@@ -179,6 +189,16 @@ export function TheoryContent() {
         ド・モルガンの法則、二重否定除去、対偶、含意の定義は論理学の基本変換規則。
         これらを使いこなすことで複雑な論理式を簡略化できる。
       </KeyPoint>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 論理パズルチャレンジ</h2>
+        <LogicPuzzleChallenge />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="02-truth-tables" />
+    </div>
+    </>
   )
 }

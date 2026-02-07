@@ -1,5 +1,7 @@
 // --- Quiz Types ---
 
+export type DifficultyLevel = "beginner" | "intermediate" | "advanced"
+
 export interface MultipleChoiceQuiz {
   readonly id: string
   readonly type: "multiple-choice"
@@ -7,6 +9,7 @@ export interface MultipleChoiceQuiz {
   readonly options: readonly string[]
   readonly correctIndex: number
   readonly explanation: string
+  readonly difficulty?: DifficultyLevel
 }
 
 export interface TruthTableQuiz {
@@ -16,6 +19,7 @@ export interface TruthTableQuiz {
   readonly variables: readonly string[]
   readonly expectedTable: readonly (readonly boolean[])[]
   readonly blanks: readonly number[]
+  readonly difficulty?: DifficultyLevel
 }
 
 // --- New Quiz Types ---
@@ -33,6 +37,7 @@ export interface ProofBuilderQuiz {
   readonly availablePremises: readonly PremiseCard[]
   readonly correctOrder: readonly string[]
   readonly explanation: string
+  readonly difficulty?: DifficultyLevel
 }
 
 export type FallacyType =
@@ -53,6 +58,7 @@ export interface FallacySpotterQuiz {
   readonly fallacyType: FallacyType
   readonly distractors: readonly FallacyType[]
   readonly explanation: string
+  readonly difficulty?: DifficultyLevel
 }
 
 export interface CounterexampleOption {
@@ -70,6 +76,7 @@ export interface CounterexampleQuiz {
   readonly vulnerablePremiseIndex: number
   readonly counterexamples: readonly CounterexampleOption[]
   readonly explanation: string
+  readonly difficulty?: DifficultyLevel
 }
 
 export interface ProofStep {
@@ -86,6 +93,7 @@ export interface GapFillProofQuiz {
   readonly type: "gap-fill-proof"
   readonly steps: readonly ProofStep[]
   readonly explanation: string
+  readonly difficulty?: DifficultyLevel
 }
 
 export type Quiz =

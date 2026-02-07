@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/layout/site-header"
 import { PageShell } from "@/components/layout/page-shell"
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { QuizProgressDots } from "@/components/quiz/quiz-progress-dots"
+import { MasteryDashboard } from "@/components/dashboard/mastery-dashboard"
 import { useProgress } from "@/hooks/use-progress"
 import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
 import { calculateNextReview, type ResponseQuality } from "@/lib/spaced-repetition"
@@ -18,7 +19,7 @@ import { CheckCircle2 } from "lucide-react"
 type ReviewPhase = "answering" | "rating"
 
 export default function ReviewPage() {
-  const { addReviewItem, getDueItems } = useProgress()
+  const { progress, addReviewItem, getDueItems } = useProgress()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [phase, setPhase] = useState<ReviewPhase>("answering")
   const [lastCorrect, setLastCorrect] = useState(false)
@@ -34,9 +35,9 @@ export default function ReviewPage() {
     return (
       <>
         <SiteHeader />
-        <PageShell variant="quiz">
+        <PageShell variant="dashboard">
           <Breadcrumb items={breadcrumbItems} />
-          <div className="py-16 text-center space-y-4">
+          <div className="text-center space-y-4 mb-8">
             <CheckCircle2 className="size-10 text-primary mx-auto" />
             <h1 className="text-2xl font-serif">復習するアイテムはありません</h1>
             <p className="text-muted-foreground">
@@ -46,6 +47,7 @@ export default function ReviewPage() {
               <Button>ダッシュボードへ</Button>
             </Link>
           </div>
+          <MasteryDashboard progress={progress} />
         </PageShell>
       </>
     )
@@ -56,9 +58,9 @@ export default function ReviewPage() {
     return (
       <>
         <SiteHeader />
-        <PageShell variant="quiz">
+        <PageShell variant="dashboard">
           <Breadcrumb items={breadcrumbItems} />
-          <div className="py-16 text-center space-y-4">
+          <div className="text-center space-y-4 mb-8">
             <CheckCircle2 className="size-10 text-primary mx-auto" />
             <h1 className="text-2xl font-serif">復習完了</h1>
             <p className="text-muted-foreground">本日の復習を完了しました。</p>
@@ -66,6 +68,7 @@ export default function ReviewPage() {
               <Button>ダッシュボードへ</Button>
             </Link>
           </div>
+          <MasteryDashboard progress={progress} />
         </PageShell>
       </>
     )

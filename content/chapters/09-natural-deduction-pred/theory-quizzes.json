@@ -1,0 +1,73 @@
+[
+  {
+    "id": "ch9-t1",
+    "type": "multiple-choice",
+    "question": "∀E（全称除去）の規則について正しい説明はどれですか？",
+    "options": [
+      "∀x P(x) が成り立つとき、任意の項 t について P(t) を導ける",
+      "P(a) が成り立つとき、∀x P(x) を導ける",
+      "∃x P(x) が成り立つとき、P(a) を導ける",
+      "∀x P(x) が成り立つとき、∃x P(x) を導ける"
+    ],
+    "correctIndex": 0,
+    "explanation": "∀Eは「すべてのxについてP(x)が成り立つ」から「特定の項tについてP(t)が成り立つ」を導く規則です。「全体から個別へ」の推論であり、固有変数条件は不要です。選択肢2は∀I、選択肢3は∃Eの説明に近いですが不正確です。"
+  },
+  {
+    "id": "ch9-t2",
+    "type": "multiple-choice",
+    "question": "∀I（全称導入）の固有変数条件について、正しいのはどれですか？",
+    "options": [
+      "一般化に使う変数aが前提のどこにも現れていないこと",
+      "変数aが結論に現れていること",
+      "変数aが具体的な定数（例: 2, 太郎）であること",
+      "変数aが∃x P(x)の中に現れていること"
+    ],
+    "correctIndex": 0,
+    "explanation": "∀Iの固有変数条件は、一般化する変数aが前提に現れていないことを要求します。これにより「特定の事例の特殊な性質を使った不当な一般化」を防ぎます。例えば、前提「Even(2)」のように2が特定の偶数であるとき、∀x Even(x) への一般化は不正です。"
+  },
+  {
+    "id": "ch9-t3",
+    "type": "multiple-choice",
+    "question": "次のうち、固有変数条件が必要な規則の組み合わせとして正しいのはどれですか？",
+    "options": [
+      "∀I と ∃E",
+      "∀E と ∃I",
+      "∀I と ∃I",
+      "∀E と ∃E"
+    ],
+    "correctIndex": 0,
+    "explanation": "固有変数条件が必要なのは∀I（個別から全体への一般化）と∃E（存在するものに仮の名前を付けて推論）です。どちらも「不当な特定化」を防ぐために制約が必要です。∀E（全体から個別）と∃I（具体例から存在）は具体化するだけなので制約不要です。"
+  },
+  {
+    "id": "ch9-t4",
+    "type": "proof-builder",
+    "conclusion": "∃x Q(x)",
+    "availablePremises": [
+      { "id": "p1", "label": "∀x (P(x) → Q(x))", "rule": "前提" },
+      { "id": "p2", "label": "P(a)", "rule": "前提" },
+      { "id": "p3", "label": "P(a) → Q(a)", "rule": "∀E（p1より）" },
+      { "id": "p4", "label": "Q(a)", "rule": "→E（p2, p3より）" },
+      { "id": "p5", "label": "∃x Q(x)", "rule": "∃I（p4より）" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5"],
+    "explanation": "まず∀x (P(x) → Q(x)) に∀Eを適用して P(a) → Q(a) を得ます。次に前提P(a)と合わせて→E（モーダスポネンス）でQ(a)を導き、最後に∃IでQ(a)から∃x Q(x)を結論します。"
+  },
+  {
+    "id": "ch9-t5",
+    "type": "proof-builder",
+    "conclusion": "∀x (P(x) → R(x))",
+    "availablePremises": [
+      { "id": "p1", "label": "∀x (P(x) → Q(x))", "rule": "前提" },
+      { "id": "p2", "label": "∀x (Q(x) → R(x))", "rule": "前提" },
+      { "id": "p3", "label": "[P(a)] 仮定", "rule": "→I のための仮定" },
+      { "id": "p4", "label": "P(a) → Q(a)", "rule": "∀E（p1より）" },
+      { "id": "p5", "label": "Q(a)", "rule": "→E（p3, p4より）" },
+      { "id": "p6", "label": "Q(a) → R(a)", "rule": "∀E（p2より）" },
+      { "id": "p7", "label": "R(a)", "rule": "→E（p5, p6より）" },
+      { "id": "p8", "label": "P(a) → R(a)", "rule": "→I（p3-p7より）" },
+      { "id": "p9", "label": "∀x (P(x) → R(x))", "rule": "∀I（p8より）" }
+    ],
+    "correctOrder": ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9"],
+    "explanation": "仮言三段論法の述語論理版です。固有変数aについてP(a) → R(a)を→Iで証明し、aは前提1, 2に現れていないため∀Iで∀x (P(x) → R(x))を導きます。命題論理の規則（→I, →E）と述語論理の規則（∀I, ∀E）を組み合わせた典型的な証明です。"
+  }
+]

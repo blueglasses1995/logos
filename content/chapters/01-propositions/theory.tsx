@@ -4,17 +4,27 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
 import {
   TruthValueAnimator,
   ExampleMapping,
   InlineMiniQuiz,
+  FormalMethodsPlayground,
+  StudyNotes,
 } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第1章: 命題と論理結合子</h1>
+
+      <MotivationSection
+        icon="💡"
+        realWorldExample="プログラミングの条件分岐は命題論理そのもの。if文を書くたびに論理結合子を使っている。"
+        nextChapterConnection="真理値表で体系的に分析"
+      />
 
       <h2>命題とは何か</h2>
 
@@ -125,6 +135,16 @@ export function TheoryContent() {
         5つの論理結合子（¬, ∧, ∨, →, ↔）を使い、単純な命題から複雑な複合命題を構築できる。
         それぞれの真偽条件を正確に覚えることが論理学の基礎となる。
       </KeyPoint>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 形式手法プレイグラウンド</h2>
+        <FormalMethodsPlayground />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="01-propositions" />
+    </div>
+    </>
   )
 }

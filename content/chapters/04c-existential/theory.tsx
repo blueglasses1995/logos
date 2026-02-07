@@ -4,13 +4,27 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
-import { VennDiagram, ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
+import {
+  VennDiagram,
+  ExampleMapping,
+  InlineMiniQuiz,
+  ScientificReasoningLab,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第4c章: 存在量化子（∃） — 「存在する」を厳密に表現する</h1>
+
+      <MotivationSection
+        icon="🎯"
+        realWorldExample="「バグが存在する」「解が存在する」— 存在の証明方法を学ぶ。"
+        nextChapterConnection="量化子の否定で「全て」と「存在」の関係を深める"
+      />
 
       <h2>定義: 存在量化子とは何か</h2>
 
@@ -532,6 +546,16 @@ export function TheoryContent() {
       <KeyPoint>
         ∃は「少なくとも一つ」。∃には∧を使う。¬∃xP(x) = ∀x¬P(x) であり ∃x¬P(x) とは別物。
       </KeyPoint>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 科学的推論ラボ</h2>
+        <ScientificReasoningLab />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="04c-existential" />
+    </div>
+    </>
   )
 }

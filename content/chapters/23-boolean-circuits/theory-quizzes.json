@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ch23-t1",
+    "type": "multiple-choice",
+    "question": "ブール代数において、a ∨ (b ∧ c) = (a ∨ b) ∧ (a ∨ c) が成り立ちます。この法則の名前は何ですか？",
+    "options": [
+      "分配律",
+      "結合律",
+      "交換律",
+      "ド・モルガンの法則"
+    ],
+    "correctIndex": 0,
+    "explanation": "これは ∨ の ∧ に対する分配律です。通常の算術では加法が乗法に分配されませんが、ブール代数では ∨（加法）が ∧（乗法）に分配されます。"
+  },
+  {
+    "id": "ch23-t2",
+    "type": "multiple-choice",
+    "question": "NAND ゲートが「万能ゲート」と呼ばれる理由として正しいのはどれですか？",
+    "options": [
+      "NAND ゲートだけで AND, OR, NOT の全てを構成できるから",
+      "NAND ゲートが最も高速に動作するから",
+      "NAND ゲートの出力が常に 1 になるから",
+      "NAND ゲートが3つ以上の入力を受け付けるから"
+    ],
+    "correctIndex": 0,
+    "explanation": "NAND ゲートは機能的完全性を持ちます。NOT A = A NAND A、A AND B = (A NAND B) NAND (A NAND B)、A OR B = (A NAND A) NAND (B NAND B) として構成できます。"
+  },
+  {
+    "id": "ch23-t3",
+    "type": "multiple-choice",
+    "question": "半加算器において、入力 A=1, B=1 のとき、Sum と Carry の値はそれぞれ何ですか？",
+    "options": [
+      "Sum=0, Carry=1",
+      "Sum=1, Carry=0",
+      "Sum=1, Carry=1",
+      "Sum=0, Carry=0"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sum = A XOR B = 1 XOR 1 = 0、Carry = A AND B = 1 AND 1 = 1 です。二進数の 1 + 1 = 10（十進数の2）に対応します。"
+  },
+  {
+    "id": "ch23-t4",
+    "type": "truth-table",
+    "expression": "A NAND B",
+    "variables": ["A", "B"],
+    "expectedTable": [
+      [true, true, false],
+      [true, false, true],
+      [false, true, true],
+      [false, false, true]
+    ],
+    "blanks": [2, 5, 8, 11]
+  },
+  {
+    "id": "ch23-t5",
+    "type": "truth-table",
+    "expression": "A XOR B",
+    "variables": ["A", "B"],
+    "expectedTable": [
+      [true, true, false],
+      [true, false, true],
+      [false, true, true],
+      [false, false, false]
+    ],
+    "blanks": [2, 5, 8, 11]
+  }
+]

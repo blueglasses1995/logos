@@ -1,0 +1,69 @@
+[
+  {
+    "id": "ch11-t1",
+    "type": "multiple-choice",
+    "question": "集合 A = {1, 2, 3} のべき集合 P(A) の要素数はいくつですか？",
+    "options": [
+      "8",
+      "6",
+      "3",
+      "9"
+    ],
+    "correctIndex": 0,
+    "explanation": "|A| = 3 のとき |P(A)| = 2³ = 8 です。P(A) = {∅, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}} の8個です。"
+  },
+  {
+    "id": "ch11-t2",
+    "type": "multiple-choice",
+    "question": "A = {1, 2, 3, 4}, B = {3, 4, 5, 6} のとき、A △ B（対称差）はどれですか？",
+    "options": [
+      "{1, 2, 5, 6}",
+      "{3, 4}",
+      "{1, 2, 3, 4, 5, 6}",
+      "{1, 2}"
+    ],
+    "correctIndex": 0,
+    "explanation": "対称差 A △ B = (A \\ B) ∪ (B \\ A) = {1, 2} ∪ {5, 6} = {1, 2, 5, 6} です。両方に共通する {3, 4} は除かれます。"
+  },
+  {
+    "id": "ch11-t3",
+    "type": "multiple-choice",
+    "question": "ド・モルガンの法則 (A ∩ B)ᶜ = Aᶜ ∪ Bᶜ を命題論理で表すと、どれに対応しますか？",
+    "options": [
+      "¬(P ∧ Q) ≡ ¬P ∨ ¬Q",
+      "¬(P ∨ Q) ≡ ¬P ∧ ¬Q",
+      "P → Q ≡ ¬Q → ¬P",
+      "P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)"
+    ],
+    "correctIndex": 0,
+    "explanation": "∩ は ∧（AND）、∪ は ∨（OR）、補集合は ¬（NOT）に対応します。よって (A ∩ B)ᶜ = Aᶜ ∪ Bᶜ は ¬(P ∧ Q) ≡ ¬P ∨ ¬Q に対応します。"
+  },
+  {
+    "id": "ch11-t4",
+    "type": "truth-table",
+    "expression": "(x ∈ A ∪ B) ↔ (x ∈ A ∨ x ∈ B)",
+    "variables": ["x ∈ A", "x ∈ B"],
+    "expectedTable": [
+      [true, true, true],
+      [true, false, true],
+      [false, true, true],
+      [false, false, true]
+    ],
+    "blanks": [2, 5, 8, 11]
+  },
+  {
+    "id": "ch11-t5",
+    "type": "counterexample",
+    "argument": "A ⊆ B かつ B ⊆ C ならば A = C である。",
+    "premises": ["A ⊆ B", "B ⊆ C"],
+    "conclusion": "A = C",
+    "vulnerablePremiseIndex": 0,
+    "counterexamples": [
+      { "id": "ce1", "text": "A = {1}, B = {1, 2}, C = {1, 2, 3} のとき A ⊆ B かつ B ⊆ C だが A ≠ C", "isValid": true },
+      { "id": "ce2", "text": "A = B = C のとき成り立つ", "isValid": false },
+      { "id": "ce3", "text": "A = ∅, B = {1}, C = {1, 2} のとき A ⊆ B かつ B ⊆ C だが A ≠ C", "isValid": true },
+      { "id": "ce4", "text": "A ⊆ C は導けるが A = C とは限らない", "isValid": false }
+    ],
+    "explanation": "推移性により A ⊆ C は導けますが、A = C を導くには A ⊆ C と C ⊆ A の両方が必要です。A が C の真部分集合である場合、等しさは成り立ちません。"
+  }
+]

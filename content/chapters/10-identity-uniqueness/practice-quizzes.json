@@ -1,0 +1,64 @@
+[
+  {
+    "id": "ch10-p1",
+    "type": "multiple-choice",
+    "question": "データベースの主キー制約「テーブルemployeesにおいて、各employee_idに対応するレコードはちょうど1つ」を述語論理で正しく表現しているのはどれですか？",
+    "options": [
+      "∀id (∃!r (Record(r) ∧ HasId(r, id))) — 各IDに対してレコードがちょうど1つ存在する",
+      "∃r (Record(r)) — レコードが存在する",
+      "∀r₁ ∀r₂ (Record(r₁) ∧ Record(r₂) → r₁ = r₂) — すべてのレコードは同一",
+      "∃id ∀r (HasId(r, id)) — あるIDをすべてのレコードが持つ"
+    ],
+    "correctIndex": 0,
+    "explanation": "主キー制約は「各IDに対して、そのIDを持つレコードがちょうど1つ（∃!）存在する」です。∃!は一意的存在を保証し、重複レコードを禁止します。選択肢3は「テーブル全体にレコードが1つだけ」という意味になり、主キーの制約とは異なります。"
+  },
+  {
+    "id": "ch10-p2",
+    "type": "multiple-choice",
+    "question": "関数 f の「一価性（well-definedness）」は ∀x ∀y₁ ∀y₂ (f(x) = y₁ ∧ f(x) = y₂ → y₁ = y₂) と表現されます。この性質が成り立たない具体例はどれですか？",
+    "options": [
+      "乱数生成関数 random() — 同じ呼び出しでも異なる値を返しうる",
+      "絶対値関数 |x| — 入力 -3 と 3 に対して同じ値 3 を返す",
+      "二乗関数 x² — 入力 -2 と 2 に対して同じ値 4 を返す",
+      "恒等関数 f(x) = x — 入力と出力が常に等しい"
+    ],
+    "correctIndex": 0,
+    "explanation": "一価性は「同じ入力に対して出力がただ一つ」です。random()は同じ呼び出しでも異なる値を返しうるため、一価性を持ちません（数学的な意味での関数ではありません）。絶対値や二乗で「異なる入力が同じ出力」になるのは一価性とは無関係です（それは単射性の問題）。"
+  },
+  {
+    "id": "ch10-p3",
+    "type": "multiple-choice",
+    "question": "次の推論は正しいですか？「morning_star = evening_star（明けの明星 = 宵の明星）、Observed_at_dawn(morning_star) であるから、Observed_at_dawn(evening_star)」",
+    "options": [
+      "正しい。=E（ライプニッツの法則）により、等しいものは任意の述語で交換可能",
+      "正しくない。明けの明星と宵の明星は名前が違うから交換できない",
+      "正しくない。観測条件が異なるから等号は適用できない",
+      "正しい。ただし対称性の規則を使う必要がある"
+    ],
+    "correctIndex": 0,
+    "explanation": "morning_star = evening_star（どちらも金星）が前提なら、=Eにより P(morning_star) から P(evening_star) を導けます。名前が異なっていても、等号が成り立っているなら任意の文脈で交換可能です。これがライプニッツの法則の核心です。"
+  },
+  {
+    "id": "ch10-p4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "a = b", "type": "given" },
+      { "id": "s2", "content": "b = c", "type": "given" },
+      { "id": "s3", "content": "P(x) を「x = c」とする", "type": "given" },
+      { "id": "s4", "content": "___", "type": "gap", "correctValue": "b = c（P(b) に相当）", "rule": "前提s2", "options": ["b = c（P(b) に相当）", "a = c（P(a) に相当）", "c = a", "a = a"] },
+      { "id": "s5", "content": "___", "type": "gap", "correctValue": "a = c", "rule": "=E（s1, s4より：aとbを交換）", "options": ["a = c", "c = b", "b = a", "a = b ∧ b = c"] }
+    ],
+    "explanation": "等号の推移性（a = b ∧ b = c → a = c）を=Eで証明します。P(x)を「x = c」と定義すると、P(b) は「b = c」（前提2）です。a = b と P(b)（= b = c）に=Eを適用すると、P(a)（= a = c）が得られます。推移性は代入原理から導出できるのです。"
+  },
+  {
+    "id": "ch10-p5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "∃!x P(x) の証明をする", "type": "given" },
+      { "id": "s2", "content": "ステップ1: P(a) を示す（具体的な a について）", "type": "given" },
+      { "id": "s3", "content": "___", "type": "gap", "correctValue": "ステップ2: P(y) を仮定し y = a を導く", "rule": "一意性の証明", "options": ["ステップ2: P(y) を仮定し y = a を導く", "ステップ2: ∀y P(y) を示す", "ステップ2: ¬P(a) を示す", "ステップ2: a ≠ y を示す"] },
+      { "id": "s4", "content": "___", "type": "gap", "correctValue": "結論: ∃x (P(x) ∧ ∀y (P(y) → y = x))", "rule": "∃I（a に対して）", "options": ["結論: ∃x (P(x) ∧ ∀y (P(y) → y = x))", "結論: ∀x P(x)", "結論: ∃x ¬P(x)", "結論: P(a) ∧ P(b)"] }
+    ],
+    "explanation": "∃!x P(x) の証明は2段階です。(1) 存在の証明: 具体的なaについてP(a)を示す。(2) 一意性の証明: P(y)を満たす任意のyについてy = aを導く。この2つを合わせて ∃x (P(x) ∧ ∀y (P(y) → y = x)) を∃Iで結論します。"
+  }
+]

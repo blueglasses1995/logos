@@ -38,6 +38,9 @@ export type AchievementId =
   | "all-chapters"
   | "100-answers"
   | "perfect-quiz"
+  | "logic-master"
+  | "speed-demon"
+  | "proof-architect"
 
 export interface Achievement {
   readonly id: AchievementId

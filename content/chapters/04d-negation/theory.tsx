@@ -4,13 +4,26 @@ import {
   ComparisonTable,
   KeyPoint,
   SectionDivider,
+  MotivationSection,
 } from "@/components/content"
-import { VennDiagram, InlineMiniQuiz } from "@/components/interactive"
+import {
+  VennDiagram,
+  InlineMiniQuiz,
+  ProofRefactoring,
+  StudyNotes,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
+    <>
     <article className="prose prose-zinc max-w-none">
       <h1>第4d章: 量化子の否定 — ド・モルガンの法則の一般化</h1>
+
+      <MotivationSection
+        icon="🔄"
+        realWorldExample="「全員が賛成でない」≠「全員が反対」— この違いが分からないと議論で負ける。"
+        nextChapterConnection="多重量化で複雑な文を読み解く"
+      />
 
       <h2>定義: 量化子の否定法則</h2>
       <p>
@@ -351,6 +364,16 @@ export function TheoryContent() {
           理論と実践の距離はゼロです。
         </p>
       </Callout>
+
+      <SectionDivider />
+      <div className="not-prose my-8">
+        <h2 className="text-xl font-serif mb-4">インタラクティブ: 証明リファクタリング</h2>
+        <ProofRefactoring />
+      </div>
     </article>
+    <div className="not-prose my-8">
+      <StudyNotes chapterSlug="04d-negation" />
+    </div>
+    </>
   )
 }

@@ -1,0 +1,61 @@
+[
+  {
+    "id": "ch23-p1",
+    "type": "multiple-choice",
+    "question": "プログラムで if (!(x > 0 && y > 0)) という条件があります。ブール代数（ド・モルガンの法則）で書き換えると同値な条件はどれですか？",
+    "options": [
+      "if (x <= 0 || y <= 0)",
+      "if (x <= 0 && y <= 0)",
+      "if (x > 0 || y > 0)",
+      "if (!(x > 0) && !(y > 0))"
+    ],
+    "correctIndex": 0,
+    "explanation": "ド・モルガンの法則: ¬(A ∧ B) = ¬A ∨ ¬B です。¬(x > 0) は x <= 0、¬(y > 0) は y <= 0 なので、if (x <= 0 || y <= 0) が同値です。選択肢Dも論理的には正しいですが、ド・モルガンを適用して簡略化した形が選択肢Aです。"
+  },
+  {
+    "id": "ch23-p2",
+    "type": "multiple-choice",
+    "question": "論理式 F = A·B + A·¬B + ¬A·B を簡略化すると何になりますか？",
+    "options": [
+      "F = A + B",
+      "F = A · B",
+      "F = A",
+      "F = B"
+    ],
+    "correctIndex": 0,
+    "explanation": "A·B + A·¬B = A·(B + ¬B) = A·1 = A。よって F = A + ¬A·B = A + B（吸収律の応用）。カルノー図を描くと、A=1 の行の全セルと B=1 の列が1になり、F = A + B が得られます。"
+  },
+  {
+    "id": "ch23-p3",
+    "type": "multiple-choice",
+    "question": "CPUの64ビット加算器を構成するために最低限必要な全加算器の数はいくつですか？",
+    "options": [
+      "64個",
+      "32個",
+      "128個",
+      "63個"
+    ],
+    "correctIndex": 0,
+    "explanation": "n ビットの加算には n 個の全加算器が必要です。各ビット位置に1つの全加算器を配置し、下位ビットからの桁上げ（Carry）を上位ビットに伝搬させます。最下位ビットは半加算器でも可能ですが、Cin=0 の全加算器でも同等です。"
+  },
+  {
+    "id": "ch23-p4",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "¬(A ∧ B)", "type": "given" },
+      { "id": "s2", "content": "= ___（ド・モルガンの法則を適用）", "type": "gap", "correctValue": "¬A ∨ ¬B", "options": ["¬A ∨ ¬B", "¬A ∧ ¬B", "A ∨ B", "A ∧ ¬B"] },
+      { "id": "s3", "content": "これは NAND ゲートの出力に等しい", "type": "given" }
+    ],
+    "explanation": "ド・モルガンの法則: ¬(A ∧ B) = ¬A ∨ ¬B です。NAND ゲートの出力は AND ゲートの否定であり、少なくとも一方の入力が 0 であるときに 1 を出力します。"
+  },
+  {
+    "id": "ch23-p5",
+    "type": "gap-fill-proof",
+    "steps": [
+      { "id": "s1", "content": "NOT A を NAND で構成する", "type": "given" },
+      { "id": "s2", "content": "NOT A = ___", "type": "gap", "correctValue": "A NAND A", "options": ["A NAND A", "A NAND 1", "A NAND 0", "1 NAND A"] },
+      { "id": "s3", "content": "∵ ¬(A ∧ A) = ¬A", "type": "given" }
+    ],
+    "explanation": "A NAND A = ¬(A ∧ A) = ¬A です。自分自身との NAND を取ることで NOT が実現できます。これが NAND の万能性の出発点です。"
+  }
+]

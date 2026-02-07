@@ -1,0 +1,71 @@
+[
+  {
+    "id": "ch11-p1",
+    "type": "multiple-choice",
+    "question": "プログラミングで users.filter(u => u.age >= 18 && u.country === 'JP') は集合論的にどう表現できますか？",
+    "options": [
+      "{u ∈ Users | age(u) ≥ 18} ∩ {u ∈ Users | country(u) = 'JP'}",
+      "{u ∈ Users | age(u) ≥ 18} ∪ {u ∈ Users | country(u) = 'JP'}",
+      "{u ∈ Users | age(u) ≥ 18} \\ {u ∈ Users | country(u) = 'JP'}",
+      "{u ∈ Users | age(u) ≥ 18} △ {u ∈ Users | country(u) = 'JP'}"
+    ],
+    "correctIndex": 0,
+    "explanation": "&& は論理積（AND）であり、集合論では共通部分（∩）に対応します。両方の条件を同時に満たす要素を取り出しています。"
+  },
+  {
+    "id": "ch11-p2",
+    "type": "multiple-choice",
+    "question": "データベースで SELECT * FROM A UNION SELECT * FROM B は、集合論のどの操作に対応しますか？",
+    "options": [
+      "A ∪ B（和集合）",
+      "A ∩ B（共通部分）",
+      "A \\ B（差集合）",
+      "A × B（直積）"
+    ],
+    "correctIndex": 0,
+    "explanation": "SQL の UNION は重複を除いて2つの結果集合を結合します。これは集合論の和集合（∪）に対応します。"
+  },
+  {
+    "id": "ch11-p3",
+    "type": "multiple-choice",
+    "question": "全体集合 U = {1, 2, 3, 4, 5}, A = {1, 3, 5}, B = {2, 3} のとき、(A ∪ B)ᶜ はどれですか？",
+    "options": [
+      "{4}",
+      "{2, 4}",
+      "{1, 2, 4, 5}",
+      "{4, 5}"
+    ],
+    "correctIndex": 0,
+    "explanation": "A ∪ B = {1, 2, 3, 5} なので、(A ∪ B)ᶜ = U \\ (A ∪ B) = {4} です。ド・モルガンで検算: Aᶜ ∩ Bᶜ = {2, 4} ∩ {1, 4, 5} = {4}。"
+  },
+  {
+    "id": "ch11-p4",
+    "type": "counterexample",
+    "argument": "A ∩ B = ∅ ならば A = ∅ または B = ∅ である。",
+    "premises": ["A ∩ B = ∅"],
+    "conclusion": "A = ∅ または B = ∅",
+    "vulnerablePremiseIndex": 0,
+    "counterexamples": [
+      { "id": "ce1", "text": "A = {1, 2}, B = {3, 4} のとき A ∩ B = ∅ だが A ≠ ∅ かつ B ≠ ∅", "isValid": true },
+      { "id": "ce2", "text": "A = ∅ のときは結論が成り立つ", "isValid": false },
+      { "id": "ce3", "text": "A = {偶数}, B = {奇数} のとき A ∩ B = ∅ だが両方とも空でない", "isValid": true },
+      { "id": "ce4", "text": "A と B が互いに素であれば少なくとも一方は空", "isValid": false }
+    ],
+    "explanation": "2つの集合が互いに素（A ∩ B = ∅）であることは、どちらかが空であることを意味しません。共通要素がないだけで、各集合は要素を持つことができます。"
+  },
+  {
+    "id": "ch11-p5",
+    "type": "counterexample",
+    "argument": "A ⊆ B ならば P(A) ⊆ P(B) である。この主張は正しいか？",
+    "premises": ["A ⊆ B"],
+    "conclusion": "P(A) ⊆ P(B)",
+    "vulnerablePremiseIndex": 0,
+    "counterexamples": [
+      { "id": "ce1", "text": "これは実際に正しい。A ⊆ B のとき A の任意の部分集合 S は B の部分集合でもある", "isValid": true },
+      { "id": "ce2", "text": "A = {1}, B = {1, 2} で P(A) = {∅, {1}} ⊆ P(B) = {∅, {1}, {2}, {1,2}} を確認できる", "isValid": true },
+      { "id": "ce3", "text": "P(A) の要素数が P(B) より少ないので偽", "isValid": false },
+      { "id": "ce4", "text": "べき集合は元の集合とは無関係", "isValid": false }
+    ],
+    "explanation": "この主張は実際に正しいです。A ⊆ B のとき、A の任意の部分集合 S について S ⊆ A ⊆ B なので S は B の部分集合でもあり、S ∈ P(B) です。"
+  }
+]

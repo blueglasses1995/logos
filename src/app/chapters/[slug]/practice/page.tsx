@@ -1,15 +1,20 @@
 "use client"
 
-import { use } from "react"
+import { use, useState } from "react"
 import { notFound } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { QuizRunner } from "@/components/quiz/QuizRunner"
+import { AdaptiveQuizRunner } from "@/components/quiz/AdaptiveQuizRunner"
+import { ChallengeMode } from "@/components/quiz/ChallengeMode"
+import type { ChallengeScore } from "@/components/quiz/challenge-results"
 import { SiteHeader } from "@/components/layout/site-header"
 import { PageShell } from "@/components/layout/page-shell"
 import { Breadcrumb } from "@/components/layout/breadcrumb"
 import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
 import { useProgress } from "@/hooks/use-progress"
 import Link from "next/link"
+
+type PracticeMode = "normal" | "adaptive" | "challenge"
 
 export default function PracticePage({
   params,
@@ -21,13 +26,25 @@ export default function PracticePage({
   if (!chapter) notFound()
 
   const quizzes = getChapterQuizzes(slug, "practice")
-  const { recordAttempt } = useProgress()
+  const { progress, recordAttempt } = useProgress()
+  const [mode, setMode] = useState<PracticeMode>("normal")
 
   const handleComplete = (
     results: readonly { quizId: string; correct: boolean }[]
   ) => {
     const timestamp = new Date().toISOString()
     for (const result of results) {
+      recordAttempt(slug, "practice", {
+        quizId: result.quizId,
+        correct: result.correct,
+        timestamp,
+      })
+    }
+  }
+
+  const handleChallengeComplete = (score: ChallengeScore) => {
+    const timestamp = new Date().toISOString()
+    for (const result of score.results) {
       recordAttempt(slug, "practice", {
         quizId: result.quizId,
         correct: result.correct,
@@ -55,7 +72,44 @@ export default function PracticePage({
           </p>
         </div>
 
-        <QuizRunner quizzes={quizzes} onComplete={handleComplete} />
+        <div className="flex gap-2 mb-6">
+          <Button
+            variant={mode === "normal" ? "default" : "outline"}
+            onClick={() => setMode("normal")}
+          >
+            通常モード
+          </Button>
+          <Button
+            variant={mode === "adaptive" ? "default" : "outline"}
+            onClick={() => setMode("adaptive")}
+          >
+            アダプティブ
+          </Button>
+          <Button
+            variant={mode === "challenge" ? "default" : "outline"}
+            onClick={() => setMode("challenge")}
+          >
+            チャレンジ
+          </Button>
+        </div>
+
+        {mode === "normal" && (
+          <QuizRunner quizzes={quizzes} onComplete={handleComplete} />
+        )}
+        {mode === "adaptive" && (
+          <AdaptiveQuizRunner
+            quizzes={quizzes}
+            chapterSlug={slug}
+            progress={progress}
+            onComplete={handleComplete}
+          />
+        )}
+        {mode === "challenge" && (
+          <ChallengeMode
+            quizzes={quizzes}
+            onComplete={handleChallengeComplete}
+          />
+        )}
 
         <div className="flex justify-between pt-8">
           <Link href={`/chapters/${slug}/theory`}>
