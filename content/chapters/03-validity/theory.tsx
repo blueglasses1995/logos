@@ -5,6 +5,11 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import {
+  ArgumentTree,
+  ExampleMapping,
+  InlineMiniQuiz,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -86,6 +91,13 @@ export function TheoryContent() {
         健全な論証だけが「確実に正しい結論」を保証する。
       </KeyPoint>
 
+      <ExampleMapping
+        formula="前提が真 ∧ 妥当 → 結論が真"
+        example="論証が健全であれば、結論は必ず真"
+        variables={{ "前提が真": "前提の内容が事実", "妥当": "論理構造が正しい", "結論が真": "結論も事実" }}
+        caption="健全性の条件"
+      />
+
       <SectionDivider />
 
       <h2>主要な推論規則</h2>
@@ -99,6 +111,13 @@ export function TheoryContent() {
         最も基本的で直感的な推論規則です。
       </p>
 
+      <ArgumentTree
+        premises={["P → Q", "P"]}
+        conclusion="Q"
+        rule="モーダスポネンス"
+        caption="前提から結論への推論構造"
+      />
+
       <h3>モーダストレンス（否定式）</h3>
 
       <FormulaBlock caption="モーダストレンス">P → Q, ¬Q ∴ ¬P</FormulaBlock>
@@ -107,6 +126,13 @@ export function TheoryContent() {
         「PならばQ」が成り立ち、Qが偽なら、Pも偽です。
         対偶の応用として理解できます。
       </p>
+
+      <ArgumentTree
+        premises={["P → Q", "¬Q"]}
+        conclusion="¬P"
+        rule="モーダストレンス"
+        caption="否定式による推論構造"
+      />
 
       <h3>仮言三段論法</h3>
 
@@ -159,6 +185,13 @@ export function TheoryContent() {
         妥当でない論証を証明するには反例が一つあれば十分。
         「前提すべて真かつ結論偽」のケースを探すのが基本戦略。
       </KeyPoint>
+
+      <InlineMiniQuiz
+        question="妥当だが健全ではない論証の例はどれ？"
+        options={["前提が偽だが論理構造は正しい", "前提が真だが論理が飛躍している", "結論が真で前提も真", "前提も結論も偽"]}
+        correctIndex={0}
+        explanation="妥当性は論理構造の正しさ、健全性は前提の真実性も要求します。前提が偽でも論理が正しければ妥当です。"
+      />
     </article>
   )
 }

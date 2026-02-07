@@ -1,4 +1,5 @@
 import { Callout, FormulaBlock, ComparisonTable, KeyPoint, SectionDivider } from "@/components/content"
+import { ArgumentTree, LogicSandbox, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -118,9 +119,33 @@ export function TheoryContent() {
         両方を満たして初めて、説得力のある議論となります。
       </Callout>
 
+      <ArgumentTree
+        premises={["∀x(P(x)→Q(x))", "P(a)"]}
+        conclusion="Q(a)"
+        rule="全称例化 + モーダスポネンス"
+        caption="述語論理と命題論理を組み合わせた推論"
+      />
+
       <KeyPoint>
         形式論理は構造を、非形式論理は内容をチェックします。両方の視点を統合して初めて、議論を正確に評価できます。
       </KeyPoint>
+
+      <LogicSandbox
+        variables={["P", "Q", "R"]}
+        formulas={[
+          { label: "P → Q", evaluate: (v) => !v.P || v.Q },
+          { label: "Q → R", evaluate: (v) => !v.Q || v.R },
+          { label: "P → R", evaluate: (v) => !v.P || v.R },
+        ]}
+        caption="仮言三段論法: P→Q と Q→R が両方真なら P→R も常に真"
+      />
+
+      <InlineMiniQuiz
+        question="論証を分析する際、最初に確認すべきことは？"
+        options={["論理構造が妥当かどうか", "結論が正しいかどうか", "話者が信頼できるかどうか", "前提の数"]}
+        correctIndex={0}
+        explanation="まず論理構造（形式的妥当性）を確認し、次に前提の真偽（健全性）、最後に非形式的誤謬の有無を検討します。"
+      />
     </article>
   )
 }

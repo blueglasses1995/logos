@@ -5,6 +5,7 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import { VennDiagram, ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -42,6 +43,13 @@ export function TheoryContent() {
       <KeyPoint>
         ∃xP(x)の証明 = 具体例を一つ提示する。否定 = ∀x¬P(x)を証明する（すべてのxでP(x)が偽）。
       </KeyPoint>
+
+      <VennDiagram
+        labelA="P(x)"
+        labelB="Q(x)"
+        highlight={["intersection"]}
+        formulaLabel="∃x (P(x) ∧ Q(x)): P と Q を同時に満たす個体がある"
+      />
 
       <SectionDivider />
 
@@ -299,6 +307,12 @@ export function TheoryContent() {
         一つの反例が理論全体を覆す、これが∃の力。Array.some()、SQL EXISTS、科学的反証はすべて∃の応用。
       </KeyPoint>
 
+      <ExampleMapping
+        formula="∃x (Cat(x) ∧ Black(x))"
+        example="黒い猫が存在する"
+        variables={{ "∃x": "あるxが存在して", "Cat(x)": "xは猫", "Black(x)": "xは黒い" }}
+      />
+
       <SectionDivider />
 
       <h2>反例: ∃x(P(x)→Q(x))の罠を深堀りする</h2>
@@ -400,6 +414,13 @@ export function TheoryContent() {
       <KeyPoint>
         存在量化子∃はバグ報告、科学的反証、SQL EXISTS、Array.some()/find()として日常的に使われている。
       </KeyPoint>
+
+      <InlineMiniQuiz
+        question="∃x P(x) が偽になるのはどんなとき？"
+        options={["P(x)を満たすxが一つも存在しないとき", "P(x)を満たすxが一つだけのとき", "P(x)を満たさないxが存在するとき", "常に偽にはならない"]}
+        correctIndex={0}
+        explanation="存在量化は「少なくとも一つ」の存在を主張するため、一つも存在しないときに偽になります。"
+      />
 
       <SectionDivider />
 

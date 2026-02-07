@@ -5,6 +5,7 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import { VennDiagram, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -103,6 +104,14 @@ export function TheoryContent() {
         ∀は巨大な∧、∃は巨大な∨。ド・モルガンの法則を量化子に拡張したものが量化子の否定法則である。本質は同じであり、スケールが異なるだけ。
       </KeyPoint>
 
+      <VennDiagram
+        labelA="P(x)"
+        labelB="¬P(x)"
+        highlight={["a-only", "b-only"]}
+        formulaLabel="P(x) と ¬P(x) は補集合の関係"
+        interactive
+      />
+
       <SectionDivider />
 
       <h2>具体例</h2>
@@ -160,6 +169,13 @@ export function TheoryContent() {
       <KeyPoint>
         反証主義、テスト、バグ証明 — いずれも量化子の否定法則の直接的な応用である。
       </KeyPoint>
+
+      <InlineMiniQuiz
+        question="¬∃x P(x) と同値なのは？"
+        options={["∀x ¬P(x)", "∃x ¬P(x)", "¬∀x P(x)", "∀x P(x)"]}
+        correctIndex={0}
+        explanation="「P(x)を満たすxは存在しない」は「すべてのxがP(x)を満たさない」と同値です。"
+      />
 
       <SectionDivider />
 

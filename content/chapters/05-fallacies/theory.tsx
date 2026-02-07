@@ -1,4 +1,5 @@
 import { Callout, FormulaBlock, ComparisonTable, KeyPoint, SectionDivider } from "@/components/content"
+import { ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -78,6 +79,13 @@ export function TheoryContent() {
         多数派の意見が結果として正しいこともあります。しかし「多数が支持している」こと自体は、論理的な根拠にはなりません。
       </Callout>
 
+      <ExampleMapping
+        formula="P(x) は信頼できない → P(x) の主張は偽"
+        example="「彼は若いから、彼の提案は信頼できない」"
+        variables={{ "P(x)": "発言者", "信頼できない": "属性への攻撃", "主張は偽": "不当な結論" }}
+        caption="人身攻撃の誤謬の構造"
+      />
+
       <KeyPoint>
         関連性の誤謬では、結論と無関係な情報（人格・権威・人気）が根拠として使われます。
         「その根拠は結論と論理的に関係しているか？」と問うことで見抜けます。
@@ -102,6 +110,13 @@ export function TheoryContent() {
       <FormulaBlock caption="藁人形論法の構造">
         相手の主張P → Pを歪めたP'を作る → P'に反論 → よってPは誤りだ
       </FormulaBlock>
+
+      <InlineMiniQuiz
+        question="藁人形論法とは何ですか？"
+        options={["相手の主張を歪めて攻撃する", "権威に訴える", "因果関係を混同する", "二択に追い込む"]}
+        correctIndex={0}
+        explanation="藁人形論法は、相手の実際の主張ではなく、歪めた弱い版を攻撃する誤謬です。"
+      />
 
       <h3>滑りやすい坂論法（Slippery Slope）</h3>
 

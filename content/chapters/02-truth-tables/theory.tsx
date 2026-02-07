@@ -5,6 +5,11 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import {
+  LogicSandbox,
+  TruthValueAnimator,
+  InlineMiniQuiz,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -51,6 +56,16 @@ export function TheoryContent() {
         変数n個に対して2<sup>n</sup>行が必要になる。
       </KeyPoint>
 
+      <LogicSandbox
+        variables={["P", "Q"]}
+        formulas={[
+          { label: "P ∧ Q", evaluate: (v) => v.P && v.Q },
+          { label: "P ∨ Q", evaluate: (v) => v.P || v.Q },
+          { label: "P → Q", evaluate: (v) => !v.P || v.Q },
+        ]}
+        caption="変数の値を切り替えて、各論理式の真理値の変化を確認しましょう"
+      />
+
       <SectionDivider />
 
       <h2>恒真式（トートロジー）</h2>
@@ -66,6 +81,13 @@ export function TheoryContent() {
         排中律は「Pであるか、Pでないか」のどちらかは必ず成り立つことを示します。
         真理値表で確認すると、すべての行で結果が真になります。
       </p>
+
+      <InlineMiniQuiz
+        question="トートロジーとは何ですか？"
+        options={["常に真になる論理式", "常に偽になる論理式", "真にも偽にもなる論理式", "変数を含まない論理式"]}
+        correctIndex={0}
+        explanation="トートロジーは変数の値に関係なく常に真になる論理式です。例: P ∨ ¬P"
+      />
 
       <SectionDivider />
 
@@ -117,6 +139,13 @@ export function TheoryContent() {
         プログラミングでは条件分岐の簡略化に頻繁に使います。
         例えば <code>!(a &amp;&amp; b)</code> は <code>!a || !b</code> と同値です。
       </Callout>
+
+      <TruthValueAnimator
+        variables={["P", "Q"]}
+        formula="¬(P ∧ Q) ↔ (¬P ∨ ¬Q)"
+        evaluate={(v) => !(v.P && v.Q) === (!v.P || !v.Q)}
+        caption="ド・モルガンの法則: どの値の組み合わせでも結果が同じことを確認しましょう"
+      />
 
       <h3>二重否定除去</h3>
 

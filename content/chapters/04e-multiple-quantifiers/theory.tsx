@@ -5,6 +5,7 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import { VennDiagram, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -117,6 +118,14 @@ export function TheoryContent() {
         ∃y ∀x は ∀x ∃y より強い主張である。
         前者が真なら後者も真だが、逆は成り立たない。
       </KeyPoint>
+
+      <VennDiagram
+        labelA="∀x∃y R(x,y)"
+        labelB="∃y∀x R(x,y)"
+        highlight={["a-only", "intersection", "b-only"]}
+        formulaLabel="量化子の順序で意味が変わる"
+        interactive
+      />
 
       <SectionDivider />
 
@@ -284,6 +293,13 @@ export function TheoryContent() {
         日常・ビジネス・数学・プログラミング・SQL・法律のすべての分野で、
         ∀x ∃y と ∃y ∀x の区別が実質的な意味の違いを生む。
       </KeyPoint>
+
+      <InlineMiniQuiz
+        question="∀x∃y Loves(x,y) の正しい読みは？"
+        options={["すべての人について、その人が愛する誰かが存在する", "ある人が存在して、すべての人がその人を愛する", "すべての人がすべての人を愛する", "誰かが誰かを愛する"]}
+        correctIndex={0}
+        explanation="∀xが先に来るため「すべてのxについて」が外側、∃yが内側で「あるyが存在する」。各人ごとに異なるyでよい。"
+      />
 
       <SectionDivider />
 

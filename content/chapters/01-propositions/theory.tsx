@@ -5,6 +5,11 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import {
+  TruthValueAnimator,
+  ExampleMapping,
+  InlineMiniQuiz,
+} from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -72,6 +77,13 @@ export function TheoryContent() {
         日常語の「または」は排他的に使われることが多いため、混同に注意してください。
       </Callout>
 
+      <TruthValueAnimator
+        variables={["P", "Q"]}
+        formula="P ∧ Q"
+        evaluate={(v) => v.P && v.Q}
+        caption="P と Q の値を切り替えて、論理積の動作を確認しましょう"
+      />
+
       <h3>条件文（IF-THEN）</h3>
 
       <FormulaBlock caption="条件文の記法">P → Q</FormulaBlock>
@@ -81,11 +93,24 @@ export function TheoryContent() {
         <strong>Pが真でQが偽のときだけ偽</strong>になります。
       </p>
 
+      <ExampleMapping
+        formula="P → Q"
+        example="雨が降る → 傘を持つ"
+        variables={{ P: "雨が降る", Q: "傘を持つ" }}
+      />
+
       <Callout variant="warning" label="よくある誤解">
         Pが偽のとき、P → Qは常に真です。
         これを<strong>空真（vacuous truth）</strong>と呼びます。
         直感に反しますが、「前提が成り立たないなら約束は破られない」と考えると理解しやすくなります。
       </Callout>
+
+      <InlineMiniQuiz
+        question="P → Q が偽になるのはどのような場合？"
+        options={["P真かつQ偽", "P偽かつQ真", "両方偽", "両方真"]}
+        correctIndex={0}
+        explanation="条件文は前件が真で後件が偽のときのみ偽になります。"
+      />
 
       <h3>双条件文（IFF）</h3>
 

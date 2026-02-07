@@ -5,6 +5,7 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import { VennDiagram, ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -37,6 +38,13 @@ export function TheoryContent() {
       <KeyPoint>
         ∀x P(x) は対象領域のすべてのxについてP(x)が真であることを要求する。1つでも反例があれば偽。
       </KeyPoint>
+
+      <VennDiagram
+        labelA="P(x)"
+        labelB="Q(x)"
+        highlight={["a-only", "intersection"]}
+        formulaLabel="∀x (P(x) → Q(x)): P の全体が Q に含まれる"
+      />
 
       <SectionDivider />
 
@@ -159,6 +167,12 @@ export function TheoryContent() {
         ∀ はビジネスルール、数学、法律、プログラミング（Array.every、Required型）など、あらゆる場面に登場する。
       </KeyPoint>
 
+      <ExampleMapping
+        formula="∀x (Student(x) → Studies(x))"
+        example="すべての学生は勉強する"
+        variables={{ "∀x": "すべてのxについて", "Student(x)": "xは学生", "Studies(x)": "xは勉強する" }}
+      />
+
       <SectionDivider />
 
       <h2>反例の破壊力: 黒い白鳥</h2>
@@ -202,6 +216,13 @@ export function TheoryContent() {
       <KeyPoint>
         たった1つの反例で ∀ は崩壊する。また ¬∀x P(x)（すべてではない）と ∀x ¬P(x)（一つもない）は全く別の主張。
       </KeyPoint>
+
+      <InlineMiniQuiz
+        question="∀x P(x) を否定すると？"
+        options={["∃x ¬P(x)", "¬∀x P(x)", "∀x ¬P(x)", "∃x P(x)"]}
+        correctIndex={0}
+        explanation="「すべてのxがPを満たす」の否定は「Pを満たさないxが存在する」です。"
+      />
 
       <SectionDivider />
 

@@ -5,6 +5,7 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import { ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -46,6 +47,13 @@ export function TheoryContent() {
         述語は「穴の空いた文」であり、穴（項）を埋めると命題になる。
         述語そのものには真偽値がなく、項を適用してはじめて真偽が定まる。
       </KeyPoint>
+
+      <ExampleMapping
+        formula="P(x)"
+        example="x は学生である"
+        variables={{ P: "...は学生である", x: "太郎" }}
+        caption="述語は変数に性質を割り当てる"
+      />
 
       <SectionDivider />
 
@@ -202,6 +210,13 @@ export function TheoryContent() {
         述語論理は命題論理では捉えられない「構造的な必然性」を形式化する。
         SQL、TypeScript、法律文書はすべて述語の概念を活用している。
       </KeyPoint>
+
+      <InlineMiniQuiz
+        question="述語論理が命題論理より表現力が高い理由は？"
+        options={["個体と性質の関係を表現できる", "より多くの結合子を使える", "計算が速い", "真理値表が不要"]}
+        correctIndex={0}
+        explanation="述語論理は個体（項）と性質（述語）の関係を表現でき、命題論理では扱えない推論を形式化できます。"
+      />
 
       <SectionDivider />
 

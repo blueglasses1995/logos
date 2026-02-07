@@ -5,6 +5,7 @@ import {
   KeyPoint,
   SectionDivider,
 } from "@/components/content"
+import { ExampleMapping, InlineMiniQuiz } from "@/components/interactive"
 
 export function TheoryContent() {
   return (
@@ -101,6 +102,13 @@ export function TheoryContent() {
         述語論理の各要素には、SQLの構文が一対一で対応している。
         WHERE句は述語、JOINは二項述語、EXISTSは∃、NOT EXISTSは¬∃である。
       </KeyPoint>
+
+      <ExampleMapping
+        formula="∀x (Employee(x) ∧ Senior(x) → HighSalary(x))"
+        example="SELECT * FROM employees WHERE is_senior = true AND salary > 100000"
+        variables={{ "∀x": "全レコード走査", "Employee(x)": "employeesテーブル", "Senior(x)": "is_senior = true", "HighSalary(x)": "salary > 100000" }}
+        caption="述語論理とSQLのWHERE句の対応"
+      />
 
       <SectionDivider />
 
@@ -233,6 +241,13 @@ export function TheoryContent() {
         SQLクエリは述語論理の式として読み解ける。
         WHERE句は述語の連言、JOINは二項述語、EXISTSは∃、二重NOT EXISTSは∀の表現である。
       </KeyPoint>
+
+      <InlineMiniQuiz
+        question="SQLのWHERE句は述語論理のどの概念に対応する？"
+        options={["述語（条件式）", "量化子", "結合子のみ", "項"]}
+        correctIndex={0}
+        explanation="WHERE句は各行に対する条件（述語）を表し、条件を満たす行を選択します。"
+      />
 
       <SectionDivider />
 
