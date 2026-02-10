@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Serwist will be configured manually for Turbopack compatibility
 };
 
 export default nextConfig;

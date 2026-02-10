@@ -9,6 +9,7 @@ import { SectionListItem } from "@/components/chapter/section-list-item"
 import { getChapterMeta, getChapterQuizzes } from "@/lib/content"
 import { useProgress } from "@/hooks/use-progress"
 import { EMPTY_CHAPTER_PROGRESS } from "@/types/progress"
+import { DownloadChapterButton } from "@/components/offline/download-chapter-button"
 
 const SECTIONS = [
   {
@@ -71,11 +72,18 @@ export default function ChapterPage({
         />
 
         <div className="mb-8">
-          <span className="font-serif text-5xl text-primary/40 leading-none">
-            {String(chapter.order).padStart(2, "0")}
-          </span>
-          <h1 className="text-3xl font-serif mt-2">{chapter.title}</h1>
-          <p className="text-muted-foreground mt-2">{chapter.description}</p>
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <span className="font-serif text-5xl text-primary/40 leading-none">
+                {String(chapter.order).padStart(2, "0")}
+              </span>
+              <h1 className="text-3xl font-serif mt-2">{chapter.title}</h1>
+              <p className="text-muted-foreground mt-2">{chapter.description}</p>
+            </div>
+            <div className="pt-8">
+              <DownloadChapterButton slug={slug} />
+            </div>
+          </div>
         </div>
 
         <div className="space-y-3">

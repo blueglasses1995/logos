@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg-gradient-192" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Circular background -->
+  <circle cx="96" cy="96" r="57.599999999999994" fill="url(#bg-gradient-192)" />
+
+  <!-- Logic symbols -->
+  <g fill="white" font-family="Arial, sans-serif" font-weight="bold" text-anchor="middle">
+    <!-- AND symbol (∧) -->
+    <text x="78.72" y="89.088" font-size="34.559999999999995" dominant-baseline="middle">∧</text>
+
+    <!-- OR symbol (∨) -->
+    <text x="113.28" y="89.088" font-size="34.559999999999995" dominant-baseline="middle">∨</text>
+  </g>
+
+  <!-- IMPLIES arrow (→) -->
+  <g stroke="white" stroke-width="7.68" stroke-linecap="round" fill="none">
+    <line x1="75.26400000000001" y1="113.28" x2="116.73599999999999" y2="113.28" />
+    <polyline points="116.73599999999999,113.28 111.55199999999999,109.824 116.73599999999999,113.28 111.55199999999999,116.736" />
+  </g>
+</svg>

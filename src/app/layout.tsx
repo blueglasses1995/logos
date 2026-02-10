@@ -6,6 +6,9 @@ import {
   Noto_Sans_JP,
 } from "next/font/google";
 import "./globals.css";
+import { ServiceWorkerRegister } from "@/components/sw-register";
+import { OfflineIndicator } from "@/components/offline/offline-indicator";
+import { InstallPrompt } from "@/components/offline/install-prompt";
 
 const lora = Lora({
   variable: "--font-heading-serif",
@@ -33,8 +36,31 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Logos",
-  description: "論理学の基礎を学び、実務に活かす",
+  title: "Logos - 論理学学習アプリ",
+  description: "論理学の基礎を学び、実務に活かすインタラクティブな学習アプリケーション",
+  applicationName: "Logos",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Logos",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.svg", sizes: "192x192", type: "image/svg+xml" },
+      { url: "/icons/icon-512.svg", sizes: "512x512", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.svg", sizes: "180x180", type: "image/svg+xml" },
+    ],
+  },
+};
+
+export const viewport = {
+  themeColor: "#3b82f6",
 };
 
 export default function RootLayout({
@@ -47,7 +73,10 @@ export default function RootLayout({
       <body
         className={`${lora.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} ${notoSansJP.variable} antialiased`}
       >
+        <ServiceWorkerRegister />
+        <OfflineIndicator />
         {children}
+        <InstallPrompt />
       </body>
     </html>
   );
